@@ -6,7 +6,7 @@
   "scripts": {
     "start": "functions-framework --source=build/ --target=preLoad",
     "start:local": "npm run build && node build/index.js",
-    "build": "rimraf ./build && tsc",
+    "build:local": "rimraf ./build && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy-reservation-flow": "gcloud functions deploy wa_flow_template-reservation-flow --gen2 --runtime=nodejs20 --region=us-central1 --source=. --entry-point=preLoad --trigger-http --env-vars-file=.env.yaml"
   },
