@@ -1,15 +1,13 @@
 import type { HttpFunction } from '@google-cloud/functions-framework/build/src/functions';
-import {
-  decryptRequest,
-  encryptResponse,
-} from './helpers/encryption';
-import { getNextScreen } from './helpers/flows';
+import { decryptRequest, encryptResponse } from './helpers/encryption';
+import { getFlow } from './flows';
 
 const privateKey: string = process.env.PRIVATE_KEY || '';
 const passphrase: string = process.env.PASSPHRASE || '';
 
 export const preLoad: HttpFunction = async (req, res) => {
   const body = req.body;
+
   try {
     if (!privateKey) {
       res
@@ -36,7 +34,7 @@ export const preLoad: HttpFunction = async (req, res) => {
     console.info(JSON.stringify(decryptedBody));
 
     console.log('💬 Decrypted Request:', JSON.stringify(decryptedBody));
-    const screenResponse = await getNextScreen(decryptedBody);
+    const screenResponse = await getFlow(decryptedBody);
     console.log('👉 Response to Encrypt:', JSON.stringify(screenResponse));
     res.append('Content-Type', 'application/json');
     res

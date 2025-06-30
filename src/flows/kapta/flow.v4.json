@@ -1,0 +1,1260 @@
+{
+  "routing_model": {
+    "STORE": ["CATEGORIES", "CHANNEL"],
+    "CHANNEL": ["CATEGORIES"],
+    "CATEGORIES": ["MEDIA_ONE", "MEDIA_TWO", "MEDIA_THREE", "MEDIA_FOUR"],
+    "MEDIA_ONE": ["MEDIA_TWO", "MEDIA_THREE", "MEDIA_FOUR"],
+    "MEDIA_TWO": ["MEDIA_THREE", "MEDIA_FOUR"],
+    "MEDIA_THREE": ["MEDIA_FOUR"]
+  },
+  "data_api_version": "3.0",
+  "version": "7.1",
+  "screens": [
+    {
+      "id": "STORE",
+      "title": "Captura de datos",
+      "data": {
+        "storeName": {
+          "type": "string",
+          "__example__": "TIENDA EL CABRITO"
+        },
+        "storeAddress": {
+          "type": "string",
+          "__example__": "Calle Paz 123, Ciudad, País"
+        },
+        "flowToken": {
+          "type": "object",
+          "properties": {
+            "userLocation": {
+              "type": "object",
+              "properties": {
+                "latitude": { "type": "number" },
+                "longitude": { "type": "number" }
+              }
+            },
+            "conversationId": {
+              "type": "string"
+            }
+          },
+          "__example__": {
+            "userLocation": {
+              "latitude": 49.287857055664,
+              "longitude": -123.12412261963
+            },
+            "conversationId": "conv_01JXGMQ38TEC4DX4CYJD0J6E2K"
+          }
+        }
+      },
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "Form",
+            "name": "store_form",
+            "children": [
+              {
+                "type": "TextBody",
+                "markdown": true,
+                "text": ["**Nombre de la tienda**"],
+                "visible": true
+              },
+              {
+                "type": "TextInput",
+                "required": true,
+                "label": "Nombre de la tienda",
+                "name": "storeName"
+              },
+              {
+                "type": "TextArea",
+                "label-variant": "large",
+                "required": true,
+                "label": "Dirección de la tienda",
+                "name": "storeAddress"
+              },
+              {
+                "type": "Footer",
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "storeName": "${form.storeName}",
+                    "storeAddress": "${form.storeAddress}"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "CHANNEL",
+      "title": "Tipo de tienda",
+      "data": {
+        "storeName": {
+          "type": "string",
+          "__example__": "TIENDA EL CABRITO"
+        },
+        "storeAddress": {
+          "type": "string",
+          "__example__": "Calle Paz 123, Ciudad, País"
+        },
+        "flowToken": {
+          "type": "object",
+          "properties": {
+            "userLocation": {
+              "type": "object",
+              "properties": {
+                "latitude": { "type": "number" },
+                "longitude": { "type": "number" }
+              }
+            },
+            "conversationId": {
+              "type": "string"
+            }
+          },
+          "__example__": {
+            "userLocation": {
+              "latitude": 49.287857055664,
+              "longitude": -123.12412261963
+            },
+            "conversationId": "conv_01JXGMQ38TEC4DX4CYJD0J6E2K"
+          }
+        },
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "MODERNO",
+              "title": "Moderno"
+            },
+            {
+              "id": "TRADICIONAL",
+              "title": "Tradicional"
+            }
+          ]
+        },
+        "modernTypes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "1",
+              "title": "carulla"
+            },
+            {
+              "id": "2",
+              "title": "exito"
+            }
+          ]
+        },
+        "traditionalTypes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "1",
+              "title": "Tienda de barrio"
+            },
+            {
+              "id": "2",
+              "title": "Supermercado de barrio"
+            }
+          ]
+        }
+      },
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "Form",
+            "name": "store_form",
+            "children": [
+              {
+                "type": "RadioButtonsGroup",
+                "name": "storeChannel",
+                "label": "Canal",
+                "description": "Escoge el canal",
+                "required": true,
+                "data-source": "${data.channels}"
+              },
+              {
+                "type": "If",
+                "condition": "${form.storeChannel} == 'MODERNO'",
+                "then": [
+                  {
+                    "type": "Dropdown",
+                    "label": "Tipo de tienda",
+                    "name": "modernType",
+                    "required": true,
+                    "data-source": "${data.modernTypes}",
+                    "on-select-action": {
+                      "name": "data_exchange",
+                      "payload": {
+                        "storeType": "${form.modernType}",
+                        "storeChannel": "${form.storeChannel}",
+                        "storeName": "${data.storeName}",
+                        "flowtoken": "${data.storeName}",
+                        "storeAddress": "${data.storeAddress}",
+                        "userLocation": "${data.userLocation}",
+                        "searchTerm": "${data.searchTerm}",
+                        "suggestedStores": "${data.suggestedStores}",
+                        "channels": "${data.channels}",
+                        "modernTypes": "${data.modernTypes}",
+                        "traditionalTypes": "${data.traditionalTypes}"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "If",
+                "condition": "${form.storeChannel} == 'TRADICIONAL'",
+                "then": [
+                  {
+                    "type": "Dropdown",
+                    "label": "Tipo de tienda",
+                    "name": "traditionalType",
+                    "required": true,
+                    "data-source": "${data.traditionalTypes}",
+                    "on-select-action": {
+                      "name": "data_exchange",
+                      "payload": {
+                        "storeType": "${form.traditionalType}",
+                        "storeChannel": "${form.storeChannel}",
+                        "storeName": "${data.storeName}",
+                        "flowtoken": "${data.storeName}",
+                        "storeAddress": "${data.storeAddress}",
+                        "userLocation": "${data.userLocation}",
+                        "searchTerm": "${data.searchTerm}",
+                        "suggestedStores": "${data.suggestedStores}",
+                        "channels": "${data.channels}",
+                        "modernTypes": "${data.modernTypes}",
+                        "traditionalTypes": "${data.traditionalTypes}"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Footer",
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "next": true,
+                    "storeType": "${data.storeType}",
+                    "storeChannel": "${form.storeChannel}",
+                    "storeName": "${data.storeName}",
+                    "flowtoken": "${data.storeName}",
+                    "storeAddress": "${data.storeAddress}",
+                    "userLocation": "${data.userLocation}",
+                    "searchTerm": "${data.searchTerm}",
+                    "suggestedStores": "${data.suggestedStores}",
+                    "channels": "${data.channels}",
+                    "modernTypes": "${data.modernTypes}",
+                    "traditionalTypes": "${data.traditionalTypes}"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "CATEGORIES",
+      "title": "Categorias",
+      "data": {
+        "storeName": {
+          "type": "string",
+          "__example__": "TIENDA EL CABRITO"
+        },
+        "storeAddress": {
+          "type": "string",
+          "__example__": "Calle Paz 123, Ciudad, País"
+        },
+        "storeChannel": {
+          "type": "string",
+          "__example__": "MODERNO"
+        },
+        "storeType": {
+          "type": "string",
+          "__example__": "Tienda de barrio"
+        },
+
+        "flowToken": {
+          "type": "object",
+          "properties": {
+            "userLocation": {
+              "type": "object",
+              "properties": {
+                "latitude": { "type": "number" },
+                "longitude": { "type": "number" }
+              }
+            },
+            "conversationId": {
+              "type": "string"
+            }
+          },
+          "__example__": {
+            "userLocation": {
+              "latitude": 49.287857055664,
+              "longitude": -123.12412261963
+            },
+            "conversationId": "conv_01JXGMQ38TEC4DX4CYJD0J6E2K"
+          }
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "1",
+              "title": "Bebidas sin alcohol",
+              "description": "Jugos, gaseosas, aguas"
+            },
+            {
+              "id": "2",
+              "title": "Mascotas",
+              "description": "Comida seca, húmeda, snacks"
+            },
+            {
+              "id": "3",
+              "title": "Snacks",
+              "description": "Papas fritas, galletas, ponqués, chocolates, chicles"
+            },
+            {
+              "id": "4",
+              "title": "Cervezas y licores",
+              "description": "Latas, botellas, packs"
+            }
+          ]
+        }
+      },
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "Form",
+            "name": "store_form",
+            "children": [
+              {
+                "type": "CheckboxGroup",
+                "name": "categoriesSelected",
+                "min-selected-items": 3,
+                "required": true,
+                "label": "Agrega las categorias que trabajaste",
+                "data-source": "${data.categories}"
+              },
+              {
+                "type": "Footer",
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "categoriesSelected": "${form.categoriesSelected}",
+                    "categories": "${data.categories}",
+                    "categoriesSize": "${data.categoriesSize}",
+                    "categoryCounter": "${data.categoryCounter}",
+                    "storeType": "${data.storeType}",
+                    "storeChannel": "${data.storeChannel}",
+                    "storeName": "${data.storeName}",
+                    "flowtoken": "${data.storeName}",
+                    "storeAddress": "${data.storeAddress}",
+                    "userLocation": "${data.userLocation}",
+                    "searchTerm": "${data.searchTerm}",
+                    "suggestedStores": "${data.suggestedStores}",
+                    "channels": "${data.channels}",
+                    "modernTypes": "${data.modernTypes}",
+                    "traditionalTypes": "${data.traditionalTypes}"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "MEDIA_ONE",
+      "title": "Captura de datos",
+      "data": {
+        "storeName": {
+          "type": "string",
+          "__example__": "TIENDA EL CABRITO"
+        },
+        "storeAddress": {
+          "type": "string",
+          "__example__": "TIENDA EL CABRITO"
+        },
+        "storeChannel": {
+          "type": "string",
+          "__example__": "MODERNO"
+        },
+        "storeType": {
+          "type": "string",
+          "__example__": "Tienda del barrio"
+        },
+        "flowToken": {
+          "type": "object",
+          "properties": {
+            "userLocation": {
+              "type": "object",
+              "properties": {
+                "latitude": { "type": "number" },
+                "longitude": { "type": "number" }
+              }
+            },
+            "conversationId": {
+              "type": "string"
+            }
+          },
+          "__example__": {
+            "userLocation": {
+              "latitude": 49.287857055664,
+              "longitude": -123.12412261963
+            },
+            "conversationId": "conv_01JXGMQ38TEC4DX4CYJD0J6E2K"
+          }
+        },
+        "category": {
+          "type": "string",
+          "__example__": "Bebidas sin alcohol: Jugos, gaseosas, aguas"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "1",
+              "title": "Bebidas sin alcohol",
+              "description": "Jugos, gaseosas, aguas"
+            },
+            {
+              "id": "2",
+              "title": "Mascotas",
+              "description": "Comida seca, húmeda, snacks"
+            },
+            {
+              "id": "3",
+              "title": "Snacks",
+              "description": "Papas fritas, galletas, ponqués, chocolates, chicles"
+            },
+            {
+              "id": "4",
+              "title": "Cerveza",
+              "description": "Latas, botellas, packs"
+            }
+          ]
+        },
+        "categoriesSelected": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "__example__": ["1", "2"]
+        },
+        "images": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "file_name": {
+                  "type": "string"
+                },
+                "media_id": {
+                  "type": "string"
+                },
+                "cdn_url": {
+                  "type": "string"
+                },
+                "encryption_metadata": {
+                  "type": "object",
+                  "properties": {
+                    "encryption_key": {
+                      "type": "string"
+                    },
+                    "hmac_key": {
+                      "type": "string"
+                    },
+                    "hmac": {
+                      "type": "string"
+                    },
+                    "iv": {
+                      "type": "string"
+                    },
+                    "plaintext_hash": {
+                      "type": "string"
+                    },
+                    "encrypted_hash": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "__example__": {
+            "Mascotas": [
+              {
+                "file_name": "6f2e2c18-f2b5-471c-afb3-0e872849a820.jpg",
+                "media_id": "053E5094-1295-47AC-BE7A-10B906D12E36",
+                "cdn_url": "https://mmg.whatsapp.net/v/t62.66612-24/21295665_1924117828325854_8020253381993101141_n.enc?ccb=11-4&oh=...",
+                "encryption_metadata": {
+                  "encryption_key": "toKTZnylV+8vwbIg9z8Pq0uk4bxZUxViHJge+T3l/MI=",
+                  "hmac_key": "iiB5/IgRwF98mqWHweNXT4kXyCs8vya7KhNaCnaQr54=",
+                  "hmac": "/ntvF0M0un8FAERrzhLEf0hrbWt70Scirf7BVvhaoNY=",
+                  "iv": "4NSMBwHuKPQfiS4ovN5yPQ==",
+                  "plaintext_hash": "X8/k7IZbr6isHHLlpllCCIqfJ731H9N2ED7CIcuJWwE=",
+                  "encrypted_hash": "BfdjBER4433/ic9ezGa6u7hvQQTvcUnj0Ocs+q0EWTU="
+                }
+              }
+            ]
+          }
+        }
+      },
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "Form",
+            "name": "store_form",
+            "children": [
+              {
+                "type": "TextBody",
+                "text": "Bien es hora de subir fotos iniciemos con la categoria"
+              },
+              {
+                "type": "TextCaption",
+                "text": "Estos son ejemplo de las foto que debes subir"
+              },
+              {
+                "type": "ImageCarousel",
+                "scale-type": "cover",
+                "images": [
+                  {
+                    "alt-text": "Landscape image",
+                    "src": "iVBORw0KGgoAAAANSUhEUgAAAB4AAAAKCAIAAAAsFXl4AAAANElEQVR4nGL5ctWagWjwuH0b8YqZiFdKKhg1Gg2wzOawIV61t1AF8YqHZoAMTaMBAQAA//9ljAXx5eZ2mwAAAABJRU5ErkJggg=="
+                  },
+                  {
+                    "alt-text": "Square image",
+                    "src": "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAALElEQVR4nGIRPRrBgATeWLsjc5kY8AKaSrPIL3FA5i9evZNudhOQBgQAAP//2DAFw06W30wAAAAASUVORK5CYII="
+                  },
+                  {
+                    "alt-text": "Portrait image",
+                    "src": "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAUCAIAAAA7jDsBAAAALUlEQVR4nGIJWfabAQls8DVA5jIx4AUjVZqRP2AJMn//v6V0s3voSgMCAAD//6kkBrFsdv78AAAAAElFTkSuQmCC"
+                  }
+                ]
+              },
+              {
+                "type": "PhotoPicker",
+                "name": "photo_picker",
+                "label": "Por favor sube fotos de la categoria",
+                "description": "`${data.category}`",
+                "photo-source": "camera_gallery",
+                "min-uploaded-photos": 3,
+                "max-uploaded-photos": 5,
+                "max-file-size-kb": 25600
+              },
+              {
+                "type": "Footer",
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "photo_picker": "${form.photo_picker}",
+                    "images": "${data.images}",
+                    "category": "${data.category}",
+                    "categories": "${data.categories}",
+                    "categoriesSize": "${data.categoriesSize}",
+                    "categoryCounter": "${data.categoryCounter}",
+                    "categoriesSelected": "${data.categoriesSelected}",
+                    "storeType": "${data.storeType}",
+                    "storeChannel": "${data.storeChannel}",
+                    "storeName": "${data.storeName}",
+                    "flowtoken": "${data.storeName}",
+                    "storeAddress": "${data.storeAddress}",
+                    "userLocation": "${data.userLocation}",
+                    "searchTerm": "${data.searchTerm}",
+                    "suggestedStores": "${data.suggestedStores}",
+                    "channels": "${data.channels}",
+                    "modernTypes": "${data.modernTypes}",
+                    "traditionalTypes": "${data.traditionalTypes}"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "MEDIA_TWO",
+      "title": "Captura de datos",
+      "data": {
+        "storeName": {
+          "type": "string",
+          "__example__": "TIENDA EL CABRITO"
+        },
+        "storeAddress": {
+          "type": "string",
+          "__example__": "TIENDA EL CABRITO"
+        },
+        "storeChannel": {
+          "type": "string",
+          "__example__": "MODERNO"
+        },
+        "storeType": {
+          "type": "string",
+          "__example__": "Tienda del barrio"
+        },
+        "flowToken": {
+          "type": "object",
+          "properties": {
+            "userLocation": {
+              "type": "object",
+              "properties": {
+                "latitude": { "type": "number" },
+                "longitude": { "type": "number" }
+              }
+            },
+            "conversationId": {
+              "type": "string"
+            }
+          },
+          "__example__": {
+            "userLocation": {
+              "latitude": 49.287857055664,
+              "longitude": -123.12412261963
+            },
+            "conversationId": "conv_01JXGMQ38TEC4DX4CYJD0J6E2K"
+          }
+        },
+        "category": {
+          "type": "string",
+          "__example__": "Bebidas sin alcohol: Jugos, gaseosas, aguas"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "1",
+              "title": "Bebidas sin alcohol",
+              "description": "Jugos, gaseosas, aguas"
+            },
+            {
+              "id": "2",
+              "title": "Mascotas",
+              "description": "Comida seca, húmeda, snacks"
+            },
+            {
+              "id": "3",
+              "title": "Snacks",
+              "description": "Papas fritas, galletas, ponqués, chocolates, chicles"
+            },
+            {
+              "id": "4",
+              "title": "Cervezas y licores",
+              "description": "Latas, botellas, packs"
+            }
+          ]
+        },
+        "categoriesSelected": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "__example__": ["1", "2"]
+        },
+        "images": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "file_name": {
+                  "type": "string"
+                },
+                "media_id": {
+                  "type": "string"
+                },
+                "cdn_url": {
+                  "type": "string"
+                },
+                "encryption_metadata": {
+                  "type": "object",
+                  "properties": {
+                    "encryption_key": {
+                      "type": "string"
+                    },
+                    "hmac_key": {
+                      "type": "string"
+                    },
+                    "hmac": {
+                      "type": "string"
+                    },
+                    "iv": {
+                      "type": "string"
+                    },
+                    "plaintext_hash": {
+                      "type": "string"
+                    },
+                    "encrypted_hash": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "__example__": {
+            "Mascotas": [
+              {
+                "file_name": "6f2e2c18-f2b5-471c-afb3-0e872849a820.jpg",
+                "media_id": "053E5094-1295-47AC-BE7A-10B906D12E36",
+                "cdn_url": "https://mmg.whatsapp.net/v/t62.66612-24/21295665_1924117828325854_8020253381993101141_n.enc?ccb=11-4&oh=...",
+                "encryption_metadata": {
+                  "encryption_key": "toKTZnylV+8vwbIg9z8Pq0uk4bxZUxViHJge+T3l/MI=",
+                  "hmac_key": "iiB5/IgRwF98mqWHweNXT4kXyCs8vya7KhNaCnaQr54=",
+                  "hmac": "/ntvF0M0un8FAERrzhLEf0hrbWt70Scirf7BVvhaoNY=",
+                  "iv": "4NSMBwHuKPQfiS4ovN5yPQ==",
+                  "plaintext_hash": "X8/k7IZbr6isHHLlpllCCIqfJ731H9N2ED7CIcuJWwE=",
+                  "encrypted_hash": "BfdjBER4433/ic9ezGa6u7hvQQTvcUnj0Ocs+q0EWTU="
+                }
+              }
+            ]
+          }
+        }
+      },
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "Form",
+            "name": "store_form",
+            "children": [
+              {
+                "type": "PhotoPicker",
+                "name": "photo_picker",
+                "label": "Por favor sube fotos de la categoria",
+                "description": "`${data.category}`",
+                "photo-source": "camera_gallery",
+                "min-uploaded-photos": 3,
+                "max-uploaded-photos": 5,
+                "max-file-size-kb": 25600
+              },
+              {
+                "type": "Footer",
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "photo_picker": "${form.photo_picker}",
+                    "images": "${data.images}",
+                    "category": "${data.category}",
+                    "categories": "${data.categories}",
+                    "categoriesSize": "${data.categoriesSize}",
+                    "categoryCounter": "${data.categoryCounter}",
+                    "categoriesSelected": "${data.categoriesSelected}",
+                    "storeType": "${data.storeType}",
+                    "storeChannel": "${data.storeChannel}",
+                    "storeName": "${data.storeName}",
+                    "flowtoken": "${data.storeName}",
+                    "storeAddress": "${data.storeAddress}",
+                    "userLocation": "${data.userLocation}",
+                    "searchTerm": "${data.searchTerm}",
+                    "suggestedStores": "${data.suggestedStores}",
+                    "channels": "${data.channels}",
+                    "modernTypes": "${data.modernTypes}",
+                    "traditionalTypes": "${data.traditionalTypes}"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "MEDIA_THREE",
+      "title": "Captura de datos",
+      "data": {
+        "storeName": {
+          "type": "string",
+          "__example__": "TIENDA EL CABRITO"
+        },
+        "storeAddress": {
+          "type": "string",
+          "__example__": "TIENDA EL CABRITO"
+        },
+        "storeChannel": {
+          "type": "string",
+          "__example__": "MODERNO"
+        },
+        "storeType": {
+          "type": "string",
+          "__example__": "Tienda del barrio"
+        },
+        "flowToken": {
+          "type": "object",
+          "properties": {
+            "userLocation": {
+              "type": "object",
+              "properties": {
+                "latitude": { "type": "number" },
+                "longitude": { "type": "number" }
+              }
+            },
+            "conversationId": {
+              "type": "string"
+            }
+          },
+          "__example__": {
+            "userLocation": {
+              "latitude": 49.287857055664,
+              "longitude": -123.12412261963
+            },
+            "conversationId": "conv_01JXGMQ38TEC4DX4CYJD0J6E2K"
+          }
+        },
+        "category": {
+          "type": "string",
+          "__example__": "Bebidas sin alcohol: Jugos, gaseosas, aguas"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "1",
+              "title": "Bebidas sin alcohol",
+              "description": "Jugos, gaseosas, aguas"
+            },
+            {
+              "id": "2",
+              "title": "Mascotas",
+              "description": "Comida seca, húmeda, snacks"
+            },
+            {
+              "id": "3",
+              "title": "Snacks",
+              "description": "Papas fritas, galletas, ponqués, chocolates, chicles"
+            },
+            {
+              "id": "4",
+              "title": "Cervezas y licores",
+              "description": "Latas, botellas, packs"
+            }
+          ]
+        },
+        "categoriesSelected": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "__example__": ["1", "2"]
+        },
+        "images": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "file_name": {
+                  "type": "string"
+                },
+                "media_id": {
+                  "type": "string"
+                },
+                "cdn_url": {
+                  "type": "string"
+                },
+                "encryption_metadata": {
+                  "type": "object",
+                  "properties": {
+                    "encryption_key": {
+                      "type": "string"
+                    },
+                    "hmac_key": {
+                      "type": "string"
+                    },
+                    "hmac": {
+                      "type": "string"
+                    },
+                    "iv": {
+                      "type": "string"
+                    },
+                    "plaintext_hash": {
+                      "type": "string"
+                    },
+                    "encrypted_hash": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "__example__": {
+            "Mascotas": [
+              {
+                "file_name": "6f2e2c18-f2b5-471c-afb3-0e872849a820.jpg",
+                "media_id": "053E5094-1295-47AC-BE7A-10B906D12E36",
+                "cdn_url": "https://mmg.whatsapp.net/v/t62.66612-24/21295665_1924117828325854_8020253381993101141_n.enc?ccb=11-4&oh=...",
+                "encryption_metadata": {
+                  "encryption_key": "toKTZnylV+8vwbIg9z8Pq0uk4bxZUxViHJge+T3l/MI=",
+                  "hmac_key": "iiB5/IgRwF98mqWHweNXT4kXyCs8vya7KhNaCnaQr54=",
+                  "hmac": "/ntvF0M0un8FAERrzhLEf0hrbWt70Scirf7BVvhaoNY=",
+                  "iv": "4NSMBwHuKPQfiS4ovN5yPQ==",
+                  "plaintext_hash": "X8/k7IZbr6isHHLlpllCCIqfJ731H9N2ED7CIcuJWwE=",
+                  "encrypted_hash": "BfdjBER4433/ic9ezGa6u7hvQQTvcUnj0Ocs+q0EWTU="
+                }
+              }
+            ]
+          }
+        }
+      },
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "Form",
+            "name": "store_form",
+            "children": [
+              {
+                "type": "PhotoPicker",
+                "name": "photo_picker",
+                "label": "Por favor sube fotos de la categoria",
+                "description": "`${data.category}`",
+                "photo-source": "camera_gallery",
+                "min-uploaded-photos": 3,
+                "max-uploaded-photos": 5,
+                "max-file-size-kb": 25600
+              },
+              {
+                "type": "Footer",
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "photo_picker": "${form.photo_picker}",
+                    "images": "${data.images}",
+                    "category": "${data.category}",
+                    "categories": "${data.categories}",
+                    "categoriesSize": "${data.categoriesSize}",
+                    "categoryCounter": "${data.categoryCounter}",
+                    "categoriesSelected": "${data.categoriesSelected}",
+                    "storeType": "${data.storeType}",
+                    "storeChannel": "${data.storeChannel}",
+                    "storeName": "${data.storeName}",
+                    "flowtoken": "${data.storeName}",
+                    "storeAddress": "${data.storeAddress}",
+                    "userLocation": "${data.userLocation}",
+                    "searchTerm": "${data.searchTerm}",
+                    "suggestedStores": "${data.suggestedStores}",
+                    "channels": "${data.channels}",
+                    "modernTypes": "${data.modernTypes}",
+                    "traditionalTypes": "${data.traditionalTypes}"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "MEDIA_FOUR",
+      "terminal": true,
+      "success": true,
+      "title": "Captura de datos",
+      "data": {
+        "storeName": {
+          "type": "string",
+          "__example__": "TIENDA EL CABRITO"
+        },
+        "storeAddress": {
+          "type": "string",
+          "__example__": "TIENDA EL CABRITO"
+        },
+        "storeChannel": {
+          "type": "string",
+          "__example__": "MODERNO"
+        },
+        "storeType": {
+          "type": "string",
+          "__example__": "Tienda del barrio"
+        },
+        "flowToken": {
+          "type": "object",
+          "properties": {
+            "userLocation": {
+              "type": "object",
+              "properties": {
+                "latitude": { "type": "number" },
+                "longitude": { "type": "number" }
+              }
+            },
+            "conversationId": {
+              "type": "string"
+            }
+          },
+          "__example__": {
+            "userLocation": {
+              "latitude": 49.287857055664,
+              "longitude": -123.12412261963
+            },
+            "conversationId": "conv_01JXGMQ38TEC4DX4CYJD0J6E2K"
+          }
+        },
+        "category": {
+          "type": "string",
+          "__example__": "Bebidas sin alcohol: Jugos, gaseosas, aguas"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "1",
+              "title": "Bebidas sin alcohol",
+              "description": "Jugos, gaseosas, aguas"
+            },
+            {
+              "id": "2",
+              "title": "Mascotas",
+              "description": "Comida seca, húmeda, snacks"
+            },
+            {
+              "id": "3",
+              "title": "Snacks",
+              "description": "Papas fritas, galletas, ponqués, chocolates, chicles"
+            },
+            {
+              "id": "4",
+              "title": "Cervezas y licores",
+              "description": "Latas, botellas, packs"
+            }
+          ]
+        },
+        "categoriesSelected": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "__example__": ["1", "2"]
+        },
+        "images": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "file_name": {
+                  "type": "string"
+                },
+                "media_id": {
+                  "type": "string"
+                },
+                "cdn_url": {
+                  "type": "string"
+                },
+                "encryption_metadata": {
+                  "type": "object",
+                  "properties": {
+                    "encryption_key": {
+                      "type": "string"
+                    },
+                    "hmac_key": {
+                      "type": "string"
+                    },
+                    "hmac": {
+                      "type": "string"
+                    },
+                    "iv": {
+                      "type": "string"
+                    },
+                    "plaintext_hash": {
+                      "type": "string"
+                    },
+                    "encrypted_hash": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "__example__": {
+            "Mascotas": [
+              {
+                "file_name": "6f2e2c18-f2b5-471c-afb3-0e872849a820.jpg",
+                "media_id": "053E5094-1295-47AC-BE7A-10B906D12E36",
+                "cdn_url": "https://mmg.whatsapp.net/v/t62.66612-24/21295665_1924117828325854_8020253381993101141_n.enc?ccb=11-4&oh=...",
+                "encryption_metadata": {
+                  "encryption_key": "toKTZnylV+8vwbIg9z8Pq0uk4bxZUxViHJge+T3l/MI=",
+                  "hmac_key": "iiB5/IgRwF98mqWHweNXT4kXyCs8vya7KhNaCnaQr54=",
+                  "hmac": "/ntvF0M0un8FAERrzhLEf0hrbWt70Scirf7BVvhaoNY=",
+                  "iv": "4NSMBwHuKPQfiS4ovN5yPQ==",
+                  "plaintext_hash": "X8/k7IZbr6isHHLlpllCCIqfJ731H9N2ED7CIcuJWwE=",
+                  "encrypted_hash": "BfdjBER4433/ic9ezGa6u7hvQQTvcUnj0Ocs+q0EWTU="
+                }
+              }
+            ]
+          }
+        }
+      },
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "Form",
+            "name": "store_form",
+            "children": [
+              {
+                "type": "PhotoPicker",
+                "name": "photo_picker",
+                "label": "Por favor sube fotos de la categoria",
+                "description": "`${data.category}`",
+                "photo-source": "camera_gallery",
+                "min-uploaded-photos": 3,
+                "max-uploaded-photos": 5,
+                "max-file-size-kb": 25600
+              },
+              {
+                "type": "Footer",
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "photo_picker": "${form.photo_picker}",
+                    "images": "${data.images}",
+                    "category": "${data.category}",
+                    "categories": "${data.categories}",
+                    "categoriesSize": "${data.categoriesSize}",
+                    "categoryCounter": "${data.categoryCounter}",
+                    "categoriesSelected": "${data.categoriesSelected}",
+                    "storeType": "${data.storeType}",
+                    "storeChannel": "${data.storeChannel}",
+                    "storeName": "${data.storeName}",
+                    "flowtoken": "${data.flowtoken}",
+                    "storeAddress": "${data.storeAddress}",
+                    "userLocation": "${data.userLocation}",
+                    "searchTerm": "${data.searchTerm}",
+                    "suggestedStores": "${data.suggestedStores}",
+                    "channels": "${data.channels}",
+                    "modernTypes": "${data.modernTypes}",
+                    "traditionalTypes": "${data.traditionalTypes}"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

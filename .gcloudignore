@@ -16,3 +16,7 @@
 node_modules
 src
 .env.yaml
+.env
+private.pem
+public.pem
+# zendly-ai-1ad854c8de83.json
