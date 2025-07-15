@@ -8,6 +8,11 @@ import { getData as inventoryScreenData } from './inventory';
 import { getData as executionScreenData } from './execution';
 import { getData as rateScreenData } from './rate';
 
+import { sendDataCaptureFlow } from '../../helpers/botpress';
+
+const BOTPRESS_WEBHOOK_URL =
+  'https://webhook.botpress.cloud/7b82b00b-91b0-4964-abd4-9542823675c2';
+
 export const getNextScreen = async (decryptedBody: {
   screen: any;
   data: any;
@@ -98,10 +103,23 @@ export const getNextScreen = async (decryptedBody: {
   if (action === 'data_exchange' && screen === 'RATE') {
     const screenData = await rateScreenData(data);
 
+    await sendDataCaptureFlow(
+      { ...data, ...screenData },
+      data.conversationId,
+      BOTPRESS_WEBHOOK_URL
+    );
+
+    return {
+      version,
+      screen: 'SUMMARY',
+      data: { ...data, ...screenData },
+    };
+  }
+  if (action === 'data_exchange' && screen === 'SUMMARY') {
     return {
       version,
       screen: 'SUCCESS',
-      data: { ...data, ...screenData },
+      data: { ...data },
     };
   }
 

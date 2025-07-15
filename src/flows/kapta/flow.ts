@@ -12,6 +12,9 @@ import {
 
 import { sendDataCaptureFlow } from '../../helpers/botpress';
 
+const BOTPRESS_WEBHOOK_URL =
+  'https://webhook.botpress.cloud/337d573f-d7f2-4311-96e5-009b1c6e82c5';
+
 export const getNextScreen = async (decryptedBody: {
   screen: any;
   data: any;
@@ -109,9 +112,11 @@ export const getNextScreen = async (decryptedBody: {
       if (flow_token) {
         const flowToken = JSON.parse(flow_token);
         console.log('flow_token', flowToken);
+
         await sendDataCaptureFlow(
           { ...data, ...screenData, ...summary },
-          flowToken.conversationId
+          flowToken.conversationId,
+          BOTPRESS_WEBHOOK_URL
         );
       } else {
         console.error(

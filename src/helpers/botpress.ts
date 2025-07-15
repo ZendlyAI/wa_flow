@@ -1,11 +1,12 @@
 import axios from 'axios';
 
-const BOTPRESS_WEBHOOK_URL =
-  'https://webhook.botpress.cloud/337d573f-d7f2-4311-96e5-009b1c6e82c5';
-
-export const sendDataCaptureFlow = async (data: any, conversationId: any) => {
+export const sendDataCaptureFlow = async (
+  data: any,
+  conversationId: any,
+  url: string
+) => {
   try {
-    console.log("Sending to botpress", conversationId)
+    console.log('Sending to botpress', conversationId);
     let body = JSON.stringify({
       conversationId: conversationId,
       type: 'data_capture_flow',
@@ -15,7 +16,7 @@ export const sendDataCaptureFlow = async (data: any, conversationId: any) => {
     const config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: BOTPRESS_WEBHOOK_URL,
+      url: url,
       headers: {
         'Content-Type': 'application/json',
       },

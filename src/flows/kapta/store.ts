@@ -6,7 +6,7 @@ import { Store } from '../../types/stores';
 import { joinStores, extractChannelsAndItems } from '../../utils';
 
 const sheetId: string =
-  process.env.GSHEET_ID || '1a8wbNU5PwXrjNQ2dtX4daUEIKRgyaWExiNnGeFoN7EA';
+  process.env.GSHEET_ID_KAPTA || '1a8wbNU5PwXrjNQ2dtX4daUEIKRgyaWExiNnGeFoN7EA';
 
 export const getData = async (data: any) => {
   const tabs = await getGSheetTabs(sheetId);

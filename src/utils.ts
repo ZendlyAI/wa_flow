@@ -159,6 +159,13 @@ export const formatImageUploadSummary = (images: any) => {
     .join('\n');
 };
 
+// [
+//   ["NIT","SID","Suc","Nombre tercero","NOMBRE COMERCIAL","DEPARTAMENTO","DIRECCIÓN","ZONA","ESTADO CODIFICACIÓN","FECHA ESTADO (fecha de creación)","POLITICA DE CARTERA","Address","lat","lng"],
+//   ["901084743","9010847431","1","CHICHERIA DEMENTE S.A.S.","CHICHERIA DEMENTE","Bogotá D.C.","CLL 69 15 10","Chapinero","7. CLIENTE","20/10/2024","","Cl. 69 #15-08, Bogotá, Colombia","4,6568056","-74,0641556"],
+//   ["901262730","9012627301","1","POLA Y TEJO SAS","TEJO LA EMBAJADA","Bogotá D.C.","CRA 24 76 20","San Felipe","7. CLIENTE","20/10/2024","Cra. 24 #76-20, Bogotá, Colombia","4.6666805","-74.0645844"]
+// ]
+// Elimina entradas duplicadas por valor de id
+// Result: [ { "id": "901400632", "title": "GLOUNGE" }, { "id": "901047072", "title": "HUERTA COCTELERIA ARTESANAL" }, { "id": "901627338", "title": "CAÑA AGUARDIENTERIA" }, { "id": "900996095", "title": "NUEVA BOTELLA" }, { "id": "901590789", "title": "ACERTIJO BAR" }, { "id": "900581506", "title": "DEMENTE TAPAS BAR S.A.S." }, { "id": "80873860", "title": "KB ESPACIO CULTURAL" }, { "id": "901179346", "title": "BILONGO" }, { "id": "901262730", "title": "TEJO LA EMBAJADA" } ]
 export const extractIdTitleArray = (
   data: any[],
   idField: string,
@@ -193,4 +200,76 @@ export const extractIdTitleArray = (
 
     return result;
   }, []);
+};
+
+// [
+//   ["NIT","SID","Suc","Nombre tercero","NOMBRE COMERCIAL","DEPARTAMENTO","DIRECCIÓN","ZONA","ESTADO CODIFICACIÓN","FECHA ESTADO (fecha de creación)","POLITICA DE CARTERA","Address","lat","lng"],
+//   ["901084743","9010847431","1","CHICHERIA DEMENTE S.A.S.","CHICHERIA DEMENTE","Bogotá D.C.","CLL 69 15 10","Chapinero","7. CLIENTE","20/10/2024","","Cl. 69 #15-08, Bogotá, Colombia","4,6568056","-74,0641556"],
+//   ["901262730","9012627301","1","POLA Y TEJO SAS","TEJO LA EMBAJADA","Bogotá D.C.","CRA 24 76 20","San Felipe","7. CLIENTE","20/10/2024","Cra. 24 #76-20, Bogotá, Colombia", "4.6666805", "-74.0645844"]
+// ]
+// Result: [ "901262730", "9012627301", "1", "POLA Y TEJO SAS", "TEJO LA EMBAJADA", "Bogotá D.C.", "CRA 24 76 20", "San Felipe", "7. CLIENTE", "20/10/2024", "Cra. 24 #76-20, Bogotá, Colombia", "4.6666805", "-74.0645844" ]
+export const findRowById = (
+  data: string[][],
+  idProp: string,
+  idValue: string
+): string[] | null => {
+  if (!data || data.length < 2) return null;
+
+  const header = data[0];
+  const rows = data.slice(1);
+
+  const idIndex = header.indexOf(idProp);
+  if (idIndex === -1) {
+    throw new Error(`Columna '${idProp}' no encontrada en el header`);
+  }
+
+  console.log(`🔍 Buscando fila con ${idProp} = ${idValue}`);
+  console.log(`🔍 idIndex ${idIndex}`);
+  for (const row of rows) {
+    if (row[idIndex] === idValue) {
+      return row;
+    }
+  }
+
+  return null;
+};
+
+// [
+//   ["NIT","SID","Suc","Nombre tercero","NOMBRE COMERCIAL","DEPARTAMENTO","DIRECCIÓN","ZONA","ESTADO CODIFICACIÓN","FECHA ESTADO (fecha de creación)","POLITICA DE CARTERA","Address","lat","lng"],
+//   ["901084743","9010847431","1","CHICHERIA DEMENTE S.A.S.","CHICHERIA DEMENTE","Bogotá D.C.","CLL 69 15 10","Chapinero","7. CLIENTE","20/10/2024","","Cl. 69 #15-08, Bogotá, Colombia","4,6568056","-74,0641556"],
+//   ["901262730","9012627301","1","POLA Y TEJO SAS","TEJO LA EMBAJADA","Bogotá D.C.","CRA 24 76 20","San Felipe","7. CLIENTE","20/10/2024","Cra. 24 #76-20, Bogotá, Colombia","4.6666805","-74.0645844"]
+// ]
+// Result: [ { SID: '9010847431', 'NOMBRE COMERCIAL': 'CHICHERIA DEMENTE', ZONA: 'Chapinero' }, { SID: '9012627301', 'NOMBRE COMERCIAL': 'TEJO LA EMBAJADA', ZONA: 'San Felipe' } ]
+export const mapToObjectsByProps = (data: string[][], props: string[]): any => {
+  if (!data || data.length < 2) return [];
+
+  const header = data[0];
+
+  // Obtener los índices de todas las props solicitadas
+  const indices = props.map((prop) => {
+    const index = header.indexOf(prop);
+    if (index === -1) {
+      throw new Error(`No se encontró columna '${prop}' en el header`);
+    }
+    return index;
+  });
+
+  return data.slice(1).map((plan) => {
+    const obj: any = {};
+    props.forEach((prop, i) => {
+      obj[prop] = plan[indices[i]];
+    });
+    return obj;
+  });
+};
+
+export const sumTotalCartera = (
+  data: { 'Total cartera': string }[]
+): number => {
+  return data.reduce((acc, item) => {
+    const raw = item['Total cartera'];
+    const clean = raw.replace(/,/g, '').replace('$', ''); // Elimina coma dolar de miles
+    const value = parseFloat(clean); // Convierte a número flotante
+    return acc + (isNaN(value) ? 0 : value);
+  }, 0);
 };

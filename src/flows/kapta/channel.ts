@@ -7,19 +7,14 @@ export const getData = async (data: any) => {
     },
     {
       id: '2',
-      title: 'Mascotas',
+      title: 'Alimentos para Mascotas',
       description: 'Comida seca, húmeda, snacks',
     },
     {
       id: '3',
       title: 'Snacks',
       description: 'Papas fritas, galletas, ponqués, chocolates, chicles',
-    },
-    {
-      id: '4',
-      title: 'Cervezas y licores',
-      description: 'Latas, botellas, packs',
-    },
+    }
   ];
   return {
     ...data,

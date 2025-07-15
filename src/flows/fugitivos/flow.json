@@ -2,13 +2,31 @@
   "version": "7.1",
   "data_api_version": "3.0",
   "routing_model": {
-    "REGISTER_VISIT": ["COMMERCIAL_PLAN"],
-    "COMMERCIAL_PLAN": ["PORTAFOLIO_STATUS"],
-    "PORTAFOLIO_STATUS": ["CAPTURE_DATA"],
-    "CAPTURE_DATA": ["SALES_LEVERS"],
-    "SALES_LEVERS": ["INVENTORY"],
-    "INVENTORY": ["EXECUTION"],
-    "EXECUTION": ["RATE"]
+    "REGISTER_VISIT": [
+      "COMMERCIAL_PLAN"
+    ],
+    "COMMERCIAL_PLAN": [
+      "PORTAFOLIO_STATUS"
+    ],
+    "PORTAFOLIO_STATUS": [
+      "CAPTURE_DATA"
+    ],
+    "CAPTURE_DATA": [
+      "SALES_LEVERS"
+    ],
+    "SALES_LEVERS": [
+      "INVENTORY"
+    ],
+    "INVENTORY": [
+      "EXECUTION"
+    ],
+    "EXECUTION": [
+      "RATE"
+    ],
+    "RATE": [
+      "SUMMARY"
+    ],
+    "SUMMARY": []
   },
   "screens": [
     {
@@ -70,18 +88,18 @@
             "children": [
               {
                 "type": "TextSubheading",
-                "text": "Escoge al cliente que estás visitando\n"
+                "text": "Escoge al cliente que estás visitando:\n"
               },
               {
                 "data-source": "${data.stores}",
                 "label": "Seleccionar cliente",
-                "name": "client",
+                "name": "sid",
                 "required": true,
                 "type": "Dropdown"
               },
               {
                 "label": "Fecha de visita",
-                "name": "vistiDate",
+                "name": "visitDate",
                 "required": true,
                 "type": "DatePicker"
               },
@@ -90,8 +108,11 @@
                 "on-click-action": {
                   "name": "data_exchange",
                   "payload": {
-                    "client": "${form.client}",
-                    "vistiDate": "${form.vistiDate}"
+                    "sid": "${form.sid}",
+                    "visitDate": "${form.visitDate}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
                   }
                 },
                 "type": "Footer"
@@ -108,13 +129,56 @@
       "id": "COMMERCIAL_PLAN",
       "title": "Plan comercial",
       "data": {
-        "screen_0_Seleccionar_cliente_0": {
-          "__example__": "Example",
-          "type": "string"
+        "commercialPlan": {
+          "type": "object",
+          "properties": {
+            "PLAN": {
+              "type": "string"
+            },
+            "VENTA": {
+              "type": "string"
+            },
+            "GAP": {
+              "type": "string"
+            }
+          },
+          "__example__": {
+            "PLAN": "1",
+            "VENTA": "2",
+            "GAP": "1"
+          }
         },
-        "screen_0_Fecha_de_visita_1": {
-          "__example__": "Example",
-          "type": "string"
+        "salesLevers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "10% DCTO",
+              "title": "10% DCTO"
+            },
+            {
+              "id": "2000 X SHOT",
+              "title": "2000 X SHOT"
+            }
+          ]
+        },
+        "portafolioStatus": {
+          "type": "boolean",
+          "__example__": false
+        },
+        "portafolio": {
+          "type": "string",
+          "__example__": "462400.0"
         }
       },
       "layout": {
@@ -130,7 +194,7 @@
                 "type": "TextSubheading"
               },
               {
-                "text": "10 botellas",
+                "text": "${data.commercialPlan.PLAN}",
                 "type": "TextBody"
               },
               {
@@ -138,19 +202,15 @@
                 "type": "TextSubheading"
               },
               {
-                "text": "4 botellas",
+                "text": "${data.commercialPlan.VENTA}",
                 "type": "TextBody"
-              },
-              {
-                "text": "Fecha de la última compra: 10/06/2025 ",
-                "type": "TextCaption"
               },
               {
                 "text": "Gap:",
                 "type": "TextSubheading"
               },
               {
-                "text": "6 botellas",
+                "text": "${data.commercialPlan.GAP}",
                 "type": "TextBody"
               },
               {
@@ -158,8 +218,17 @@
                 "on-click-action": {
                   "name": "data_exchange",
                   "payload": {
-                    "screen_0_Seleccionar_cliente_0": "${data.screen_0_Seleccionar_cliente_0}",
-                    "screen_0_Fecha_de_visita_1": "${data.screen_0_Fecha_de_visita_1}"
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
                   }
                 },
                 "type": "Footer"
@@ -176,13 +245,37 @@
       "id": "PORTAFOLIO_STATUS",
       "title": "Cartera",
       "data": {
-        "screen_0_Seleccionar_cliente_0": {
-          "__example__": "Example",
-          "type": "string"
+        "salesLevers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "10% DCTO",
+              "title": "10% DCTO"
+            },
+            {
+              "id": "2000 X SHOT",
+              "title": "2000 X SHOT"
+            }
+          ]
         },
-        "screen_0_Fecha_de_visita_1": {
-          "__example__": "Example",
-          "type": "string"
+        "portafolioStatus": {
+          "type": "boolean",
+          "__example__": true
+        },
+        "portafolio": {
+          "type": "string",
+          "__example__": "$2.637,125.01"
         }
       },
       "layout": {
@@ -194,28 +287,53 @@
                 "type": "TextHeading"
               },
               {
-                "text": "¿Tiene cartera vencida?\n",
+                "text": "¿Tiene cartera vencida?",
                 "type": "TextSubheading"
               },
               {
-                "text": "Si/No",
-                "type": "TextBody"
+                "type": "If",
+                "condition": "${data.portafolioStatus} == false",
+                "then": [
+                  {
+                    "text": "No",
+                    "type": "TextBody"
+                  }
+                ]
               },
               {
-                "text": "Total de cartera vencida:",
-                "type": "TextSubheading"
-              },
-              {
-                "text": "$10,000,000",
-                "type": "TextBody"
+                "type": "If",
+                "condition": "${data.portafolioStatus} == true",
+                "then": [
+                  {
+                    "text": "Si",
+                    "type": "TextBody"
+                  },
+                  {
+                    "text": "Total de cartera vencida:",
+                    "type": "TextSubheading"
+                  },
+                  {
+                    "text": "`'total: ' ${data.portafolio}`",
+                    "type": "TextBody"
+                  }
+                ]
               },
               {
                 "label": "Siguiente",
                 "on-click-action": {
                   "name": "data_exchange",
                   "payload": {
-                    "screen_0_Seleccionar_cliente_0": "${data.screen_0_Seleccionar_cliente_0}",
-                    "screen_0_Fecha_de_visita_1": "${data.screen_0_Fecha_de_visita_1}"
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
                   }
                 },
                 "type": "Footer"
@@ -231,16 +349,7 @@
     {
       "id": "CAPTURE_DATA",
       "title": "Empezar visita",
-      "data": {
-        "screen_0_Seleccionar_cliente_0": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_0_Fecha_de_visita_1": {
-          "__example__": "Example",
-          "type": "string"
-        }
-      },
+      "data": {},
       "layout": {
         "children": [
           {
@@ -274,9 +383,17 @@
                 "on-click-action": {
                   "name": "data_exchange",
                   "payload": {
-                    "screen_3_Confirmo_que_estoy_en_punto_de_venta_y_la_informacin_ser_la_correcta_0": "${form.Confirmo_que_estoy_en_punto_de_venta_y_la_informacin_ser_la_correcta_37c304}",
-                    "screen_0_Seleccionar_cliente_0": "${data.screen_0_Seleccionar_cliente_0}",
-                    "screen_0_Fecha_de_visita_1": "${data.screen_0_Fecha_de_visita_1}"
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
                   }
                 },
                 "type": "Footer"
@@ -293,17 +410,29 @@
       "id": "SALES_LEVERS",
       "title": "Palancas de venta",
       "data": {
-        "screen_3_Confirmo_que_estoy_en_punto_de_venta_y_la_informacin_ser_la_correcta_0": {
-          "__example__": false,
-          "type": "boolean"
-        },
-        "screen_0_Seleccionar_cliente_0": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_0_Fecha_de_visita_1": {
-          "__example__": "Example",
-          "type": "string"
+        "salesLevers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "10% DCTO",
+              "title": "10% DCTO"
+            },
+            {
+              "id": "2000 X SHOT",
+              "title": "2000 X SHOT"
+            }
+          ]
         }
       },
       "layout": {
@@ -317,122 +446,67 @@
               {
                 "data-source": [
                   {
-                    "id": "0_Si",
+                    "id": "si",
                     "title": "Si"
                   },
                   {
-                    "id": "1_No",
+                    "id": "no",
                     "title": "No"
                   }
                 ],
                 "label": "¿Palanca presentada?",
-                "name": "Palanca_presentada_f2c8e2",
+                "name": "leverPresented",
                 "required": true,
                 "type": "RadioButtonsGroup"
               },
               {
-                "data-source": [
+                "type": "If",
+                "condition": "${form.leverPresented} == 'si'",
+                "then": [
                   {
-                    "id": "0_10%_DCTO",
-                    "title": "10% DCTO"
+                    "data-source": "${data.salesLevers}",
+                    "label": "Seleccionar palanca",
+                    "name": "salesLeverSelected",
+                    "required": true,
+                    "type": "Dropdown"
                   },
                   {
-                    "id": "1_1000_x_SHOT",
-                    "title": "1000 x SHOT"
-                  },
-                  {
-                    "id": "2_15%_DCTO",
-                    "title": "15% DCTO"
-                  },
-                  {
-                    "id": "3_15000_X_BOTELLA",
-                    "title": "15000 X BOTELLA"
-                  },
-                  {
-                    "id": "4_2_Copas_por_Bot_",
-                    "title": "2 Copas por Bot "
-                  },
-                  {
-                    "id": "5_2000_X_SHOT",
-                    "title": "2000 X SHOT"
-                  },
-                  {
-                    "id": "6_2x1",
-                    "title": "2x1"
-                  },
-                  {
-                    "id": "7_2x3",
-                    "title": "2x3"
-                  },
-                  {
-                    "id": "8_30%_DESCUENTO_",
-                    "title": "30% DESCUENTO "
-                  },
-                  {
-                    "id": "9_35%_ACT_SELL_OUT_",
-                    "title": "35% ACT SELL OUT "
-                  },
-                  {
-                    "id": "10_3X2_SERVICIO",
-                    "title": "3X2 SERVICIO"
-                  },
-                  {
-                    "id": "11_4_VASOS_x_BOTELLA",
-                    "title": "4 VASOS x BOTELLA"
-                  },
-                  {
-                    "id": "12_Activación_Impulso_",
-                    "title": "Activación Impulso "
-                  },
-                  {
-                    "id": "13_CAJA_13",
-                    "title": "CAJA 13"
-                  },
-                  {
-                    "id": "14_CAJA_7",
-                    "title": "CAJA 7"
-                  },
-                  {
-                    "id": "15_Coctel_de_temporada_",
-                    "title": "Coctel de temporada "
-                  },
-                  {
-                    "id": "16_Picada_por_botella",
-                    "title": "Picada por botella"
+                    "data-source": [
+                      {
+                        "id": "si",
+                        "title": "Si"
+                      },
+                      {
+                        "id": "no",
+                        "title": "No"
+                      }
+                    ],
+                    "label": "¿Palanca aceptada?",
+                    "name": "aceptedLever",
+                    "required": true,
+                    "type": "RadioButtonsGroup"
                   }
-                ],
-                "label": "Seleccionar palanca",
-                "name": "Seleccionar_palanca_50f77e",
-                "required": true,
-                "type": "Dropdown"
-              },
-              {
-                "data-source": [
-                  {
-                    "id": "0_Si",
-                    "title": "Si"
-                  },
-                  {
-                    "id": "1_No",
-                    "title": "No"
-                  }
-                ],
-                "label": "¿Palanca aceptada?",
-                "name": "Palanca_aceptada_f064a1",
-                "required": true,
-                "type": "RadioButtonsGroup"
+                ]
               },
               {
                 "label": "Continuar",
                 "on-click-action": {
                   "name": "data_exchange",
                   "payload": {
-                    "screen_4_Palanca_presentada_0": "${form.Palanca_presentada_f2c8e2}",
-                    "screen_4_Seleccionar_palanca_1": "${form.Seleccionar_palanca_50f77e}",
-                    "screen_4_Palanca_aceptada_2": "${form.Palanca_aceptada_f064a1}",
-                    "screen_3_Confirmo_que_estoy_en_punto_de_venta_y_la_informacin_ser_la_correcta_0": "${data.screen_3_Confirmo_que_estoy_en_punto_de_venta_y_la_informacin_ser_la_correcta_0}",
-                    "screen_0_Seleccionar_cliente_0": "${data.screen_0_Seleccionar_cliente_0}",
-                    "screen_0_Fecha_de_visita_1": "${data.screen_0_Fecha_de_visita_1}"
+                    "aceptedLever": "${form.aceptedLever}",
+                    "salesLeverSelected": "${form.salesLeverSelected}",
+                    "leverPresented": "${form.leverPresented}",
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
                   }
                 },
                 "type": "Footer"
@@ -448,44 +522,19 @@
     {
       "id": "INVENTORY",
       "title": "Inventario",
-      "data": {
-        "screen_4_Palanca_presentada_0": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_4_Seleccionar_palanca_1": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_4_Palanca_aceptada_2": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_3_Confirmo_que_estoy_en_punto_de_venta_y_la_informacin_ser_la_correcta_0": {
-          "__example__": false,
-          "type": "boolean"
-        },
-        "screen_0_Seleccionar_cliente_0": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_0_Fecha_de_visita_1": {
-          "__example__": "Example",
-          "type": "string"
-        }
-      },
+      "data": {},
       "layout": {
         "children": [
           {
             "children": [
               {
-                "text": "Mapeo de inventario",
+                "text": "Mapeo de inventario:",
                 "type": "TextHeading"
               },
               {
                 "input-type": "number",
                 "label": "Cantidad de botellas",
-                "name": "Cantidad_de_botellas_0e3f58",
+                "name": "bottlesCount",
                 "required": true,
                 "type": "TextInput"
               },
@@ -495,7 +544,7 @@
               },
               {
                 "label": "Comentarios ",
-                "name": "Comentarios__5057fe",
+                "name": "comments",
                 "required": true,
                 "type": "TextArea",
                 "helper-text": "Registra el detalle de inventarios acá."
@@ -505,14 +554,22 @@
                 "on-click-action": {
                   "name": "data_exchange",
                   "payload": {
-                    "screen_5_Cantidad_de_botellas_0": "${form.Cantidad_de_botellas_0e3f58}",
-                    "screen_5_Comentarios__1": "${form.Comentarios__5057fe}",
-                    "screen_4_Palanca_presentada_0": "${data.screen_4_Palanca_presentada_0}",
-                    "screen_4_Seleccionar_palanca_1": "${data.screen_4_Seleccionar_palanca_1}",
-                    "screen_4_Palanca_aceptada_2": "${data.screen_4_Palanca_aceptada_2}",
-                    "screen_3_Confirmo_que_estoy_en_punto_de_venta_y_la_informacin_ser_la_correcta_0": "${data.screen_3_Confirmo_que_estoy_en_punto_de_venta_y_la_informacin_ser_la_correcta_0}",
-                    "screen_0_Seleccionar_cliente_0": "${data.screen_0_Seleccionar_cliente_0}",
-                    "screen_0_Fecha_de_visita_1": "${data.screen_0_Fecha_de_visita_1}"
+                    "comments": "${form.comments}",
+                    "bottlesCount": "${form.bottlesCount}",
+                    "aceptedLever": "${data.aceptedLever}",
+                    "salesLeverSelected": "${data.salesLeverSelected}",
+                    "leverPresented": "${data.leverPresented}",
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
                   }
                 },
                 "type": "Footer"
@@ -528,40 +585,7 @@
     {
       "id": "EXECUTION",
       "title": "Ejecución",
-      "data": {
-        "screen_5_Cantidad_de_botellas_0": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_5_Comentarios__1": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_4_Palanca_presentada_0": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_4_Seleccionar_palanca_1": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_4_Palanca_aceptada_2": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_3_Confirmo_que_estoy_en_punto_de_venta_y_la_informacin_ser_la_correcta_0": {
-          "__example__": false,
-          "type": "boolean"
-        },
-        "screen_0_Seleccionar_cliente_0": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_0_Fecha_de_visita_1": {
-          "__example__": "Example",
-          "type": "string"
-        }
-      },
+      "data": {},
       "layout": {
         "children": [
           {
@@ -573,24 +597,24 @@
               {
                 "data-source": [
                   {
-                    "id": "0_Coctel",
+                    "id": "Coctel",
                     "title": "Coctel"
                   },
                   {
-                    "id": "1_Menú",
+                    "id": "Menú",
                     "title": "Menú"
                   },
                   {
-                    "id": "2_Visibilidad_en_barra",
+                    "id": "Visibilidad en barra",
                     "title": "Visibilidad en barra"
                   },
                   {
-                    "id": "3_Capacitación_últimos_6_meses",
+                    "id": "Capacitación últimos 6 meses",
                     "title": "Capacitación últimos 6 meses"
                   }
                 ],
                 "label": "Selecciona las que aplique:",
-                "name": "Selecciona_las_que_aplique_1a1ae5",
+                "name": "executionSelected",
                 "required": true,
                 "type": "CheckboxGroup"
               },
@@ -599,23 +623,36 @@
                 "type": "TextSubheading"
               },
               {
-                "text": "Galería / Tomar foto",
-                "type": "TextBody"
+                "type": "PhotoPicker",
+                "name": "photoPicker",
+                "label": "Puedes elegirlas desde tu galería o tomarlas ahora mismo.",
+                "photo-source": "camera_gallery",
+                "min-uploaded-photos": 1,
+                "max-file-size-kb": 25600
               },
               {
                 "label": "Continuar",
                 "on-click-action": {
                   "name": "data_exchange",
                   "payload": {
-                    "screen_6_Selecciona_las_que_aplique_0": "${form.Selecciona_las_que_aplique_1a1ae5}",
-                    "screen_5_Cantidad_de_botellas_0": "${data.screen_5_Cantidad_de_botellas_0}",
-                    "screen_5_Comentarios__1": "${data.screen_5_Comentarios__1}",
-                    "screen_4_Palanca_presentada_0": "${data.screen_4_Palanca_presentada_0}",
-                    "screen_4_Seleccionar_palanca_1": "${data.screen_4_Seleccionar_palanca_1}",
-                    "screen_4_Palanca_aceptada_2": "${data.screen_4_Palanca_aceptada_2}",
-                    "screen_3_Confirmo_que_estoy_en_punto_de_venta_y_la_informacin_ser_la_correcta_0": "${data.screen_3_Confirmo_que_estoy_en_punto_de_venta_y_la_informacin_ser_la_correcta_0}",
-                    "screen_0_Seleccionar_cliente_0": "${data.screen_0_Seleccionar_cliente_0}",
-                    "screen_0_Fecha_de_visita_1": "${data.screen_0_Fecha_de_visita_1}"
+                    "photoPicker": "${form.photoPicker}",
+                    "executionSelected": "${form.executionSelected}",
+                    "comments": "${data.comments}",
+                    "bottlesCount": "${data.bottlesCount}",
+                    "aceptedLever": "${data.aceptedLever}",
+                    "salesLeverSelected": "${data.salesLeverSelected}",
+                    "leverPresented": "${data.leverPresented}",
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
                   }
                 },
                 "type": "Footer"
@@ -631,60 +668,20 @@
     {
       "id": "RATE",
       "title": "Calificar visita",
-      "data": {
-        "screen_6_Selecciona_las_que_aplique_0": {
-          "__example__": [],
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "screen_5_Cantidad_de_botellas_0": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_5_Comentarios__1": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_4_Palanca_presentada_0": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_4_Seleccionar_palanca_1": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_4_Palanca_aceptada_2": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_3_Confirmo_que_estoy_en_punto_de_venta_y_la_informacin_ser_la_correcta_0": {
-          "__example__": false,
-          "type": "boolean"
-        },
-        "screen_0_Seleccionar_cliente_0": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_0_Fecha_de_visita_1": {
-          "__example__": "Example",
-          "type": "string"
-        }
-      },
+      "data": {},
       "layout": {
         "children": [
           {
             "children": [
               {
-                "text": "Califica tu experiencia general",
+                "text": "Califica tu experiencia general de tu visita en punto de venta:",
                 "type": "TextHeading"
               },
               {
                 "type": "Dropdown",
                 "label": "Experiencia general",
                 "required": true,
-                "name": "Experiencia_general_a6b75f",
+                "name": "generalExperience",
                 "data-source": [
                   {
                     "id": "0_★★★★★_•_Excelente_(5/5)",
@@ -709,31 +706,40 @@
                 ]
               },
               {
-                "text": "Deja tus comentarios acerca de cómo te recibieron en tu punto de venta",
+                "text": "Deja tus comentarios acerca de cómo te recibieron en el punto de venta",
                 "type": "TextCaption"
               },
               {
                 "label": "Comentarios",
-                "name": "Comentarios_6f10f7",
+                "name": "generalComments",
                 "required": true,
                 "type": "TextArea"
               },
               {
                 "label": "Terminar",
                 "on-click-action": {
-                  "name": "complete",
+                  "name": "data_exchange",
                   "payload": {
-                    "screen_7_Experiencia_general_0": "${form.Experiencia_general_a6b75f}",
-                    "screen_7_Comentarios_1": "${form.Comentarios_6f10f7}",
-                    "screen_6_Selecciona_las_que_aplique_0": "${data.screen_6_Selecciona_las_que_aplique_0}",
-                    "screen_5_Cantidad_de_botellas_0": "${data.screen_5_Cantidad_de_botellas_0}",
-                    "screen_5_Comentarios__1": "${data.screen_5_Comentarios__1}",
-                    "screen_4_Palanca_presentada_0": "${data.screen_4_Palanca_presentada_0}",
-                    "screen_4_Seleccionar_palanca_1": "${data.screen_4_Seleccionar_palanca_1}",
-                    "screen_4_Palanca_aceptada_2": "${data.screen_4_Palanca_aceptada_2}",
-                    "screen_3_Confirmo_que_estoy_en_punto_de_venta_y_la_informacin_ser_la_correcta_0": "${data.screen_3_Confirmo_que_estoy_en_punto_de_venta_y_la_informacin_ser_la_correcta_0}",
-                    "screen_0_Seleccionar_cliente_0": "${data.screen_0_Seleccionar_cliente_0}",
-                    "screen_0_Fecha_de_visita_1": "${data.screen_0_Fecha_de_visita_1}"
+                    "generalComments": "${form.generalComments}",
+                    "generalExperience": "${form.generalExperience}",
+                    "photoPicker": "${data.photoPicker}",
+                    "executionSelected": "${data.executionSelected}",
+                    "comments": "${data.comments}",
+                    "bottlesCount": "${data.bottlesCount}",
+                    "aceptedLever": "${data.aceptedLever}",
+                    "salesLeverSelected": "${data.salesLeverSelected}",
+                    "leverPresented": "${data.leverPresented}",
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
                   }
                 },
                 "type": "Footer"
@@ -744,8 +750,143 @@
           }
         ],
         "type": "SingleColumnLayout"
+      }
+    },
+    {
+      "id": "SUMMARY",
+      "terminal": true,
+      "success": true,
+      "title": "Resumen",
+      "data": {
+        "sid": {
+          "type": "string",
+          "__example__": "SORELLA"
+        },
+        "client": {
+          "type": "string",
+          "__example__": "SORELLA"
+        },
+        "visitDate": {
+          "type": "string",
+          "__example__": "2025-07-07"
+        },
+        "leverPresented": {
+          "type": "string",
+          "__example__": "MODERNO"
+        },
+        "aceptedLever": {
+          "type": "string",
+          "__example__": "Tienda del barrio"
+        },
+        "salesLeverSelected": {
+          "type": "string",
+          "__example__": "Bebidas sin alcohol: Jugos, gaseosas, aguas"
+        },
+        "bottlesCount": {
+          "type": "string",
+          "__example__": "Bebidas sin alcohol: Jugos, gaseosas, aguas"
+        },
+        "comments": {
+          "type": "string",
+          "__example__": "Bebidas sin alcohol: Jugos, gaseosas, aguas"
+        },
+        "executionSelected": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "__example__": [
+            "Coctel",
+            "Menú"
+          ]
+        },
+        "generalComments": {
+          "type": "string",
+          "__example__": "\n - Bebidas sin alcohol \n - Bebidas sin alcohol \n - Mascotas"
+        },
+        "generalExperience": {
+          "type": "string",
+          "__example__": "\n - Bebidas sin alcohol: 3 fotos subidas \n - Bebidas sin alcohol: 3 fotos subidas \n - Mascotas: 3 fotos subidas \n"
+        }
       },
-      "terminal": true
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "TextSubheading",
+            "text": "Captura de datos:"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'Cliente: '${data.sid} '-' ${data.client}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'Fecha de visita: '${data.visitDate}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'¿Palanca presentada? '${data.leverPresented}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'Palanca selecionada:: '${data.salesLeverSelected}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'¿Palanca aceptada? '${data.aceptedLever}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'Cantidad de botellas: '${data.bottlesCount}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'Comentarios sobre el inventario: '${data.comments}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'Validación de ejecución: '${data.executionSelected}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'Califica tu experiencia general: '${data.generalComments}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'Deja tus comentarios acerca de cómo te recibieron en tu punto de venta '${data.generalExperience}`"
+          },
+          {
+            "type": "Footer",
+            "label": "Confirmar",
+            "on-click-action": {
+              "name": "complete",
+              "payload": {
+                "generalComments": "${form.generalComments}",
+                "generalExperience": "${form.generalExperience}",
+                "photoPicker": "${data.photoPicker}",
+                "executionSelected": "${data.executionSelected}",
+                "comments": "${data.comments}",
+                "bottlesCount": "${data.bottlesCount}",
+                "aceptedLever": "${data.aceptedLever}",
+                "salesLeverSelected": "${data.salesLeverSelected}",
+                "leverPresented": "${data.leverPresented}",
+                "salesLevers": "${data.salesLevers}",
+                "portafolio": "${data.portafolio}",
+                "portafolioStatus": "${data.portafolioStatus}",
+                "commercialPlan": "${data.commercialPlan}",
+                "store": "${data.store}",
+                "sid": "${data.sid}",
+                "client": "${data.client}",
+                "visitDate": "${data.visitDate}",
+                "userLocation": "${data.userLocation}",
+                "nearbyStores": "${data.nearbyStores}",
+                "conversationId": "${data.conversationId}"
+              }
+            }
+          }
+        ]
+      }
     }
   ]
 }

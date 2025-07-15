@@ -36,21 +36,32 @@ export const getFlow = async (decryptedBody: {
   }
 
   const metadata = JSON.parse(flow_token);
-  console.debug(`metadata: ${metadata}`);
-  console.debug(`metadata: ${flow_token.flowName}`);
+  // console.debug(`metadata: ${metadata}`);
+  // console.debug(`metadata: ${metadata.flowName}`);
   if (metadata.flowName === 'kapta') {
     console.debug(
       `Processing Kapta flow with action: ${action} and screen: ${screen}`
     );
-    return await KaptaNextScreen(decryptedBody);
+    return await KaptaNextScreen({
+      screen,
+      data: { ...data, ...metadata },
+      version,
+      action,
+      flow_token,
+    });
   }
 
   if (metadata.flowName === 'fugitivos') {
     console.debug(
       `Processing Fugitivos flow with action: ${action} and screen: ${screen}`
     );
-
-    return await FugitivosNextScreen(decryptedBody);
+    return await FugitivosNextScreen({
+      screen,
+      data: { ...data, ...metadata },
+      version,
+      action,
+      flow_token,
+    });
   }
 
   throw new Error(`Unsupported request action ${action} & screen: ${screen}`);
