@@ -249,7 +249,8 @@ export const mapToObjectsByProps = (data: string[][], props: string[]): any => {
   const indices = props.map((prop) => {
     const index = header.indexOf(prop);
     if (index === -1) {
-      throw new Error(`No se encontró columna '${prop}' en el header`);
+      // throw new Error(`No se encontró columna '${prop}' en el header`);
+      console.log(`No se encontró columna '${prop}' en el header`);
     }
     return index;
   });
@@ -272,4 +273,19 @@ export const sumTotalCartera = (
     const value = parseFloat(clean); // Convierte a número flotante
     return acc + (isNaN(value) ? 0 : value);
   }, 0);
+};
+
+export const getUniqueById = (data: any[]) => {
+  const seen = new Set();
+
+  return data
+    .filter((item) => {
+      const trimmedId = item.id.trim();
+      if (seen.has(trimmedId)) {
+        return false;
+      }
+      seen.add(trimmedId);
+      return true;
+    })
+    .sort((a, b) => a.id.localeCompare(b.id));
 };

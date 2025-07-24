@@ -24,14 +24,37 @@ export const getNextScreen = async (decryptedBody: {
   console.debug(
     `action ${action} screen ${screen} data: ${JSON.stringify(data)}`
   );
+
   // handle initial request when opening the flow
   if (action === 'INIT') {
+    return {
+      version,
+      screen: 'CAPTURE_TYPE',
+      data: { ...data },
+    };
+  }
+
+  if (action === 'data_exchange' && screen === 'CAPTURE_TYPE') {
     const screenData = await storeScreenData(data);
 
     return {
       version,
-      screen: 'REGISTER_VISIT',
+      screen: data.captureType === 'exist' ? 'REGISTER_VISIT' : 'NEW_CLIENT',
       data: { ...data, ...screenData },
+    };
+  }
+  if (action === 'data_exchange' && screen === 'NEW_CLIENT') {
+    return {
+      version,
+      screen: 'CONTACT',
+      data: { ...data },
+    };
+  }
+  if (action === 'data_exchange' && screen === 'CONTACT') {
+    return {
+      version,
+      screen: 'CAPTURE_DATA',
+      data: { ...data },
     };
   }
 
@@ -40,7 +63,7 @@ export const getNextScreen = async (decryptedBody: {
 
     return {
       version,
-      screen: 'COMMERCIAL_PLAN',
+      screen: data.noFound ? 'CAPTURE_DATA' : 'COMMERCIAL_PLAN',
       data: { ...data, ...screenData },
     };
   }
