@@ -1,9 +1,5 @@
 import { google } from 'googleapis';
 
-interface BuscarEnGSheetResult {
-  [key: string]: string;
-}
-
 interface SheetData {
   [tabName: string]: string[][];
 }
@@ -16,6 +12,7 @@ const tabsRead = [
   'gestor_de_cartera',
   'vendedores',
   'Palanca comercial',
+  'departamentos_municipios_input'
 ];
 
 const auth = new google.auth.JWT({

@@ -8,7 +8,9 @@ import {
   mapToObjectsByProps,
   extractChannelsAndItems,
   getUniqueById,
+  getUniqueByKey,
 } from '../../utils';
+import { dropdownGrouped } from '../../dropdown';
 
 const sheetId: string =
   process.env.GSHEET_ID_FUGITIVOS ||
@@ -122,6 +124,19 @@ const selectSeller = (tabs: any, data: { phone: string }) => {
   return result[0] || '';
 };
 
+const filterBySeller = (data: any[][], seller: string) => {
+  const header = data[0];
+  const sellerIndex = header.indexOf('seller');
+
+  let rows = data.slice(1); // omitir encabezado
+
+  if (seller !== '') {
+    rows = rows.filter((row) => row[sellerIndex] === seller);
+  }
+
+  return [header, ...rows];
+};
+
 export const getData = async (data: any) => {
   const tabs = await getGSheetTabs(sheetId);
 
@@ -131,36 +146,37 @@ export const getData = async (data: any) => {
     throw new Error(`No ${tabName} tab found in the Google Sheet`);
   }
   const seller = selectSeller(tabs, data);
-  console.log(seller);
 
   // console.log(`✅ data  "${JSON.stringify(tabs[tabName])}"`);
-  const updates = await getCoordinates(tabs[tabName]);
+  // const updates = await getCoordinates(tabs[tabName]);
   // console.log(`✅ updates "${JSON.stringify(updates)}"`);
 
-  await updateSheetWithCoordinates(tabName, sheetId, updates);
+  // await updateSheetWithCoordinates(tabName, sheetId, updates);
 
-  const storesUpdated = updates.map(([address, original, updated]: any) =>
-    updated ? [...original, ...address] : original
-  );
+  // const storesUpdated = updates.map(([address, original, updated]: any) =>
+  //   updated ? [...original, ...address] : original
+  // );
 
-  const headers = [...tabs[tabName][0], ...['Address', 'lat', 'lng']];
-  storesUpdated.unshift(headers);
+  // const headers = [...tabs[tabName][0], ...['Address', 'lat', 'lng']];
+  // storesUpdated.unshift(headers);
   // console.log(`✅ storesUpdated "${JSON.stringify(storesUpdated)}"`);
 
-  const userLat = data.userLocation.latitude;
-  const userLng = data.userLocation.longitude;
+  // const userLat = data.userLocation.latitude;
+  // const userLng = data.userLocation.longitude;
 
-  console.log(
-    `🔍 Buscando tiendas cercanas al usuario en lat: ${userLat}, lng: ${userLng}`
-  );
-  // Buscar tiendas a menos de 2km del usuario
-  const nearbyStores = findClosestStores(
-    storesUpdated,
-    userLat,
-    userLng,
-    seller,
-    1
-  );
+  // console.log(
+  //   `🔍 Buscando tiendas cercanas al usuario en lat: ${userLat}, lng: ${userLng}`
+  // );
+  // // Buscar tiendas a menos de 2km del usuario
+  // const nearbyStores = findClosestStores(
+  //   storesUpdated,
+  //   userLat,
+  //   userLng,
+  //   seller,
+  //   1
+  // );
+
+  const nearbyStores = filterBySeller(tabs[tabName], seller);
 
   console.log(
     `✅ ${nearbyStores.length - 1} tiendas encontradas cerca del usuario`
@@ -170,22 +186,58 @@ export const getData = async (data: any) => {
   //   console.log(`${i + 1}. ${row[4]} - ${distanceKm.toFixed(3)} km`);
   // });
 
-  const stores = extractIdTitleArray(
-    nearbyStores,
+  const inputs: any = extractChannelsAndItems(tabs['Inputs']);
+  // console.log(`✅ inputs "${JSON.stringify(inputs)}"`);
+  const zones: any[] = getUniqueById(inputs['ZONA']).slice(0, 200);
+  // console.log(`✅ zones "${JSON.stringify(zones)}"`);
+  // const stores = extractIdTitleArray(
+  //   nearbyStores,
+  //   'SID',
+  //   'NOMBRE COMERCIAL'
+  // ).sort((a: { title: number }, b: { title: number }) => a.title - b.title);
+
+  let storesObj = mapToObjectsByProps(nearbyStores, [
+    'ZONA',
+    'SID',
+    'NOMBRE COMERCIAL',
+  ]);
+  // console.log(`✅ storesObj "${JSON.stringify(storesObj)}"`);
+  const stores = dropdownGrouped(
+    getUniqueByKey(storesObj, 'SID'),
+    'ZONA',
     'SID',
     'NOMBRE COMERCIAL'
-  ).sort((a: { title: number }, b: { title: number }) => a.title - b.title);
+  );
+  // console.log(`✅ stores "${JSON.stringify(stores)}"`);
+  const deptosObj = extractIdTitleArray(
+    tabs['departamentos_municipios_input'],
+    'Departamento',
+    'Municipio',
+    false
+  );
+  // console.log(`✅ deptosObj "${JSON.stringify(deptosObj)}"`);
 
-  // GET DATA FOR NEW CLIENT FLOW
-  const inputs: any = extractChannelsAndItems(tabs['Inputs']);
+  const deptos = dropdownGrouped(
+    deptosObj,
+    'id',
+    'title',
+    'title',
+    'towns',
+    zones
+  );
 
+  // console.log(`✅ deptos "${JSON.stringify(deptos)}"`);
   return {
     ...data,
-    nearbyStores,
-    stores,
-    deptos: getUniqueById(inputs['DEPARTAMENTO']) || [],
-    zones: getUniqueById(inputs['ZONA']) || [],
-    towns: getUniqueById(inputs['MUNICIPIO ']) || [],
-    segments: getUniqueById(inputs['SEGMENTO ']) || [],
+    // nearbyStores,
+    storesZones: stores,
+    deptos: deptos.slice(0, 200) || [],
+    zones: [
+      {
+        id: 'NO_APLICA',
+        title: 'NO_APLICA',
+      },
+    ],
+    segments: getUniqueById(inputs['SEGMENTO']).slice(0, 200) || [],
   };
 };

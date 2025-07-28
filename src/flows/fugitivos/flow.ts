@@ -118,8 +118,36 @@ export const getNextScreen = async (decryptedBody: {
 
     return {
       version,
-      screen: 'RATE',
+      screen: 'TRADE_MARKETING',
       data: { ...data, ...screenData },
+    };
+  }
+  if (action === 'data_exchange' && screen === 'TRADE_MARKETING') {
+    return {
+      version,
+      screen: 'COMPETITION',
+      data: { ...data },
+    };
+  }
+  if (action === 'data_exchange' && screen === 'COMPETITION') {
+    return {
+      version,
+      screen: 'PRICE_VALIDATION',
+      data: { ...data },
+    };
+  }
+  if (action === 'data_exchange' && screen === 'PRICE_VALIDATION') {
+    return {
+      version,
+      screen: 'COMPETITION_INVENTORIES',
+      data: { ...data },
+    };
+  }
+  if (action === 'data_exchange' && screen === 'COMPETITION_INVENTORIES') {
+    return {
+      version,
+      screen: 'RATE',
+      data: { ...data },
     };
   }
 

@@ -1,0 +1,3912 @@
+{
+  "version": "7.1",
+  "data_api_version": "3.0",
+  "routing_model": {
+    "CAPTURE_TYPE": ["REGISTER_VISIT", "NEW_CLIENT"],
+    "NEW_CLIENT": ["CONTACT"],
+    "CONTACT": ["CAPTURE_DATA"],
+    "REGISTER_VISIT": ["CAPTURE_DATA", "COMMERCIAL_PLAN"],
+    "COMMERCIAL_PLAN": ["PORTAFOLIO_STATUS"],
+    "PORTAFOLIO_STATUS": ["CAPTURE_DATA"],
+    "CAPTURE_DATA": ["SALES_LEVERS"],
+    "SALES_LEVERS": ["INVENTORY"],
+    "INVENTORY": ["EXECUTION"],
+    "EXECUTION": ["TRADE_MARKETING"],
+    "TRADE_MARKETING": ["COMPETITION"],
+    "COMPETITION": ["PRICE_VALIDATION"],
+    "PRICE_VALIDATION": ["COMPETITION_INVENTORIES"],
+    "COMPETITION_INVENTORIES": ["RATE"],
+    "RATE": ["SUMMARY"],
+    "SUMMARY": []
+  },
+  "screens": [
+    {
+      "data": {},
+      "id": "CAPTURE_TYPE",
+      "title": "Tipo de Captura",
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "type": "TextSubheading",
+                "text": "Registra el tipo de visita"
+              },
+              {
+                "type": "RadioButtonsGroup",
+                "label": "Elige una:",
+                "name": "captureType",
+                "data-source": [
+                  {
+                    "id": "exist",
+                    "title": "Cliente existente"
+                  },
+                  {
+                    "id": "new",
+                    "title": "Cliente nuevo"
+                  }
+                ],
+                "required": true
+              },
+              {
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "captureType": "${form.captureType}",
+                    "phone": "${data.phone}",
+                    "userLocation": "${data.userLocation}",
+                    "conversationId": "${data.conversationId}"
+                  }
+                },
+                "type": "Footer"
+              }
+            ],
+            "name": "flow_path",
+            "type": "Form"
+          }
+        ],
+        "type": "SingleColumnLayout"
+      }
+    },
+    {
+      "id": "NEW_CLIENT",
+      "title": "Cliente nuevo",
+      "data": {
+        "deptos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "ANTIOQUIA",
+              "title": "ANTIOQUIA",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "towns": [
+                    {
+                      "id": "MEDELLÍN",
+                      "title": "MEDELLÍN"
+                    },
+                    {
+                      "id": "ABEJORRAL",
+                      "title": "ABEJORRAL"
+                    },
+                    {
+                      "id": "ABRIAQUÍ",
+                      "title": "ABRIAQUÍ"
+                    },
+                    {
+                      "id": "ALEJANDRÍA",
+                      "title": "ALEJANDRÍA"
+                    },
+                    {
+                      "id": "AMAGÁ",
+                      "title": "AMAGÁ"
+                    },
+                    {
+                      "id": "AMALFI",
+                      "title": "AMALFI"
+                    },
+                    {
+                      "id": "ANDES",
+                      "title": "ANDES"
+                    },
+                    {
+                      "id": "ANGELÓPOLIS",
+                      "title": "ANGELÓPOLIS"
+                    },
+                    {
+                      "id": "ANGOSTURA",
+                      "title": "ANGOSTURA"
+                    },
+                    {
+                      "id": "ANORÍ",
+                      "title": "ANORÍ"
+                    },
+                    {
+                      "id": "SANTA FÉ DE ANTIOQUIA",
+                      "title": "SANTA FÉ DE ANTIOQUIA"
+                    },
+                    {
+                      "id": "ANZÁ",
+                      "title": "ANZÁ"
+                    },
+                    {
+                      "id": "APARTADÓ",
+                      "title": "APARTADÓ"
+                    },
+                    {
+                      "id": "ARBOLETES",
+                      "title": "ARBOLETES"
+                    },
+                    {
+                      "id": "ARGELIA",
+                      "title": "ARGELIA"
+                    },
+                    {
+                      "id": "ARMENIA",
+                      "title": "ARMENIA"
+                    },
+                    {
+                      "id": "BARBOSA",
+                      "title": "BARBOSA"
+                    },
+                    {
+                      "id": "BELMIRA",
+                      "title": "BELMIRA"
+                    },
+                    {
+                      "id": "BELLO",
+                      "title": "BELLO"
+                    },
+                    {
+                      "id": "BETANIA",
+                      "title": "BETANIA"
+                    },
+                    {
+                      "id": "BETULIA",
+                      "title": "BETULIA"
+                    },
+                    {
+                      "id": "CIUDAD BOLÍVAR",
+                      "title": "CIUDAD BOLÍVAR"
+                    },
+                    {
+                      "id": "BRICEÑO",
+                      "title": "BRICEÑO"
+                    },
+                    {
+                      "id": "BURITICÁ",
+                      "title": "BURITICÁ"
+                    },
+                    {
+                      "id": "CÁCERES",
+                      "title": "CÁCERES"
+                    },
+                    {
+                      "id": "CAICEDO",
+                      "title": "CAICEDO"
+                    },
+                    {
+                      "id": "CALDAS",
+                      "title": "CALDAS"
+                    },
+                    {
+                      "id": "CAMPAMENTO",
+                      "title": "CAMPAMENTO"
+                    },
+                    {
+                      "id": "CAÑASGORDAS",
+                      "title": "CAÑASGORDAS"
+                    },
+                    {
+                      "id": "CARACOLÍ",
+                      "title": "CARACOLÍ"
+                    },
+                    {
+                      "id": "CARAMANTA",
+                      "title": "CARAMANTA"
+                    },
+                    {
+                      "id": "CAREPA",
+                      "title": "CAREPA"
+                    },
+                    {
+                      "id": "EL CARMEN DE VIBORAL",
+                      "title": "EL CARMEN DE VIBORAL"
+                    },
+                    {
+                      "id": "CAROLINA",
+                      "title": "CAROLINA"
+                    },
+                    {
+                      "id": "CAUCASIA",
+                      "title": "CAUCASIA"
+                    },
+                    {
+                      "id": "CHIGORODÓ",
+                      "title": "CHIGORODÓ"
+                    },
+                    {
+                      "id": "CISNEROS",
+                      "title": "CISNEROS"
+                    },
+                    {
+                      "id": "COCORNÁ",
+                      "title": "COCORNÁ"
+                    },
+                    {
+                      "id": "CONCEPCIÓN",
+                      "title": "CONCEPCIÓN"
+                    },
+                    {
+                      "id": "CONCORDIA",
+                      "title": "CONCORDIA"
+                    },
+                    {
+                      "id": "COPACABANA",
+                      "title": "COPACABANA"
+                    },
+                    {
+                      "id": "DABEIBA",
+                      "title": "DABEIBA"
+                    },
+                    {
+                      "id": "DONMATÍAS",
+                      "title": "DONMATÍAS"
+                    },
+                    {
+                      "id": "EBÉJICO",
+                      "title": "EBÉJICO"
+                    },
+                    {
+                      "id": "EL BAGRE",
+                      "title": "EL BAGRE"
+                    },
+                    {
+                      "id": "ENTRERRÍOS",
+                      "title": "ENTRERRÍOS"
+                    },
+                    {
+                      "id": "ENVIGADO",
+                      "title": "ENVIGADO"
+                    },
+                    {
+                      "id": "FREDONIA",
+                      "title": "FREDONIA"
+                    },
+                    {
+                      "id": "FRONTINO",
+                      "title": "FRONTINO"
+                    },
+                    {
+                      "id": "GIRALDO",
+                      "title": "GIRALDO"
+                    },
+                    {
+                      "id": "GIRARDOTA",
+                      "title": "GIRARDOTA"
+                    },
+                    {
+                      "id": "GÓMEZ PLATA",
+                      "title": "GÓMEZ PLATA"
+                    },
+                    {
+                      "id": "GRANADA",
+                      "title": "GRANADA"
+                    },
+                    {
+                      "id": "GUADALUPE",
+                      "title": "GUADALUPE"
+                    },
+                    {
+                      "id": "GUARNE",
+                      "title": "GUARNE"
+                    },
+                    {
+                      "id": "GUATAPÉ",
+                      "title": "GUATAPÉ"
+                    },
+                    {
+                      "id": "HELICONIA",
+                      "title": "HELICONIA"
+                    },
+                    {
+                      "id": "HISPANIA",
+                      "title": "HISPANIA"
+                    },
+                    {
+                      "id": "ITAGÜÍ",
+                      "title": "ITAGÜÍ"
+                    },
+                    {
+                      "id": "ITUANGO",
+                      "title": "ITUANGO"
+                    },
+                    {
+                      "id": "JARDÍN",
+                      "title": "JARDÍN"
+                    },
+                    {
+                      "id": "JERICÓ",
+                      "title": "JERICÓ"
+                    },
+                    {
+                      "id": "LA CEJA",
+                      "title": "LA CEJA"
+                    },
+                    {
+                      "id": "LA ESTRELLA",
+                      "title": "LA ESTRELLA"
+                    },
+                    {
+                      "id": "LA PINTADA",
+                      "title": "LA PINTADA"
+                    },
+                    {
+                      "id": "LA UNIÓN",
+                      "title": "LA UNIÓN"
+                    },
+                    {
+                      "id": "LIBORINA",
+                      "title": "LIBORINA"
+                    },
+                    {
+                      "id": "MACEO",
+                      "title": "MACEO"
+                    },
+                    {
+                      "id": "MARINILLA",
+                      "title": "MARINILLA"
+                    },
+                    {
+                      "id": "MONTEBELLO",
+                      "title": "MONTEBELLO"
+                    },
+                    {
+                      "id": "MURINDÓ",
+                      "title": "MURINDÓ"
+                    },
+                    {
+                      "id": "MUTATÁ",
+                      "title": "MUTATÁ"
+                    },
+                    {
+                      "id": "NARIÑO",
+                      "title": "NARIÑO"
+                    },
+                    {
+                      "id": "NECOCLÍ",
+                      "title": "NECOCLÍ"
+                    },
+                    {
+                      "id": "NECHÍ",
+                      "title": "NECHÍ"
+                    },
+                    {
+                      "id": "OLAYA",
+                      "title": "OLAYA"
+                    },
+                    {
+                      "id": "PEÑOL",
+                      "title": "PEÑOL"
+                    },
+                    {
+                      "id": "PEQUE",
+                      "title": "PEQUE"
+                    },
+                    {
+                      "id": "PUEBLORRICO",
+                      "title": "PUEBLORRICO"
+                    },
+                    {
+                      "id": "PUERTO BERRÍO",
+                      "title": "PUERTO BERRÍO"
+                    },
+                    {
+                      "id": "PUERTO NARE",
+                      "title": "PUERTO NARE"
+                    },
+                    {
+                      "id": "PUERTO TRIUNFO",
+                      "title": "PUERTO TRIUNFO"
+                    },
+                    {
+                      "id": "REMEDIOS",
+                      "title": "REMEDIOS"
+                    },
+                    {
+                      "id": "RETIRO",
+                      "title": "RETIRO"
+                    },
+                    {
+                      "id": "RIONEGRO",
+                      "title": "RIONEGRO"
+                    },
+                    {
+                      "id": "SABANALARGA",
+                      "title": "SABANALARGA"
+                    },
+                    {
+                      "id": "SABANETA",
+                      "title": "SABANETA"
+                    },
+                    {
+                      "id": "SALGAR",
+                      "title": "SALGAR"
+                    },
+                    {
+                      "id": "SAN ANDRÉS DE CUERQUÍA",
+                      "title": "SAN ANDRÉS DE CUERQUÍA"
+                    },
+                    {
+                      "id": "SAN CARLOS",
+                      "title": "SAN CARLOS"
+                    },
+                    {
+                      "id": "SAN FRANCISCO",
+                      "title": "SAN FRANCISCO"
+                    },
+                    {
+                      "id": "SAN JERÓNIMO",
+                      "title": "SAN JERÓNIMO"
+                    },
+                    {
+                      "id": "SAN JOSÉ DE LA MONTAÑA",
+                      "title": "SAN JOSÉ DE LA MONTAÑA"
+                    },
+                    {
+                      "id": "SAN JUAN DE URABÁ",
+                      "title": "SAN JUAN DE URABÁ"
+                    },
+                    {
+                      "id": "SAN LUIS",
+                      "title": "SAN LUIS"
+                    },
+                    {
+                      "id": "SAN PEDRO DE LOS MILAGROS",
+                      "title": "SAN PEDRO DE LOS MILAGROS"
+                    },
+                    {
+                      "id": "SAN PEDRO DE URABÁ",
+                      "title": "SAN PEDRO DE URABÁ"
+                    },
+                    {
+                      "id": "SAN RAFAEL",
+                      "title": "SAN RAFAEL"
+                    },
+                    {
+                      "id": "SAN ROQUE",
+                      "title": "SAN ROQUE"
+                    },
+                    {
+                      "id": "SAN VICENTE FERRER",
+                      "title": "SAN VICENTE FERRER"
+                    },
+                    {
+                      "id": "SANTA BÁRBARA",
+                      "title": "SANTA BÁRBARA"
+                    },
+                    {
+                      "id": "SANTA ROSA DE OSOS",
+                      "title": "SANTA ROSA DE OSOS"
+                    },
+                    {
+                      "id": "SANTO DOMINGO",
+                      "title": "SANTO DOMINGO"
+                    },
+                    {
+                      "id": "EL SANTUARIO",
+                      "title": "EL SANTUARIO"
+                    },
+                    {
+                      "id": "SEGOVIA",
+                      "title": "SEGOVIA"
+                    },
+                    {
+                      "id": "SONSÓN",
+                      "title": "SONSÓN"
+                    },
+                    {
+                      "id": "SOPETRÁN",
+                      "title": "SOPETRÁN"
+                    },
+                    {
+                      "id": "TÁMESIS",
+                      "title": "TÁMESIS"
+                    },
+                    {
+                      "id": "TARAZÁ",
+                      "title": "TARAZÁ"
+                    },
+                    {
+                      "id": "TARSO",
+                      "title": "TARSO"
+                    },
+                    {
+                      "id": "TITIRIBÍ",
+                      "title": "TITIRIBÍ"
+                    },
+                    {
+                      "id": "TOLEDO",
+                      "title": "TOLEDO"
+                    },
+                    {
+                      "id": "TURBO",
+                      "title": "TURBO"
+                    },
+                    {
+                      "id": "URAMITA",
+                      "title": "URAMITA"
+                    },
+                    {
+                      "id": "URRAO",
+                      "title": "URRAO"
+                    },
+                    {
+                      "id": "VALDIVIA",
+                      "title": "VALDIVIA"
+                    },
+                    {
+                      "id": "VALPARAÍSO",
+                      "title": "VALPARAÍSO"
+                    },
+                    {
+                      "id": "VEGACHÍ",
+                      "title": "VEGACHÍ"
+                    },
+                    {
+                      "id": "VENECIA",
+                      "title": "VENECIA"
+                    },
+                    {
+                      "id": "VIGÍA DEL FUERTE",
+                      "title": "VIGÍA DEL FUERTE"
+                    },
+                    {
+                      "id": "YALÍ",
+                      "title": "YALÍ"
+                    },
+                    {
+                      "id": "YARUMAL",
+                      "title": "YARUMAL"
+                    },
+                    {
+                      "id": "YOLOMBÓ",
+                      "title": "YOLOMBÓ"
+                    },
+                    {
+                      "id": "YONDÓ",
+                      "title": "YONDÓ"
+                    },
+                    {
+                      "id": "ZARAGOZA",
+                      "title": "ZARAGOZA"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "ATLÁNTICO",
+              "title": "ATLÁNTICO",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "towns": [
+                    {
+                      "id": "BARRANQUILLA",
+                      "title": "BARRANQUILLA"
+                    },
+                    {
+                      "id": "BARANOA",
+                      "title": "BARANOA"
+                    },
+                    {
+                      "id": "CAMPO DE LA CRUZ",
+                      "title": "CAMPO DE LA CRUZ"
+                    },
+                    {
+                      "id": "CANDELARIA",
+                      "title": "CANDELARIA"
+                    },
+                    {
+                      "id": "GALAPA",
+                      "title": "GALAPA"
+                    },
+                    {
+                      "id": "JUAN DE ACOSTA",
+                      "title": "JUAN DE ACOSTA"
+                    },
+                    {
+                      "id": "LURUACO",
+                      "title": "LURUACO"
+                    },
+                    {
+                      "id": "MALAMBO",
+                      "title": "MALAMBO"
+                    },
+                    {
+                      "id": "MANATÍ",
+                      "title": "MANATÍ"
+                    },
+                    {
+                      "id": "PALMAR DE VARELA",
+                      "title": "PALMAR DE VARELA"
+                    },
+                    {
+                      "id": "PIOJÓ",
+                      "title": "PIOJÓ"
+                    },
+                    {
+                      "id": "POLONUEVO",
+                      "title": "POLONUEVO"
+                    },
+                    {
+                      "id": "PONEDERA",
+                      "title": "PONEDERA"
+                    },
+                    {
+                      "id": "PUERTO COLOMBIA",
+                      "title": "PUERTO COLOMBIA"
+                    },
+                    {
+                      "id": "REPELÓN",
+                      "title": "REPELÓN"
+                    },
+                    {
+                      "id": "SABANAGRANDE",
+                      "title": "SABANAGRANDE"
+                    },
+                    {
+                      "id": "SABANALARGA",
+                      "title": "SABANALARGA"
+                    },
+                    {
+                      "id": "SANTA LUCÍA",
+                      "title": "SANTA LUCÍA"
+                    },
+                    {
+                      "id": "SANTO TOMÁS",
+                      "title": "SANTO TOMÁS"
+                    },
+                    {
+                      "id": "SOLEDAD",
+                      "title": "SOLEDAD"
+                    },
+                    {
+                      "id": "SUAN",
+                      "title": "SUAN"
+                    },
+                    {
+                      "id": "TUBARÁ",
+                      "title": "TUBARÁ"
+                    },
+                    {
+                      "id": "USIACURÍ",
+                      "title": "USIACURÍ"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "BOGOTÁ, D.C.",
+              "title": "BOGOTÁ, D.C.",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "towns": [
+                    {
+                      "id": "BOGOTÁ, D.C.",
+                      "title": "BOGOTÁ, D.C.",
+                      "on-unselect-action": {
+                        "name": "update_data",
+                        "payload": {
+                          "zones": [
+                            {
+                              "id": "NO_APLICA",
+                              "title": "NO_APLICA"
+                            }
+                          ]
+                        }
+                      },
+                      "on-select-action": {
+                        "name": "update_data",
+                        "payload": {
+                          "zones": [
+                            {
+                              "id": "ANTONIO NARIÑO",
+                              "title": "Antonio Nariño"
+                            },
+                            {
+                              "id": "BARRIOS UNIDOS",
+                              "title": "Barrios Unidos"
+                            },
+                            {
+                              "id": "CAJICÁ",
+                              "title": "Cajicá"
+                            },
+                            {
+                              "id": "CANDELARIA",
+                              "title": "Candelaria"
+                            },
+                            {
+                              "id": "CASTELLANA",
+                              "title": "Castellana"
+                            },
+                            {
+                              "id": "CEDRITOS",
+                              "title": "Cedritos"
+                            },
+                            {
+                              "id": "CHAPINERO",
+                              "title": "Chapinero"
+                            },
+                            {
+                              "id": "CHAPINERO ALTO",
+                              "title": "Chapinero Alto"
+                            },
+                            {
+                              "id": "CHÍA",
+                              "title": "Chía"
+                            },
+                            {
+                              "id": "CHICÓ",
+                              "title": "Chicó"
+                            },
+                            {
+                              "id": "CIUDAD BOLÍVAR",
+                              "title": "Ciudad Bolívar"
+                            },
+                            {
+                              "id": "COLINA",
+                              "title": "Colina"
+                            },
+                            {
+                              "id": "EL LAGO",
+                              "title": "El Lago"
+                            },
+                            {
+                              "id": "ENGATIVÁ",
+                              "title": "Engativá"
+                            },
+                            {
+                              "id": "FONTIBON",
+                              "title": "Fontibon"
+                            },
+                            {
+                              "id": "FUNZA",
+                              "title": "Funza"
+                            },
+                            {
+                              "id": "GALERÍAS",
+                              "title": "Galerías"
+                            },
+                            {
+                              "id": "GUAYMARAL",
+                              "title": "Guaymaral"
+                            },
+                            {
+                              "id": "KENNEDY",
+                              "title": "Kennedy"
+                            },
+                            {
+                              "id": "LA ALHAMBRA",
+                              "title": "La Alhambra"
+                            },
+                            {
+                              "id": "LA ALQUERÍA",
+                              "title": "La Alquería"
+                            },
+                            {
+                              "id": "LA CALERA",
+                              "title": "La Calera"
+                            },
+                            {
+                              "id": "LA ESMERALDA",
+                              "title": "La Esmeralda"
+                            },
+                            {
+                              "id": "LOS MÁRTIRES",
+                              "title": "Los Mártires"
+                            },
+                            {
+                              "id": "MACARENA",
+                              "title": "Macarena"
+                            },
+                            {
+                              "id": "MADRID",
+                              "title": "Madrid"
+                            },
+                            {
+                              "id": "MULTICENTRO",
+                              "title": "Multicentro"
+                            },
+                            {
+                              "id": "NO APLICA",
+                              "title": "No aplica"
+                            },
+                            {
+                              "id": "PALOQUEMAO",
+                              "title": "Paloquemao"
+                            },
+                            {
+                              "id": "PARKWAY",
+                              "title": "Parkway"
+                            },
+                            {
+                              "id": "POLO",
+                              "title": "Polo"
+                            },
+                            {
+                              "id": "POR DEFINIR",
+                              "title": "Por definir"
+                            },
+                            {
+                              "id": "PUENTE ARANDA",
+                              "title": "Puente Aranda"
+                            },
+                            {
+                              "id": "QUINTA CAMACHO",
+                              "title": "Quinta Camacho"
+                            },
+                            {
+                              "id": "SALITRE",
+                              "title": "Salitre"
+                            },
+                            {
+                              "id": "SAN CRISTÓBAL",
+                              "title": "San Cristóbal"
+                            },
+                            {
+                              "id": "SAN FELIPE",
+                              "title": "San Felipe"
+                            },
+                            {
+                              "id": "SIBERIA",
+                              "title": "Siberia"
+                            },
+                            {
+                              "id": "SIETE DE AGOSTO",
+                              "title": "Siete De Agosto"
+                            },
+                            {
+                              "id": "SOACHA",
+                              "title": "Soacha"
+                            },
+                            {
+                              "id": "SOPÓ",
+                              "title": "Sopó"
+                            },
+                            {
+                              "id": "SUBA",
+                              "title": "Suba"
+                            },
+                            {
+                              "id": "TEUSAQUILLO",
+                              "title": "Teusaquillo"
+                            },
+                            {
+                              "id": "TOBERIN",
+                              "title": "Toberin"
+                            },
+                            {
+                              "id": "TUNAL",
+                              "title": "Tunal"
+                            },
+                            {
+                              "id": "USAQUEN",
+                              "title": "Usaquen"
+                            },
+                            {
+                              "id": "WORLD TRADE CENTER",
+                              "title": "World Trade Center"
+                            },
+                            {
+                              "id": "ZIPAQUIRÁ",
+                              "title": "Zipaquirá"
+                            },
+                            {
+                              "id": "ZONA G",
+                              "title": "Zona G"
+                            },
+                            {
+                              "id": "ZONA ROSA",
+                              "title": "Zona Rosa"
+                            },
+                            {
+                              "id": "PLAZA DE LAS AMÉRICAS",
+                              "title": "Plaza de las américas"
+                            },
+                            {
+                              "id": "LA 18 ",
+                              "title": "La 18 "
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "BOLÍVAR",
+              "title": "BOLÍVAR",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "towns": [
+                    {
+                      "id": "CARTAGENA DE INDIAS",
+                      "title": "CARTAGENA DE INDIAS"
+                    },
+                    {
+                      "id": "ACHÍ",
+                      "title": "ACHÍ"
+                    },
+                    {
+                      "id": "ALTOS DEL ROSARIO",
+                      "title": "ALTOS DEL ROSARIO"
+                    },
+                    {
+                      "id": "ARENAL",
+                      "title": "ARENAL"
+                    },
+                    {
+                      "id": "ARJONA",
+                      "title": "ARJONA"
+                    },
+                    {
+                      "id": "ARROYOHONDO",
+                      "title": "ARROYOHONDO"
+                    },
+                    {
+                      "id": "BARRANCO DE LOBA",
+                      "title": "BARRANCO DE LOBA"
+                    },
+                    {
+                      "id": "CALAMAR",
+                      "title": "CALAMAR"
+                    },
+                    {
+                      "id": "CANTAGALLO",
+                      "title": "CANTAGALLO"
+                    },
+                    {
+                      "id": "CICUCO",
+                      "title": "CICUCO"
+                    },
+                    {
+                      "id": "CÓRDOBA",
+                      "title": "CÓRDOBA"
+                    },
+                    {
+                      "id": "CLEMENCIA",
+                      "title": "CLEMENCIA"
+                    },
+                    {
+                      "id": "EL CARMEN DE BOLÍVAR",
+                      "title": "EL CARMEN DE BOLÍVAR"
+                    },
+                    {
+                      "id": "EL GUAMO",
+                      "title": "EL GUAMO"
+                    },
+                    {
+                      "id": "EL PEÑÓN",
+                      "title": "EL PEÑÓN"
+                    },
+                    {
+                      "id": "HATILLO DE LOBA",
+                      "title": "HATILLO DE LOBA"
+                    },
+                    {
+                      "id": "MAGANGUÉ",
+                      "title": "MAGANGUÉ"
+                    },
+                    {
+                      "id": "MAHATES",
+                      "title": "MAHATES"
+                    },
+                    {
+                      "id": "MARGARITA",
+                      "title": "MARGARITA"
+                    },
+                    {
+                      "id": "MARÍA LA BAJA",
+                      "title": "MARÍA LA BAJA"
+                    },
+                    {
+                      "id": "MONTECRISTO",
+                      "title": "MONTECRISTO"
+                    },
+                    {
+                      "id": "SANTA CRUZ DE MOMPOX",
+                      "title": "SANTA CRUZ DE MOMPOX"
+                    },
+                    {
+                      "id": "MORALES",
+                      "title": "MORALES"
+                    },
+                    {
+                      "id": "NOROSÍ",
+                      "title": "NOROSÍ"
+                    },
+                    {
+                      "id": "PINILLOS",
+                      "title": "PINILLOS"
+                    },
+                    {
+                      "id": "REGIDOR",
+                      "title": "REGIDOR"
+                    },
+                    {
+                      "id": "RÍO VIEJO",
+                      "title": "RÍO VIEJO"
+                    },
+                    {
+                      "id": "SAN CRISTÓBAL",
+                      "title": "SAN CRISTÓBAL"
+                    },
+                    {
+                      "id": "SAN ESTANISLAO",
+                      "title": "SAN ESTANISLAO"
+                    },
+                    {
+                      "id": "SAN FERNANDO",
+                      "title": "SAN FERNANDO"
+                    },
+                    {
+                      "id": "SAN JACINTO",
+                      "title": "SAN JACINTO"
+                    },
+                    {
+                      "id": "SAN JACINTO DEL CAUCA",
+                      "title": "SAN JACINTO DEL CAUCA"
+                    },
+                    {
+                      "id": "SAN JUAN NEPOMUCENO",
+                      "title": "SAN JUAN NEPOMUCENO"
+                    },
+                    {
+                      "id": "SAN MARTÍN DE LOBA",
+                      "title": "SAN MARTÍN DE LOBA"
+                    },
+                    {
+                      "id": "SAN PABLO",
+                      "title": "SAN PABLO"
+                    },
+                    {
+                      "id": "SANTA CATALINA",
+                      "title": "SANTA CATALINA"
+                    },
+                    {
+                      "id": "SANTA ROSA",
+                      "title": "SANTA ROSA"
+                    },
+                    {
+                      "id": "SANTA ROSA DEL SUR",
+                      "title": "SANTA ROSA DEL SUR"
+                    },
+                    {
+                      "id": "SIMITÍ",
+                      "title": "SIMITÍ"
+                    },
+                    {
+                      "id": "SOPLAVIENTO",
+                      "title": "SOPLAVIENTO"
+                    },
+                    {
+                      "id": "TALAIGUA NUEVO",
+                      "title": "TALAIGUA NUEVO"
+                    },
+                    {
+                      "id": "TIQUISIO",
+                      "title": "TIQUISIO"
+                    },
+                    {
+                      "id": "TURBACO",
+                      "title": "TURBACO"
+                    },
+                    {
+                      "id": "TURBANÁ",
+                      "title": "TURBANÁ"
+                    },
+                    {
+                      "id": "VILLANUEVA",
+                      "title": "VILLANUEVA"
+                    },
+                    {
+                      "id": "ZAMBRANO",
+                      "title": "ZAMBRANO"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "BOYACÁ",
+              "title": "BOYACÁ",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "towns": [
+                    {
+                      "id": "TUNJA",
+                      "title": "TUNJA"
+                    },
+                    {
+                      "id": "ALMEIDA",
+                      "title": "ALMEIDA"
+                    },
+                    {
+                      "id": "AQUITANIA",
+                      "title": "AQUITANIA"
+                    },
+                    {
+                      "id": "ARCABUCO",
+                      "title": "ARCABUCO"
+                    },
+                    {
+                      "id": "BELÉN",
+                      "title": "BELÉN"
+                    },
+                    {
+                      "id": "BERBEO",
+                      "title": "BERBEO"
+                    },
+                    {
+                      "id": "BETÉITIVA",
+                      "title": "BETÉITIVA"
+                    },
+                    {
+                      "id": "BOAVITA",
+                      "title": "BOAVITA"
+                    },
+                    {
+                      "id": "BOYACÁ",
+                      "title": "BOYACÁ"
+                    },
+                    {
+                      "id": "BRICEÑO",
+                      "title": "BRICEÑO"
+                    },
+                    {
+                      "id": "BUENAVISTA",
+                      "title": "BUENAVISTA"
+                    },
+                    {
+                      "id": "BUSBANZÁ",
+                      "title": "BUSBANZÁ"
+                    },
+                    {
+                      "id": "CALDAS",
+                      "title": "CALDAS"
+                    },
+                    {
+                      "id": "CAMPOHERMOSO",
+                      "title": "CAMPOHERMOSO"
+                    },
+                    {
+                      "id": "CERINZA",
+                      "title": "CERINZA"
+                    },
+                    {
+                      "id": "CHINAVITA",
+                      "title": "CHINAVITA"
+                    },
+                    {
+                      "id": "CHIQUINQUIRÁ",
+                      "title": "CHIQUINQUIRÁ"
+                    },
+                    {
+                      "id": "CHISCAS",
+                      "title": "CHISCAS"
+                    },
+                    {
+                      "id": "CHITA",
+                      "title": "CHITA"
+                    },
+                    {
+                      "id": "CHITARAQUE",
+                      "title": "CHITARAQUE"
+                    },
+                    {
+                      "id": "CHIVATÁ",
+                      "title": "CHIVATÁ"
+                    },
+                    {
+                      "id": "CIÉNEGA",
+                      "title": "CIÉNEGA"
+                    },
+                    {
+                      "id": "CÓMBITA",
+                      "title": "CÓMBITA"
+                    },
+                    {
+                      "id": "COPER",
+                      "title": "COPER"
+                    },
+                    {
+                      "id": "CORRALES",
+                      "title": "CORRALES"
+                    },
+                    {
+                      "id": "COVARACHÍA",
+                      "title": "COVARACHÍA"
+                    },
+                    {
+                      "id": "CUBARÁ",
+                      "title": "CUBARÁ"
+                    },
+                    {
+                      "id": "CUCAITA",
+                      "title": "CUCAITA"
+                    },
+                    {
+                      "id": "CUÍTIVA",
+                      "title": "CUÍTIVA"
+                    },
+                    {
+                      "id": "CHÍQUIZA",
+                      "title": "CHÍQUIZA"
+                    },
+                    {
+                      "id": "CHIVOR",
+                      "title": "CHIVOR"
+                    },
+                    {
+                      "id": "DUITAMA",
+                      "title": "DUITAMA"
+                    },
+                    {
+                      "id": "EL COCUY",
+                      "title": "EL COCUY"
+                    },
+                    {
+                      "id": "EL ESPINO",
+                      "title": "EL ESPINO"
+                    },
+                    {
+                      "id": "FIRAVITOBA",
+                      "title": "FIRAVITOBA"
+                    },
+                    {
+                      "id": "FLORESTA",
+                      "title": "FLORESTA"
+                    },
+                    {
+                      "id": "GACHANTIVÁ",
+                      "title": "GACHANTIVÁ"
+                    },
+                    {
+                      "id": "GÁMEZA",
+                      "title": "GÁMEZA"
+                    },
+                    {
+                      "id": "GARAGOA",
+                      "title": "GARAGOA"
+                    },
+                    {
+                      "id": "GUACAMAYAS",
+                      "title": "GUACAMAYAS"
+                    },
+                    {
+                      "id": "GUATEQUE",
+                      "title": "GUATEQUE"
+                    },
+                    {
+                      "id": "GUAYATÁ",
+                      "title": "GUAYATÁ"
+                    },
+                    {
+                      "id": "GÜICÁN DE LA SIERRA",
+                      "title": "GÜICÁN DE LA SIERRA"
+                    },
+                    {
+                      "id": "IZA",
+                      "title": "IZA"
+                    },
+                    {
+                      "id": "JENESANO",
+                      "title": "JENESANO"
+                    },
+                    {
+                      "id": "JERICÓ",
+                      "title": "JERICÓ"
+                    },
+                    {
+                      "id": "LABRANZAGRANDE",
+                      "title": "LABRANZAGRANDE"
+                    },
+                    {
+                      "id": "LA CAPILLA",
+                      "title": "LA CAPILLA"
+                    },
+                    {
+                      "id": "LA VICTORIA",
+                      "title": "LA VICTORIA"
+                    },
+                    {
+                      "id": "LA UVITA",
+                      "title": "LA UVITA"
+                    },
+                    {
+                      "id": "VILLA DE LEYVA",
+                      "title": "VILLA DE LEYVA"
+                    },
+                    {
+                      "id": "MACANAL",
+                      "title": "MACANAL"
+                    },
+                    {
+                      "id": "MARIPÍ",
+                      "title": "MARIPÍ"
+                    },
+                    {
+                      "id": "MIRAFLORES",
+                      "title": "MIRAFLORES"
+                    },
+                    {
+                      "id": "MONGUA",
+                      "title": "MONGUA"
+                    },
+                    {
+                      "id": "MONGUÍ",
+                      "title": "MONGUÍ"
+                    },
+                    {
+                      "id": "MONIQUIRÁ",
+                      "title": "MONIQUIRÁ"
+                    },
+                    {
+                      "id": "MOTAVITA",
+                      "title": "MOTAVITA"
+                    },
+                    {
+                      "id": "MUZO",
+                      "title": "MUZO"
+                    },
+                    {
+                      "id": "NOBSA",
+                      "title": "NOBSA"
+                    },
+                    {
+                      "id": "NUEVO COLÓN",
+                      "title": "NUEVO COLÓN"
+                    },
+                    {
+                      "id": "OICATÁ",
+                      "title": "OICATÁ"
+                    },
+                    {
+                      "id": "OTANCHE",
+                      "title": "OTANCHE"
+                    },
+                    {
+                      "id": "PACHAVITA",
+                      "title": "PACHAVITA"
+                    },
+                    {
+                      "id": "PÁEZ",
+                      "title": "PÁEZ"
+                    },
+                    {
+                      "id": "PAIPA",
+                      "title": "PAIPA"
+                    },
+                    {
+                      "id": "PAJARITO",
+                      "title": "PAJARITO"
+                    },
+                    {
+                      "id": "PANQUEBA",
+                      "title": "PANQUEBA"
+                    },
+                    {
+                      "id": "PAUNA",
+                      "title": "PAUNA"
+                    },
+                    {
+                      "id": "PAYA",
+                      "title": "PAYA"
+                    },
+                    {
+                      "id": "PAZ DE RÍO",
+                      "title": "PAZ DE RÍO"
+                    },
+                    {
+                      "id": "PESCA",
+                      "title": "PESCA"
+                    },
+                    {
+                      "id": "PISBA",
+                      "title": "PISBA"
+                    },
+                    {
+                      "id": "PUERTO BOYACÁ",
+                      "title": "PUERTO BOYACÁ"
+                    },
+                    {
+                      "id": "QUÍPAMA",
+                      "title": "QUÍPAMA"
+                    },
+                    {
+                      "id": "RAMIRIQUÍ",
+                      "title": "RAMIRIQUÍ"
+                    },
+                    {
+                      "id": "RÁQUIRA",
+                      "title": "RÁQUIRA"
+                    },
+                    {
+                      "id": "RONDÓN",
+                      "title": "RONDÓN"
+                    },
+                    {
+                      "id": "SABOYÁ",
+                      "title": "SABOYÁ"
+                    },
+                    {
+                      "id": "SÁCHICA",
+                      "title": "SÁCHICA"
+                    },
+                    {
+                      "id": "SAMACÁ",
+                      "title": "SAMACÁ"
+                    },
+                    {
+                      "id": "SAN EDUARDO",
+                      "title": "SAN EDUARDO"
+                    },
+                    {
+                      "id": "SAN JOSÉ DE PARE",
+                      "title": "SAN JOSÉ DE PARE"
+                    },
+                    {
+                      "id": "SAN LUIS DE GACENO",
+                      "title": "SAN LUIS DE GACENO"
+                    },
+                    {
+                      "id": "SAN MATEO",
+                      "title": "SAN MATEO"
+                    },
+                    {
+                      "id": "SAN MIGUEL DE SEMA",
+                      "title": "SAN MIGUEL DE SEMA"
+                    },
+                    {
+                      "id": "SAN PABLO DE BORBUR",
+                      "title": "SAN PABLO DE BORBUR"
+                    },
+                    {
+                      "id": "SANTANA",
+                      "title": "SANTANA"
+                    },
+                    {
+                      "id": "SANTA MARÍA",
+                      "title": "SANTA MARÍA"
+                    },
+                    {
+                      "id": "SANTA ROSA DE VITERBO",
+                      "title": "SANTA ROSA DE VITERBO"
+                    },
+                    {
+                      "id": "SANTA SOFÍA",
+                      "title": "SANTA SOFÍA"
+                    },
+                    {
+                      "id": "SATIVANORTE",
+                      "title": "SATIVANORTE"
+                    },
+                    {
+                      "id": "SATIVASUR",
+                      "title": "SATIVASUR"
+                    },
+                    {
+                      "id": "SIACHOQUE",
+                      "title": "SIACHOQUE"
+                    },
+                    {
+                      "id": "SOATÁ",
+                      "title": "SOATÁ"
+                    },
+                    {
+                      "id": "SOCOTÁ",
+                      "title": "SOCOTÁ"
+                    },
+                    {
+                      "id": "SOCHA",
+                      "title": "SOCHA"
+                    },
+                    {
+                      "id": "SOGAMOSO",
+                      "title": "SOGAMOSO"
+                    },
+                    {
+                      "id": "SOMONDOCO",
+                      "title": "SOMONDOCO"
+                    },
+                    {
+                      "id": "SORA",
+                      "title": "SORA"
+                    },
+                    {
+                      "id": "SOTAQUIRÁ",
+                      "title": "SOTAQUIRÁ"
+                    },
+                    {
+                      "id": "SORACÁ",
+                      "title": "SORACÁ"
+                    },
+                    {
+                      "id": "SUSACÓN",
+                      "title": "SUSACÓN"
+                    },
+                    {
+                      "id": "SUTAMARCHÁN",
+                      "title": "SUTAMARCHÁN"
+                    },
+                    {
+                      "id": "SUTATENZA",
+                      "title": "SUTATENZA"
+                    },
+                    {
+                      "id": "TASCO",
+                      "title": "TASCO"
+                    },
+                    {
+                      "id": "TENZA",
+                      "title": "TENZA"
+                    },
+                    {
+                      "id": "TIBANÁ",
+                      "title": "TIBANÁ"
+                    },
+                    {
+                      "id": "TIBASOSA",
+                      "title": "TIBASOSA"
+                    },
+                    {
+                      "id": "TINJACÁ",
+                      "title": "TINJACÁ"
+                    },
+                    {
+                      "id": "TIPACOQUE",
+                      "title": "TIPACOQUE"
+                    },
+                    {
+                      "id": "TOCA",
+                      "title": "TOCA"
+                    },
+                    {
+                      "id": "TOGÜÍ",
+                      "title": "TOGÜÍ"
+                    },
+                    {
+                      "id": "TÓPAGA",
+                      "title": "TÓPAGA"
+                    },
+                    {
+                      "id": "TOTA",
+                      "title": "TOTA"
+                    },
+                    {
+                      "id": "TUNUNGUÁ",
+                      "title": "TUNUNGUÁ"
+                    },
+                    {
+                      "id": "TURMEQUÉ",
+                      "title": "TURMEQUÉ"
+                    },
+                    {
+                      "id": "TUTA",
+                      "title": "TUTA"
+                    },
+                    {
+                      "id": "TUTAZÁ",
+                      "title": "TUTAZÁ"
+                    },
+                    {
+                      "id": "ÚMBITA",
+                      "title": "ÚMBITA"
+                    },
+                    {
+                      "id": "VENTAQUEMADA",
+                      "title": "VENTAQUEMADA"
+                    },
+                    {
+                      "id": "VIRACACHÁ",
+                      "title": "VIRACACHÁ"
+                    },
+                    {
+                      "id": "ZETAQUIRA",
+                      "title": "ZETAQUIRA"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "NO_APLICA",
+              "title": "NO_APLICA"
+            }
+          ]
+        },
+        "towns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": []
+        },
+        "segments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "0_DISTRIB",
+              "title": "DISTRIB"
+            },
+            {
+              "id": "1_ECMM3RD",
+              "title": "ECMM3RD"
+            },
+            {
+              "id": "2_DISCO",
+              "title": "DISCO"
+            },
+            {
+              "id": "3_BARPREM",
+              "title": "BARPREM"
+            },
+            {
+              "id": "4_RESTPREM",
+              "title": "RESTPREM"
+            },
+            {
+              "id": "5_HOSTAL",
+              "title": "HOSTAL"
+            },
+            {
+              "id": "6_BAR",
+              "title": "BAR"
+            },
+            {
+              "id": "7_REST",
+              "title": "REST"
+            },
+            {
+              "id": "8_OCASIONALES",
+              "title": "OCASIONALES"
+            },
+            {
+              "id": "9_HOTEL_",
+              "title": "HOTEL "
+            },
+            {
+              "id": "10_LICOPREM",
+              "title": "LICOPREM"
+            },
+            {
+              "id": "11_LICO",
+              "title": "LICO"
+            },
+            {
+              "id": "12_CLUB",
+              "title": "CLUB"
+            },
+            {
+              "id": "13_DISCOPREM",
+              "title": "DISCOPREM"
+            },
+            {
+              "id": "14_CASINO",
+              "title": "CASINO"
+            },
+            {
+              "id": "15_ECMM3RD",
+              "title": "ECMM3RD"
+            },
+            {
+              "id": "16_RESTPREM",
+              "title": "RESTPREM"
+            },
+            {
+              "id": "17_EVENTOS",
+              "title": "EVENTOS"
+            },
+            {
+              "id": "18_REST",
+              "title": "REST"
+            }
+          ]
+        }
+      },
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "text": "Datos del cliente:",
+                "type": "TextSubheading"
+              },
+              {
+                "input-type": "text",
+                "label": "Nombre del cliente",
+                "name": "clientName",
+                "required": true,
+                "type": "TextInput",
+                "helper-text": "Escribe el nombre de la razón social"
+              },
+              {
+                "input-type": "number",
+                "label": "NIT",
+                "name": "nit",
+                "required": true,
+                "type": "TextInput",
+                "helper-text": "Digital el NIT sin numero de verificación"
+              },
+              {
+                "label": "Departamento",
+                "name": "depto",
+                "required": true,
+                "type": "Dropdown",
+                "data-source": "${data.deptos}"
+              },
+              {
+                "label": "Municipio",
+                "name": "town",
+                "required": true,
+                "type": "Dropdown",
+                "data-source": "${data.towns}"
+              },
+              {
+                "label": "Zona",
+                "name": "zone",
+                "required": true,
+                "type": "Dropdown",
+                "data-source": "${data.zones}"
+              },
+              {
+                "input-type": "text",
+                "label": "Dirección",
+                "name": "address",
+                "required": true,
+                "type": "TextInput",
+                "helper-text": "Incluye los detalles necesarios"
+              },
+              {
+                "label": "Segmento comercial",
+                "name": "segment",
+                "required": true,
+                "type": "Dropdown",
+                "data-source": "${data.segments}"
+              },
+              {
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "clientName": "${form.clientName}",
+                    "nit": "${form.nit}",
+                    "depto": "${form.depto}",
+                    "town": "${form.town}",
+                    "address": "${form.address}",
+                    "zone": "${form.zone}",
+                    "segment": "${form.segment}",
+                    "captureType": "${data.captureType}",
+                    "salesLevers": "${data.salesLevers}",
+                    "phone": "${data.phone}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
+                  }
+                },
+                "type": "Footer"
+              }
+            ],
+            "name": "flow_path",
+            "type": "Form"
+          }
+        ],
+        "type": "SingleColumnLayout"
+      }
+    },
+    {
+      "data": {},
+      "id": "CONTACT",
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "text": "Datos del contacto comercial:",
+                "type": "TextSubheading"
+              },
+              {
+                "input-type": "text",
+                "label": "Nombre del encargado",
+                "name": "managerName",
+                "required": true,
+                "type": "TextInput",
+                "helper-text": "Nombre de la persona encargada a nivel comercial"
+              },
+              {
+                "input-type": "phone",
+                "label": "Teléfono contacto",
+                "name": "contactPhone",
+                "required": true,
+                "type": "TextInput",
+                "helper-text": "Teléfono del contacto comercial"
+              },
+              {
+                "input-type": "email",
+                "label": "E-mail contacto",
+                "name": "contactEmail",
+                "type": "TextInput",
+                "helper-text": "*Opcional: e-mail del contacto comercial"
+              },
+              {
+                "label": "Fecha de creación",
+                "name": "creationDate",
+                "required": true,
+                "type": "DatePicker",
+                "helper-text": "Selecciona la fecha de hoy"
+              },
+              {
+                "label": "Registrar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "managerName": "${form.managerName}",
+                    "contactPhone": "${form.contactPhone}",
+                    "contactEmail": "${form.contactEmail}",
+                    "creationDate": "${form.creationDate}",
+                    "clientName": "${data.clientName}",
+                    "clientNit": "${data.clientNit}",
+                    "nit": "${data.nit}",
+                    "depto": "${data.depto}",
+                    "town": "${data.town}",
+                    "address": "${data.address}",
+                    "zone": "${data.zone}",
+                    "segment": "${data.segment}",
+                    "captureType": "${data.captureType}",
+                    "salesLevers": "${data.salesLevers}",
+                    "phone": "${data.phone}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
+                  }
+                },
+                "type": "Footer"
+              }
+            ],
+            "name": "flow_path",
+            "type": "Form"
+          }
+        ],
+        "type": "SingleColumnLayout"
+      },
+      "title": "Datos de contacto"
+    },
+    {
+      "id": "REGISTER_VISIT",
+      "title": "Registrar visita",
+      "data": {
+        "stores": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": []
+        },
+        "storesZones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "_",
+              "title": "_",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    { "id": "9003754548", "title": "EL VIAJERO CARTAGENA" },
+                    { "id": "9003754545", "title": "EL VIAJERO GUATAPE" }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "NO APLICA",
+              "title": "NO APLICA",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    { "id": "901538239", "title": "CACHITO GROUP SAS" },
+                    { "id": "10305536690", "title": "IMAGINARIUM " },
+                    { "id": "9013191851", "title": "LOCAL COLOMBIA S.A.S" },
+                    {
+                      "id": "900115560Crear",
+                      "title": "SOCIEDAD OPERADORA 72 GRAN HOTEL SAS"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "CHAPINERO ALTO",
+              "title": "CHAPINERO ALTO",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    { "id": "9011358011", "title": "CASCAJAL" },
+                    { "id": "860006866", "title": "CLUB DEL COMERCIO" },
+                    { "id": "9015986771", "title": "Cocodrilo SAS" },
+                    {
+                      "id": "9005390520",
+                      "title": "EMILIA GRACE/EMILIA GRACE"
+                    },
+                    { "id": "9016474821", "title": "HAB HOTEL" },
+                    { "id": "10190172951", "title": "HARAKURU" },
+                    { "id": "901035244", "title": "INSURGENTES CLL 56" },
+                    {
+                      "id": "901581276",
+                      "title": "INVERSIONES MAAVI SAS/RESTAURANTE FIERO"
+                    },
+                    { "id": "9016445801", "title": "JARDIN TRAGOS Y PASTEL" }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "MULTICENTRO",
+              "title": "MULTICENTRO",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    { "id": "901572006", "title": "OVEJO 116" },
+                    { "id": "8000370111", "title": "SHAMUA" }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "LOS MÁRTIRES",
+              "title": "LOS MÁRTIRES",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    {
+                      "id": "830147165",
+                      "title": "WINE AND BEERS SAN ANDRESITO"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "QUINTA CAMACHO",
+              "title": "QUINTA CAMACHO",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    { "id": "9015460791", "title": "RESTAURANTE SIGA" },
+                    {
+                      "id": "9014701650",
+                      "title": "SANTA JUANA FOOD BAR S.A.S."
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "ZONA ROSA",
+              "title": "ZONA ROSA",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    { "id": "900906554", "title": "CANTINA LA 15" },
+                    { "id": "800210409", "title": "HOTEL SOFITEL" },
+                    { "id": "9003879931", "title": "LALICO DE LA 85" },
+                    { "id": "9009174360", "title": "OSAKA COCINA NIKKEI SAS" },
+                    { "id": "901354801", "title": "SUMAK SAS" },
+                    { "id": "9013475461", "title": "TERCER PISO " },
+                    { "id": "900817497", "title": "VAPIANO" }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "SAN FELIPE",
+              "title": "SAN FELIPE",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [{ "id": "90137361010", "title": "aquelarre" }]
+                }
+              }
+            },
+            {
+              "id": "CHICÓ",
+              "title": "CHICÓ",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    { "id": "8300883741", "title": "IRISH PUB CALLE 93" },
+                    { "id": "9017891821", "title": "POCIMA" },
+                    { "id": "9018204201", "title": "Seikuchi " },
+                    { "id": "8300947519", "title": "Vista corona" }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "MACARENA",
+              "title": "MACARENA",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [{ "id": "9011499161", "title": "MONFERRINA SAS" }]
+                }
+              }
+            },
+            {
+              "id": "LA 18 ",
+              "title": "LA 18 ",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    {
+                      "id": "900378088",
+                      "title": "LA NACIONAL DE LICORES DE COLOMBIA SAS"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "USAQUEN",
+              "title": "USAQUEN",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [{ "id": "9017097621", "title": "Putt SAS" }]
+                }
+              }
+            },
+            {
+              "id": "CHAPINERO",
+              "title": "CHAPINERO",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    { "id": "9008182403", "title": "CHAPINERO" },
+                    { "id": "9010847431", "title": "CHICHERIA DEMENTE" },
+                    { "id": "9006089841", "title": "EL CEBOLLERO" },
+                    { "id": "9014176161", "title": "VIDEO CLUB" }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "POR DEFINIR",
+              "title": "POR DEFINIR",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    { "id": "9016831461", "title": "Distribuidora RH SAS" },
+                    { "id": "9014730881", "title": "MANUEL RESTAURANTE" }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "EL LAGO",
+              "title": "EL LAGO",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    { "id": "9004153580", "title": "OLIVIA 81" },
+                    { "id": "9017996081", "title": "OSSO" },
+                    {
+                      "id": "901559949",
+                      "title": "P&P LIQUORS & DELICATESSEN SAS"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "CANDELARIA",
+              "title": "CANDELARIA",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    { "id": "9015627281", "title": "2 GATOS Y SIMONE" },
+                    { "id": "8300845881", "title": "ARACATACA + MARCHA" }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "ZONA G",
+              "title": "ZONA G",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [{ "id": "8600063020", "title": "JOCKEY CLUB" }]
+                }
+              }
+            },
+            {
+              "id": "LA CALERA",
+              "title": "LA CALERA",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    { "id": "10100051261", "title": "CANTON DE TIJUANA" }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "CHÍA",
+              "title": "CHÍA",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    { "id": "83008142712", "title": "OSAKI 85" },
+                    { "id": "8300814279", "title": "VECCINA 85" }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "PALOQUEMAO",
+              "title": "PALOQUEMAO",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    { "id": "9018533071", "title": "Casona Mercado Artesanal" }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "PARKWAY",
+              "title": "PARKWAY",
+              "on-select-action": {
+                "name": "update_data",
+                "payload": {
+                  "stores": [
+                    { "id": "9016950111", "title": "CAFE DE LA MADELEINE" },
+                    { "id": "103069110980", "title": "EL GARNACHAN" }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "type": "TextSubheading",
+                "text": "Escoge al cliente que estás visitando:\n"
+              },
+              {
+                "data-source": "${data.storesZones}",
+                "label": "Seleccionar zona",
+                "name": "storesZone",
+                "required": "`!${form.noFound}`",
+                "visible": "`!${form.noFound}`",
+                "type": "Dropdown"
+              },
+              {
+                "data-source": "${data.stores}",
+                "label": "Seleccionar cliente",
+                "name": "sid",
+                "required": "`!${form.noFound}`",
+                "visible": "`!${form.noFound}`",
+                "type": "Dropdown"
+              },
+              {
+                "label": "El Cliente NO esta en la lista",
+                "name": "noFound",
+                "type": "OptIn"
+              },
+              {
+                "type": "If",
+                "condition": "${form.noFound}",
+                "then": [
+                  {
+                    "input-type": "text",
+                    "label": "Nombre del cliente",
+                    "name": "clientName",
+                    "required": true,
+                    "type": "TextInput",
+                    "helper-text": "Escribe el nombre de la razón social"
+                  },
+                  {
+                    "input-type": "text",
+                    "label": "NIT",
+                    "name": "clientNit",
+                    "required": true,
+                    "type": "TextInput",
+                    "helper-text": "Escribe el NIT"
+                  }
+                ]
+              },
+              {
+                "label": "Fecha de visita",
+                "name": "visitDate",
+                "required": true,
+                "type": "DatePicker"
+              },
+              {
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "noFound": "${form.noFound}",
+                    "clientName": "${form.clientName}",
+                    "clientNit": "${form.clientNit}",
+                    "sid": "${form.sid}",
+                    "visitDate": "${form.visitDate}",
+                    "captureType": "${data.captureType}",
+                    "salesLevers": "${data.salesLevers}",
+                    "phone": "${data.phone}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
+                  }
+                },
+                "type": "Footer"
+              }
+            ],
+            "name": "flow_path",
+            "type": "Form"
+          }
+        ],
+        "type": "SingleColumnLayout"
+      }
+    },
+    {
+      "id": "COMMERCIAL_PLAN",
+      "title": "Plan comercial",
+      "data": {
+        "commercialPlan": {
+          "type": "object",
+          "properties": {
+            "PLAN": {
+              "type": "string"
+            },
+            "VENTA": {
+              "type": "string"
+            },
+            "GAP": {
+              "type": "string"
+            },
+            "PALANCA": {
+              "type": "string"
+            }
+          },
+          "__example__": {
+            "PLAN": "1",
+            "VENTA": "2",
+            "GAP": "1",
+            "PALANCA": "2x1"
+          }
+        },
+        "portafolioStatus": {
+          "type": "boolean",
+          "__example__": false
+        },
+        "portafolio": {
+          "type": "string",
+          "__example__": "462400.0"
+        },
+        "u3m": {
+          "type": "string",
+          "__example__": "27.43"
+        },
+        "lastMonth": {
+          "type": "string",
+          "__example__": "Julio 2025"
+        }
+      },
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "text": "Plan comercial",
+                "type": "TextHeading"
+              },
+              {
+                "text": "Plan:",
+                "type": "TextSubheading"
+              },
+              {
+                "text": "${data.commercialPlan.PLAN}",
+                "type": "TextBody"
+              },
+              {
+                "text": "Venta:",
+                "type": "TextSubheading"
+              },
+              {
+                "text": "${data.commercialPlan.VENTA}",
+                "type": "TextBody"
+              },
+              {
+                "text": "Gap:",
+                "type": "TextSubheading"
+              },
+              {
+                "text": "${data.commercialPlan.GAP}",
+                "type": "TextBody"
+              },
+              {
+                "text": "Promedio de compra últimos 3 meses:",
+                "type": "TextSubheading"
+              },
+              {
+                "text": "${data.u3m}",
+                "type": "TextBody"
+              },
+              {
+                "text": "Mes de última compra:",
+                "type": "TextSubheading"
+              },
+              {
+                "text": "${data.lastMonth}",
+                "type": "TextBody"
+              },
+              {
+                "label": "Siguiente",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "portafolioDetails": "${data.portafolioDetails}",
+                    "u3m": "${data.u3m}",
+                    "lastMonth": "${data.lastMonth}",
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "noFound": "${data.noFound}",
+                    "clientName": "${data.clientName}",
+                    "clientNit": "${data.clientNit}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "captureType": "${data.captureType}",
+                    "phone": "${data.phone}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
+                  }
+                },
+                "type": "Footer"
+              }
+            ],
+            "name": "flow_path",
+            "type": "Form"
+          }
+        ],
+        "type": "SingleColumnLayout"
+      }
+    },
+    {
+      "id": "PORTAFOLIO_STATUS",
+      "title": "Cartera",
+      "data": {
+        "portafolioStatus": {
+          "type": "boolean",
+          "__example__": true
+        },
+        "portafolio": {
+          "type": "string",
+          "__example__": "$2.637,125.01"
+        },
+        "portafolioDetails": {
+          "type": "string",
+          "__example__": "Total de facturas pendientes: 2\n\nNúmero de factura: 1234\nFecha de vencimiento: 12/07/2025\nRango mora: 8-30 días \nValor: $40,000\n\nNúmero de factura: 5678\nFecha de vencimiento: 12/07/2025\nRango mora: 31-60 días \nValor: $12,000"
+        }
+      },
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "text": "Estado de cartera",
+                "type": "TextHeading"
+              },
+              {
+                "text": "¿Tiene cartera vencida?",
+                "type": "TextSubheading"
+              },
+              {
+                "type": "If",
+                "condition": "${data.portafolioStatus} == false",
+                "then": [
+                  {
+                    "text": "No",
+                    "type": "TextBody"
+                  }
+                ]
+              },
+              {
+                "type": "If",
+                "condition": "${data.portafolioStatus} == true",
+                "then": [
+                  {
+                    "text": "Si",
+                    "type": "TextBody"
+                  },
+                  {
+                    "text": "Total de cartera vencida:",
+                    "type": "TextSubheading"
+                  },
+                  {
+                    "text": "`'total: ' ${data.portafolio}`",
+                    "type": "TextBody"
+                  },
+                  {
+                    "text": "Detalle de cartera vencida:",
+                    "type": "TextSubheading"
+                  },
+                  {
+                    "text": "${data.portafolioDetails}",
+                    "type": "TextBody"
+                  }
+                ]
+              },
+              {
+                "label": "Siguiente",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "u3m": "${data.u3m}",
+                    "lastMonth": "${data.lastMonth}",
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "noFound": "${data.noFound}",
+                    "clientName": "${data.clientName}",
+                    "clientNit": "${data.clientNit}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "captureType": "${data.captureType}",
+                    "phone": "${data.phone}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
+                  }
+                },
+                "type": "Footer"
+              }
+            ],
+            "name": "flow_path",
+            "type": "Form"
+          }
+        ],
+        "type": "SingleColumnLayout"
+      }
+    },
+    {
+      "id": "CAPTURE_DATA",
+      "title": "Empezar visita",
+      "data": {},
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "text": "Registrar visita",
+                "type": "TextHeading"
+              },
+              {
+                "height": 150,
+                "scale-type": "contain",
+                "src": "iVBORw0KGgoAAAANSUhEUgAAAgAAAAC0CAYAAADivJSwAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAFCWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0nUmVzb3VyY2UnPgogICAgIDxBdHRyaWI6Q3JlYXRlZD4yMDI1LTA2LTI1PC9BdHRyaWI6Q3JlYXRlZD4KICAgICA8QXR0cmliOkV4dElkPjUxY2Y4YzFjLWMwMDEtNGMzNy05ZGIzLTA1Yjk1ZWM3MDE4YzwvQXR0cmliOkV4dElkPgogICAgIDxBdHRyaWI6RmJJZD41MjUyNjU5MTQxNzk1ODA8L0F0dHJpYjpGYklkPgogICAgIDxBdHRyaWI6VG91Y2hUeXBlPjI8L0F0dHJpYjpUb3VjaFR5cGU+CiAgICA8L3JkZjpsaT4KICAgPC9yZGY6U2VxPgogIDwvQXR0cmliOkFkcz4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6ZGM9J2h0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvJz4KICA8ZGM6dGl0bGU+CiAgIDxyZGY6QWx0PgogICAgPHJkZjpsaSB4bWw6bGFuZz0neC1kZWZhdWx0Jz5CYW5uZXIgcGFyYSB3aGF0c2FwcCBmbG93IC0gMjwvcmRmOmxpPgogICA8L3JkZjpBbHQ+CiAgPC9kYzp0aXRsZT4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6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",
+                "type": "Image"
+              },
+              {
+                "text": "Lee las siguientes instrucciones:",
+                "type": "TextSubheading"
+              },
+              {
+                "text": "1. Recuerda llenar los datos en el punto de venta\n2. No se aceptan fotos de visitas pasadas\n3. Esta información será utilizada para mejorar las próximas rutas.",
+                "type": "TextBody"
+              },
+              {
+                "label": "Confirmo que estoy en punto de venta y la información será la correcta.",
+                "name": "Confirmo_que_estoy_en_punto_de_venta_y_la_informacin_ser_la_correcta_37c304",
+                "required": true,
+                "type": "OptIn"
+              },
+              {
+                "label": "Empezar visita",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "managerName": "${data.managerName}",
+                    "contactPhone": "${data.contactPhone}",
+                    "contactEmail": "${data.contactEmail}",
+                    "creationDate": "${data.creationDate}",
+                    "nit": "${data.nit}",
+                    "depto": "${data.depto}",
+                    "town": "${data.town}",
+                    "address": "${data.address}",
+                    "zone": "${data.zone}",
+                    "segment": "${data.segment}",
+                    "u3m": "${data.u3m}",
+                    "lastMonth": "${data.lastMonth}",
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "noFound": "${data.noFound}",
+                    "clientName": "${data.clientName}",
+                    "clientNit": "${data.clientNit}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "captureType": "${data.captureType}",
+                    "phone": "${data.phone}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
+                  }
+                },
+                "type": "Footer"
+              }
+            ],
+            "name": "flow_path",
+            "type": "Form"
+          }
+        ],
+        "type": "SingleColumnLayout"
+      }
+    },
+    {
+      "id": "SALES_LEVERS",
+      "title": "Palancas de venta",
+      "data": {
+        "commercialPlan": {
+          "type": "object",
+          "properties": {
+            "PLAN": {
+              "type": "string"
+            },
+            "VENTA": {
+              "type": "string"
+            },
+            "GAP": {
+              "type": "string"
+            },
+            "PALANCA": {
+              "type": "string"
+            }
+          },
+          "__example__": {
+            "PLAN": "1",
+            "VENTA": "2",
+            "GAP": "1",
+            "PALANCA": "2x1"
+          }
+        },
+        "salesLevers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "10% DCTO",
+              "title": "10% DCTO"
+            },
+            {
+              "id": "2000 X SHOT",
+              "title": "2000 X SHOT"
+            }
+          ]
+        }
+      },
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "text": "Palancas comerciales",
+                "type": "TextHeading"
+              },
+              {
+                "text": "`'Palanca a presentar: '${data.commercialPlan.PALANCA}`",
+                "type": "TextBody"
+              },
+              {
+                "data-source": [
+                  {
+                    "id": "si",
+                    "title": "Si"
+                  },
+                  {
+                    "id": "no",
+                    "title": "No"
+                  }
+                ],
+                "label": "¿Palanca presentada?",
+                "name": "leverPresented",
+                "required": true,
+                "type": "RadioButtonsGroup"
+              },
+              {
+                "type": "If",
+                "condition": "${form.leverPresented} == 'no'",
+                "then": [
+                  {
+                    "data-source": "${data.salesLevers}",
+                    "label": "Seleccionar palanca",
+                    "name": "salesLeverSelected",
+                    "required": true,
+                    "type": "Dropdown"
+                  },
+                  {
+                    "data-source": [
+                      {
+                        "id": "si",
+                        "title": "Si"
+                      },
+                      {
+                        "id": "no",
+                        "title": "No"
+                      }
+                    ],
+                    "label": "¿Palanca aceptada?",
+                    "name": "aceptedLever",
+                    "required": true,
+                    "type": "RadioButtonsGroup"
+                  }
+                ]
+              },
+              {
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "aceptedLever": "${form.aceptedLever}",
+                    "salesLeverSelected": "${form.salesLeverSelected}",
+                    "leverPresented": "${form.leverPresented}",
+                    "managerName": "${data.managerName}",
+                    "contactPhone": "${data.contactPhone}",
+                    "contactEmail": "${data.contactEmail}",
+                    "creationDate": "${data.creationDate}",
+                    "nit": "${data.nit}",
+                    "depto": "${data.depto}",
+                    "town": "${data.town}",
+                    "address": "${data.address}",
+                    "zone": "${data.zone}",
+                    "segment": "${data.segment}",
+                    "u3m": "${data.u3m}",
+                    "lastMonth": "${data.lastMonth}",
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "noFound": "${data.noFound}",
+                    "clientName": "${data.clientName}",
+                    "clientNit": "${data.clientNit}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "captureType": "${data.captureType}",
+                    "phone": "${data.phone}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
+                  }
+                },
+                "type": "Footer"
+              }
+            ],
+            "name": "flow_path",
+            "type": "Form"
+          }
+        ],
+        "type": "SingleColumnLayout"
+      }
+    },
+    {
+      "id": "INVENTORY",
+      "title": "Inventario",
+      "data": {},
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "text": "Mapeo de inventario:",
+                "type": "TextHeading"
+              },
+              {
+                "input-type": "number",
+                "label": "Cantidad de botellas",
+                "name": "bottlesCount",
+                "required": true,
+                "type": "TextInput"
+              },
+              {
+                "text": "Cuenta el número de botellas actual y registra la cantidad usando números.",
+                "type": "TextCaption"
+              },
+              {
+                "label": "Comentarios ",
+                "name": "comments",
+                "required": true,
+                "type": "TextArea",
+                "helper-text": "Registra el detalle de inventarios acá."
+              },
+              {
+                "data-source": [
+                  {
+                    "id": "si",
+                    "title": "Si"
+                  },
+                  {
+                    "id": "no",
+                    "title": "No"
+                  }
+                ],
+                "label": "¿Tiene botellas abiertas??",
+                "name": "openBottles",
+                "required": true,
+                "type": "RadioButtonsGroup"
+              },
+              {
+                "type": "If",
+                "condition": "${form.openBottles} == 'si'",
+                "then": [
+                  {
+                    "type": "TextInput",
+                    "required": true,
+                    "label": "Cantidad de botellas abiertas",
+                    "input-type": "number",
+                    "name": "quantityOpenBottles"
+                  }
+                ]
+              },
+              {
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "openBottles": "${form.openBottles}",
+                    "quantityOpenBottles": "${form.quantityOpenBottles}",
+                    "comments": "${form.comments}",
+                    "bottlesCount": "${form.bottlesCount}",
+                    "aceptedLever": "${data.aceptedLever}",
+                    "salesLeverSelected": "${data.salesLeverSelected}",
+                    "leverPresented": "${data.leverPresented}",
+                    "managerName": "${data.managerName}",
+                    "contactPhone": "${data.contactPhone}",
+                    "contactEmail": "${data.contactEmail}",
+                    "creationDate": "${data.creationDate}",
+                    "nit": "${data.nit}",
+                    "depto": "${data.depto}",
+                    "town": "${data.town}",
+                    "address": "${data.address}",
+                    "zone": "${data.zone}",
+                    "segment": "${data.segment}",
+                    "u3m": "${data.u3m}",
+                    "lastMonth": "${data.lastMonth}",
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "noFound": "${data.noFound}",
+                    "clientName": "${data.clientName}",
+                    "clientNit": "${data.clientNit}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "captureType": "${data.captureType}",
+                    "phone": "${data.phone}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
+                  }
+                },
+                "type": "Footer"
+              }
+            ],
+            "name": "flow_path",
+            "type": "Form"
+          }
+        ],
+        "type": "SingleColumnLayout"
+      }
+    },
+    {
+      "id": "EXECUTION",
+      "title": "Ejecución",
+      "data": {},
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "text": "Validación de ejecución:",
+                "type": "TextHeading"
+              },
+              {
+                "data-source": [
+                  {
+                    "id": "Coctel",
+                    "title": "Coctel"
+                  },
+                  {
+                    "id": "Menú",
+                    "title": "Menú"
+                  },
+                  {
+                    "id": "Visibilidad en barra",
+                    "title": "Visibilidad en barra"
+                  },
+                  {
+                    "id": "Capacitación últimos 6 meses",
+                    "title": "Capacitación últimos 6 meses"
+                  },
+                  {
+                    "id": "Shots",
+                    "title": "Shots"
+                  }
+                ],
+                "label": "Selecciona las que aplique:",
+                "name": "executionSelected",
+                "required": true,
+                "type": "CheckboxGroup"
+              },
+              {
+                "text": "Cargar evidencia de la visita\n",
+                "type": "TextSubheading"
+              },
+              {
+                "type": "PhotoPicker",
+                "name": "photoPicker",
+                "label": "Puedes elegirlas desde tu galería o tomarlas ahora mismo.",
+                "photo-source": "camera_gallery",
+                "min-uploaded-photos": 1,
+                "max-file-size-kb": 25600
+              },
+              {
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "photoPicker": "${form.photoPicker}",
+                    "executionSelected": "${form.executionSelected}",
+                    "openBottles": "${data.openBottles}",
+                    "quantityOpenBottles": "${data.quantityOpenBottles}",
+                    "comments": "${data.comments}",
+                    "bottlesCount": "${data.bottlesCount}",
+                    "aceptedLever": "${data.aceptedLever}",
+                    "salesLeverSelected": "${data.salesLeverSelected}",
+                    "leverPresented": "${data.leverPresented}",
+                    "managerName": "${data.managerName}",
+                    "contactPhone": "${data.contactPhone}",
+                    "contactEmail": "${data.contactEmail}",
+                    "creationDate": "${data.creationDate}",
+                    "nit": "${data.nit}",
+                    "depto": "${data.depto}",
+                    "town": "${data.town}",
+                    "address": "${data.address}",
+                    "zone": "${data.zone}",
+                    "segment": "${data.segment}",
+                    "u3m": "${data.u3m}",
+                    "lastMonth": "${data.lastMonth}",
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "noFound": "${data.noFound}",
+                    "clientName": "${data.clientName}",
+                    "clientNit": "${data.clientNit}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "captureType": "${data.captureType}",
+                    "phone": "${data.phone}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
+                  }
+                },
+                "type": "Footer"
+              }
+            ],
+            "name": "flow_path",
+            "type": "Form"
+          }
+        ],
+        "type": "SingleColumnLayout"
+      }
+    },
+    {
+      "data": {},
+      "id": "TRADE_MARKETING",
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "type": "TextSubheading",
+                "text": "Material de Trade Marketing:"
+              },
+              {
+                "data-source": [
+                  { "id": "0_Glorificador", "title": "Glorificador" },
+                  { "id": "1_Vasos", "title": "Vasos" },
+                  { "id": "2_Portavasos", "title": "Portavasos" }
+                ],
+                "label": "Selecciona material ejecutado:",
+                "name": "Selecciona_material_ejecutado_a4185c",
+                "required": true,
+                "type": "CheckboxGroup"
+              },
+              {
+                "text": "¿Requiere algún tipo de material?",
+                "type": "TextSubheading"
+              },
+              {
+                "label": "Por ejemplo: copas",
+                "name": "Por_ejemplo_copas_36c6bd",
+                "required": true,
+                "type": "TextArea",
+                "helper-text": "Escribe aquí tu petición de material"
+              },
+              {
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "screen_0_Selecciona_material_ejecutado_0": "${form.Selecciona_material_ejecutado_a4185c}",
+                    "screen_0_Por_ejemplo_copas_1": "${form.Por_ejemplo_copas_36c6bd}",
+                    "photoPicker": "${data.photoPicker}",
+                    "executionSelected": "${data.executionSelected}",
+                    "openBottles": "${data.openBottles}",
+                    "quantityOpenBottles": "${data.quantityOpenBottles}",
+                    "comments": "${data.comments}",
+                    "bottlesCount": "${data.bottlesCount}",
+                    "aceptedLever": "${data.aceptedLever}",
+                    "salesLeverSelected": "${data.salesLeverSelected}",
+                    "leverPresented": "${data.leverPresented}",
+                    "managerName": "${data.managerName}",
+                    "contactPhone": "${data.contactPhone}",
+                    "contactEmail": "${data.contactEmail}",
+                    "creationDate": "${data.creationDate}",
+                    "nit": "${data.nit}",
+                    "depto": "${data.depto}",
+                    "town": "${data.town}",
+                    "address": "${data.address}",
+                    "zone": "${data.zone}",
+                    "segment": "${data.segment}",
+                    "u3m": "${data.u3m}",
+                    "lastMonth": "${data.lastMonth}",
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "noFound": "${data.noFound}",
+                    "clientName": "${data.clientName}",
+                    "clientNit": "${data.clientNit}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "captureType": "${data.captureType}",
+                    "phone": "${data.phone}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
+                  }
+                },
+                "type": "Footer"
+              }
+            ],
+            "name": "flow_path",
+            "type": "Form"
+          }
+        ],
+        "type": "SingleColumnLayout"
+      },
+      "title": "TradeMarketing"
+    },
+    {
+      "data": {
+        "screen_0_Selecciona_material_ejecutado_0": {
+          "__example__": [],
+          "items": { "type": "string" },
+          "type": "array"
+        },
+        "screen_0_Por_ejemplo_copas_1": {
+          "__example__": "Example",
+          "type": "string"
+        }
+      },
+      "id": "COMPETITION",
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "text": "¿Vez alguna de estas marcas en el punto de venta?",
+                "type": "TextSubheading"
+              },
+              {
+                "data-source": [
+                  { "id": "0_Mano_de_Buey", "title": "Mano de Buey" },
+                  { "id": "1_Viche_Dioses", "title": "Viche Dioses" },
+                  { "id": "2_Viche_Canao", "title": "Viche Canao" },
+                  {
+                    "id": "3_Viche_La_Esperanza",
+                    "title": "Viche La Esperanza"
+                  },
+                  { "id": "4_Otro", "title": "Otro" }
+                ],
+                "label": "Selecciona las que veas:",
+                "name": "Selecciona_las_que_veas_c082d9",
+                "required": true,
+                "type": "CheckboxGroup"
+              },
+              {
+                "text": "Añade el nombre del Viche:",
+                "type": "TextSubheading"
+              },
+              {
+                "input-type": "text",
+                "label": "Viche...",
+                "name": "Viche_eb4f3a",
+                "required": true,
+                "type": "TextInput"
+              },
+              {
+                "label": "Continue",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "screen_1_Selecciona_las_que_veas_0": "${form.Selecciona_las_que_veas_c082d9}",
+                    "screen_1_Viche_1": "${form.Viche_eb4f3a}",
+                    "screen_0_Selecciona_material_ejecutado_0": "${data.screen_0_Selecciona_material_ejecutado_0}",
+                    "screen_0_Por_ejemplo_copas_1": "${data.screen_0_Por_ejemplo_copas_1}",
+                    "photoPicker": "${data.photoPicker}",
+                    "executionSelected": "${data.executionSelected}",
+                    "openBottles": "${data.openBottles}",
+                    "quantityOpenBottles": "${data.quantityOpenBottles}",
+                    "comments": "${data.comments}",
+                    "bottlesCount": "${data.bottlesCount}",
+                    "aceptedLever": "${data.aceptedLever}",
+                    "salesLeverSelected": "${data.salesLeverSelected}",
+                    "leverPresented": "${data.leverPresented}",
+                    "managerName": "${data.managerName}",
+                    "contactPhone": "${data.contactPhone}",
+                    "contactEmail": "${data.contactEmail}",
+                    "creationDate": "${data.creationDate}",
+                    "nit": "${data.nit}",
+                    "depto": "${data.depto}",
+                    "town": "${data.town}",
+                    "address": "${data.address}",
+                    "zone": "${data.zone}",
+                    "segment": "${data.segment}",
+                    "u3m": "${data.u3m}",
+                    "lastMonth": "${data.lastMonth}",
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "noFound": "${data.noFound}",
+                    "clientName": "${data.clientName}",
+                    "clientNit": "${data.clientNit}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "captureType": "${data.captureType}",
+                    "phone": "${data.phone}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
+                  }
+                },
+                "type": "Footer"
+              }
+            ],
+            "name": "flow_path",
+            "type": "Form"
+          }
+        ],
+        "type": "SingleColumnLayout"
+      },
+      "title": "Competencia"
+    },
+    {
+      "data": {
+        "screen_1_Selecciona_las_que_veas_0": {
+          "__example__": [],
+          "items": { "type": "string" },
+          "type": "array"
+        },
+        "screen_1_Viche_1": { "__example__": "Example", "type": "string" },
+        "screen_0_Selecciona_material_ejecutado_0": {
+          "__example__": [],
+          "items": { "type": "string" },
+          "type": "array"
+        },
+        "screen_0_Por_ejemplo_copas_1": {
+          "__example__": "Example",
+          "type": "string"
+        }
+      },
+      "id": "PRICE_VALIDATION",
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "text": "¿Cual es el precio de la botella en punto de venta?",
+                "type": "TextSubheading"
+              },
+              {
+                "input-type": "text",
+                "label": "Precio Mano de Buey",
+                "name": "Precio_Mano_de_Buey_78a80f",
+                "required": true,
+                "type": "TextInput"
+              },
+              {
+                "input-type": "text",
+                "label": "Precio Viche Dioses",
+                "name": "Precio_Viche_Dioses_66101b",
+                "required": true,
+                "type": "TextInput"
+              },
+              {
+                "input-type": "text",
+                "label": "Precio Viche Canao",
+                "name": "Precio_Viche_Canao_e9b942",
+                "required": true,
+                "type": "TextInput"
+              },
+              {
+                "input-type": "text",
+                "label": "Precio La Esperanza",
+                "name": "Precio_La_Esperanza_fe808f",
+                "required": true,
+                "type": "TextInput"
+              },
+              {
+                "input-type": "text",
+                "label": "Precio Otro Viche",
+                "name": "Precio_Otro_Viche_c1488c",
+                "required": true,
+                "type": "TextInput"
+              },
+              {
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "screen_2_Precio_Mano_de_Buey_0": "${form.Precio_Mano_de_Buey_78a80f}",
+                    "screen_2_Precio_Viche_Dioses_1": "${form.Precio_Viche_Dioses_66101b}",
+                    "screen_2_Precio_Viche_Canao_2": "${form.Precio_Viche_Canao_e9b942}",
+                    "screen_2_Precio_La_Esperanza_3": "${form.Precio_La_Esperanza_fe808f}",
+                    "screen_2_Precio_Otro_Viche_4": "${form.Precio_Otro_Viche_c1488c}",
+                    "screen_1_Selecciona_las_que_veas_0": "${data.screen_1_Selecciona_las_que_veas_0}",
+                    "screen_1_Viche_1": "${data.screen_1_Viche_1}",
+                    "screen_0_Selecciona_material_ejecutado_0": "${data.screen_0_Selecciona_material_ejecutado_0}",
+                    "screen_0_Por_ejemplo_copas_1": "${data.screen_0_Por_ejemplo_copas_1}",
+                    "photoPicker": "${data.photoPicker}",
+                    "executionSelected": "${data.executionSelected}",
+                    "openBottles": "${data.openBottles}",
+                    "quantityOpenBottles": "${data.quantityOpenBottles}",
+                    "comments": "${data.comments}",
+                    "bottlesCount": "${data.bottlesCount}",
+                    "aceptedLever": "${data.aceptedLever}",
+                    "salesLeverSelected": "${data.salesLeverSelected}",
+                    "leverPresented": "${data.leverPresented}",
+                    "managerName": "${data.managerName}",
+                    "contactPhone": "${data.contactPhone}",
+                    "contactEmail": "${data.contactEmail}",
+                    "creationDate": "${data.creationDate}",
+                    "nit": "${data.nit}",
+                    "depto": "${data.depto}",
+                    "town": "${data.town}",
+                    "address": "${data.address}",
+                    "zone": "${data.zone}",
+                    "segment": "${data.segment}",
+                    "u3m": "${data.u3m}",
+                    "lastMonth": "${data.lastMonth}",
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "noFound": "${data.noFound}",
+                    "clientName": "${data.clientName}",
+                    "clientNit": "${data.clientNit}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "captureType": "${data.captureType}",
+                    "phone": "${data.phone}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
+                  }
+                },
+                "type": "Footer"
+              }
+            ],
+            "name": "flow_path",
+            "type": "Form"
+          }
+        ],
+        "type": "SingleColumnLayout"
+      },
+      "title": "Validación de precios"
+    },
+    {
+      "data": {
+        "screen_2_Precio_Mano_de_Buey_0": {
+          "__example__": "Example",
+          "type": "string"
+        },
+        "screen_2_Precio_Viche_Dioses_1": {
+          "__example__": "Example",
+          "type": "string"
+        },
+        "screen_2_Precio_Viche_Canao_2": {
+          "__example__": "Example",
+          "type": "string"
+        },
+        "screen_2_Precio_La_Esperanza_3": {
+          "__example__": "Example",
+          "type": "string"
+        },
+        "screen_2_Precio_Otro_Viche_4": {
+          "__example__": "Example",
+          "type": "string"
+        },
+        "screen_1_Selecciona_las_que_veas_0": {
+          "__example__": [],
+          "items": { "type": "string" },
+          "type": "array"
+        },
+        "screen_1_Viche_1": { "__example__": "Example", "type": "string" },
+        "screen_0_Selecciona_material_ejecutado_0": {
+          "__example__": [],
+          "items": { "type": "string" },
+          "type": "array"
+        },
+        "screen_0_Por_ejemplo_copas_1": {
+          "__example__": "Example",
+          "type": "string"
+        }
+      },
+      "id": "COMPETITION_INVENTORIES",
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "text": "¿Cual es el invenario de botellas de las siguientes marcas en punto de venta?",
+                "type": "TextSubheading"
+              },
+              {
+                "input-type": "text",
+                "label": "Mano de Buey",
+                "name": "Mano_de_Buey_9913e2",
+                "required": true,
+                "type": "TextInput",
+                "helper-text": "Cantidad de botellas visibles de esta marca"
+              },
+              {
+                "input-type": "text",
+                "label": "Viche Dioses",
+                "name": "Viche_Dioses_29b3b1",
+                "required": true,
+                "type": "TextInput",
+                "helper-text": "Cantidad de botellas visibles de esta marca"
+              },
+              {
+                "input-type": "text",
+                "label": "Viche Canao",
+                "name": "Viche_Canao_3740c3",
+                "required": true,
+                "type": "TextInput",
+                "helper-text": "Cantidad de botellas visibles de esta marca"
+              },
+              {
+                "input-type": "text",
+                "label": "La Esperanza",
+                "name": "La_Esperanza_042d87",
+                "required": true,
+                "type": "TextInput"
+              },
+              {
+                "input-type": "text",
+                "label": "Otro Viche",
+                "name": "Otro_Viche_21fb92",
+                "required": true,
+                "type": "TextInput",
+                "helper-text": "Cantidad de botellas visibles de esta marca"
+              },
+              {
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "screen_3_Mano_de_Buey_0": "${form.Mano_de_Buey_9913e2}",
+                    "screen_3_Viche_Dioses_1": "${form.Viche_Dioses_29b3b1}",
+                    "screen_3_Viche_Canao_2": "${form.Viche_Canao_3740c3}",
+                    "screen_3_La_Esperanza_3": "${form.La_Esperanza_042d87}",
+                    "screen_3_Otro_Viche_4": "${form.Otro_Viche_21fb92}",
+                    "screen_2_Precio_Mano_de_Buey_0": "${data.screen_2_Precio_Mano_de_Buey_0}",
+                    "screen_2_Precio_Viche_Dioses_1": "${data.screen_2_Precio_Viche_Dioses_1}",
+                    "screen_2_Precio_Viche_Canao_2": "${data.screen_2_Precio_Viche_Canao_2}",
+                    "screen_2_Precio_La_Esperanza_3": "${data.screen_2_Precio_La_Esperanza_3}",
+                    "screen_2_Precio_Otro_Viche_4": "${data.screen_2_Precio_Otro_Viche_4}",
+                    "screen_1_Selecciona_las_que_veas_0": "${data.screen_1_Selecciona_las_que_veas_0}",
+                    "screen_1_Viche_1": "${data.screen_1_Viche_1}",
+                    "screen_0_Selecciona_material_ejecutado_0": "${data.screen_0_Selecciona_material_ejecutado_0}",
+                    "screen_0_Por_ejemplo_copas_1": "${data.screen_0_Por_ejemplo_copas_1}",
+                    "photoPicker": "${data.photoPicker}",
+                    "executionSelected": "${data.executionSelected}",
+                    "openBottles": "${data.openBottles}",
+                    "quantityOpenBottles": "${data.quantityOpenBottles}",
+                    "comments": "${data.comments}",
+                    "bottlesCount": "${data.bottlesCount}",
+                    "aceptedLever": "${data.aceptedLever}",
+                    "salesLeverSelected": "${data.salesLeverSelected}",
+                    "leverPresented": "${data.leverPresented}",
+                    "managerName": "${data.managerName}",
+                    "contactPhone": "${data.contactPhone}",
+                    "contactEmail": "${data.contactEmail}",
+                    "creationDate": "${data.creationDate}",
+                    "nit": "${data.nit}",
+                    "depto": "${data.depto}",
+                    "town": "${data.town}",
+                    "address": "${data.address}",
+                    "zone": "${data.zone}",
+                    "segment": "${data.segment}",
+                    "u3m": "${data.u3m}",
+                    "lastMonth": "${data.lastMonth}",
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "noFound": "${data.noFound}",
+                    "clientName": "${data.clientName}",
+                    "clientNit": "${data.clientNit}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "captureType": "${data.captureType}",
+                    "phone": "${data.phone}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
+                  }
+                },
+                "type": "Footer"
+              }
+            ],
+            "name": "flow_path",
+            "type": "Form"
+          }
+        ],
+        "type": "SingleColumnLayout"
+      },
+      "title": "Inventarios competencia"
+    },
+    {
+      "id": "RATE",
+      "title": "Calificar visita",
+      "data": {},
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "text": "Califica tu experiencia general de tu visita en punto de venta:",
+                "type": "TextHeading"
+              },
+              {
+                "type": "Dropdown",
+                "label": "Experiencia general",
+                "required": true,
+                "name": "generalExperience",
+                "data-source": [
+                  {
+                    "id": "0_★★★★★_•_Excelente_(5/5)",
+                    "title": "★★★★★ • Excelente (5/5)"
+                  },
+                  {
+                    "id": "1_★★★★☆_•_Buena_(4/5)",
+                    "title": "★★★★☆ • Buena (4/5)"
+                  },
+                  {
+                    "id": "2_★★★☆☆_•_Promedio_(3/5)",
+                    "title": "★★★☆☆ • Promedio (3/5)"
+                  },
+                  {
+                    "id": "3_★★☆☆☆_•_Mala_(2/5)",
+                    "title": "★★☆☆☆ • Mala (2/5)"
+                  },
+                  {
+                    "id": "4_★☆☆☆☆_•_Muy_mala_(1/5)",
+                    "title": "★☆☆☆☆ • Muy mala (1/5)"
+                  }
+                ]
+              },
+              {
+                "text": "Deja tus comentarios acerca de cómo te recibieron en el punto de venta",
+                "type": "TextCaption"
+              },
+              {
+                "label": "Comentarios",
+                "name": "generalComments",
+                "required": true,
+                "type": "TextArea"
+              },
+              {
+                "label": "Terminar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "generalComments": "${form.generalComments}",
+                    "generalExperience": "${form.generalExperience}",
+                    "screen_3_Mano_de_Buey_0": "${data.Mano_de_Buey_9913e2}",
+                    "screen_3_Viche_Dioses_1": "${data.Viche_Dioses_29b3b1}",
+                    "screen_3_Viche_Canao_2": "${data.Viche_Canao_3740c3}",
+                    "screen_3_La_Esperanza_3": "${data.La_Esperanza_042d87}",
+                    "screen_3_Otro_Viche_4": "${data.Otro_Viche_21fb92}",
+                    "screen_2_Precio_Mano_de_Buey_0": "${data.screen_2_Precio_Mano_de_Buey_0}",
+                    "screen_2_Precio_Viche_Dioses_1": "${data.screen_2_Precio_Viche_Dioses_1}",
+                    "screen_2_Precio_Viche_Canao_2": "${data.screen_2_Precio_Viche_Canao_2}",
+                    "screen_2_Precio_La_Esperanza_3": "${data.screen_2_Precio_La_Esperanza_3}",
+                    "screen_2_Precio_Otro_Viche_4": "${data.screen_2_Precio_Otro_Viche_4}",
+                    "screen_1_Selecciona_las_que_veas_0": "${data.screen_1_Selecciona_las_que_veas_0}",
+                    "screen_1_Viche_1": "${data.screen_1_Viche_1}",
+                    "screen_0_Selecciona_material_ejecutado_0": "${data.screen_0_Selecciona_material_ejecutado_0}",
+                    "screen_0_Por_ejemplo_copas_1": "${data.screen_0_Por_ejemplo_copas_1}",
+                    "photoPicker": "${data.photoPicker}",
+                    "executionSelected": "${data.executionSelected}",
+                    "openBottles": "${data.openBottles}",
+                    "quantityOpenBottles": "${data.quantityOpenBottles}",
+                    "comments": "${data.comments}",
+                    "bottlesCount": "${data.bottlesCount}",
+                    "aceptedLever": "${data.aceptedLever}",
+                    "salesLeverSelected": "${data.salesLeverSelected}",
+                    "leverPresented": "${data.leverPresented}",
+                    "managerName": "${data.managerName}",
+                    "contactPhone": "${data.contactPhone}",
+                    "contactEmail": "${data.contactEmail}",
+                    "creationDate": "${data.creationDate}",
+                    "nit": "${data.nit}",
+                    "depto": "${data.depto}",
+                    "town": "${data.town}",
+                    "address": "${data.address}",
+                    "zone": "${data.zone}",
+                    "segment": "${data.segment}",
+                    "u3m": "${data.u3m}",
+                    "lastMonth": "${data.lastMonth}",
+                    "salesLevers": "${data.salesLevers}",
+                    "portafolio": "${data.portafolio}",
+                    "portafolioStatus": "${data.portafolioStatus}",
+                    "commercialPlan": "${data.commercialPlan}",
+                    "store": "${data.store}",
+                    "noFound": "${data.noFound}",
+                    "clientName": "${data.clientName}",
+                    "clientNit": "${data.clientNit}",
+                    "sid": "${data.sid}",
+                    "client": "${data.client}",
+                    "visitDate": "${data.visitDate}",
+                    "captureType": "${data.captureType}",
+                    "phone": "${data.phone}",
+                    "userLocation": "${data.userLocation}",
+                    "nearbyStores": "${data.nearbyStores}",
+                    "conversationId": "${data.conversationId}"
+                  }
+                },
+                "type": "Footer"
+              }
+            ],
+            "name": "flow_path",
+            "type": "Form"
+          }
+        ],
+        "type": "SingleColumnLayout"
+      }
+    },
+    {
+      "id": "SUMMARY",
+      "terminal": true,
+      "success": true,
+      "title": "Resumen",
+      "data": {
+        "sid": {
+          "type": "string",
+          "__example__": "9018127411"
+        },
+        "client": {
+          "type": "string",
+          "__example__": "La Mecanica SAS"
+        },
+        "visitDate": {
+          "type": "string",
+          "__example__": "2025-07-07"
+        },
+        "leverPresented": {
+          "type": "string",
+          "__example__": "si"
+        },
+        "aceptedLever": {
+          "type": "string",
+          "__example__": "si"
+        },
+        "salesLeverSelected": {
+          "type": "string",
+          "__example__": "8% DESC"
+        },
+        "bottlesCount": {
+          "type": "string",
+          "__example__": "2"
+        },
+        "comments": {
+          "type": "string",
+          "__example__": "Aun hay inventario"
+        },
+        "executionSelected": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "__example__": ["Coctel", "Menú"]
+        },
+        "generalComments": {
+          "type": "string",
+          "__example__": "Pendientes por capacitacion"
+        },
+        "noFound": {
+          "type": "boolean",
+          "__example__": true
+        },
+        "captureType": {
+          "type": "string",
+          "__example__": "exist"
+        },
+        "clientName": {
+          "type": "string",
+          "__example__": "La Tiendita SAS"
+        },
+        "nit": {
+          "type": "string",
+          "__example__": "123456789"
+        },
+        "depto": {
+          "type": "string",
+          "__example__": "CUNDINAMARCA"
+        },
+        "address": {
+          "type": "string",
+          "__example__": "Calle 8"
+        },
+        "zone": {
+          "type": "string",
+          "__example__": "CASTELLANA"
+        },
+        "segment": {
+          "type": "string",
+          "__example__": "REST"
+        },
+        "managerName": {
+          "type": "string",
+          "__example__": "Alejandro"
+        },
+        "contactPhone": {
+          "type": "string",
+          "__example__": "572134584"
+        },
+        "contactEmail": {
+          "type": "string",
+          "__example__": "Ale@zendly.ai"
+        },
+        "creationDate": {
+          "type": "string",
+          "__example__": "2025-07-17"
+        },
+        "generalExperience": {
+          "type": "string",
+          "__example__": "4_★☆☆☆☆_•_Muy_mala_(1/5)"
+        }
+      },
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "TextSubheading",
+            "text": "Captura de datos:"
+          },
+          {
+            "type": "If",
+            "condition": "(${data.captureType} == 'exist') && (${data.noFound} == false)",
+            "then": [
+              {
+                "type": "TextBody",
+                "text": "`'Cliente: SID '${data.sid} '-' ${data.client}`"
+              }
+            ]
+          },
+          {
+            "type": "If",
+            "condition": "(${data.captureType} == 'exist') && (${data.noFound} == true)",
+            "then": [
+              {
+                "type": "TextBody",
+                "text": "`'Cliente: '${data.clientName}`"
+              }
+            ]
+          },
+          {
+            "type": "If",
+            "condition": "${data.captureType} == 'new'",
+            "then": [
+              {
+                "type": "TextBody",
+                "text": "`'Cliente Nuevo: '${data.clientName}`"
+              },
+              {
+                "type": "TextBody",
+                "text": "`'Nit: '${data.nit}`"
+              },
+              {
+                "type": "TextBody",
+                "text": "`'Depto.: '${data.depto}`"
+              },
+              {
+                "type": "TextBody",
+                "text": "`'Dirección: '${data.address}`"
+              },
+              {
+                "type": "TextBody",
+                "text": "`'Zona: '${data.zone}`"
+              },
+              {
+                "type": "TextBody",
+                "text": "`'Segmento: '${data.segment}`"
+              },
+              {
+                "type": "TextBody",
+                "text": "`'Encargado/a: '${data.managerName}`"
+              },
+              {
+                "type": "TextBody",
+                "text": "`'Tel.: '${data.contactPhone}`"
+              },
+              {
+                "type": "TextBody",
+                "text": "`'Correo: '${data.contactEmail}`"
+              },
+              {
+                "type": "TextBody",
+                "text": "`'Creación: '${data.creationDate}`"
+              }
+            ]
+          },
+          {
+            "type": "TextBody",
+            "text": "`'Fecha de visita: '${data.visitDate}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'¿Palanca presentada? '${data.leverPresented}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'Palanca selecionada:: '${data.salesLeverSelected}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'¿Palanca aceptada? '${data.aceptedLever}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'Cantidad de botellas: '${data.bottlesCount}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'Comentarios sobre el inventario: '${data.comments}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'Validación de ejecución: '${data.executionSelected}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'Califica tu experiencia general: '${data.generalComments}`"
+          },
+          {
+            "type": "TextBody",
+            "text": "`'Deja tus comentarios acerca de cómo te recibieron en tu punto de venta '${data.generalExperience}`"
+          },
+          {
+            "type": "Footer",
+            "label": "Confirmar",
+            "on-click-action": {
+              "name": "complete",
+              "payload": {
+                "generalComments": "${data.generalComments}",
+                "generalExperience": "${data.generalExperience}",
+                "screen_3_Mano_de_Buey_0": "${data.Mano_de_Buey_9913e2}",
+                "screen_3_Viche_Dioses_1": "${data.Viche_Dioses_29b3b1}",
+                "screen_3_Viche_Canao_2": "${data.Viche_Canao_3740c3}",
+                "screen_3_La_Esperanza_3": "${data.La_Esperanza_042d87}",
+                "screen_3_Otro_Viche_4": "${data.Otro_Viche_21fb92}",
+                "screen_2_Precio_Mano_de_Buey_0": "${data.screen_2_Precio_Mano_de_Buey_0}",
+                "screen_2_Precio_Viche_Dioses_1": "${data.screen_2_Precio_Viche_Dioses_1}",
+                "screen_2_Precio_Viche_Canao_2": "${data.screen_2_Precio_Viche_Canao_2}",
+                "screen_2_Precio_La_Esperanza_3": "${data.screen_2_Precio_La_Esperanza_3}",
+                "screen_2_Precio_Otro_Viche_4": "${data.screen_2_Precio_Otro_Viche_4}",
+                "screen_1_Selecciona_las_que_veas_0": "${data.screen_1_Selecciona_las_que_veas_0}",
+                "screen_1_Viche_1": "${data.screen_1_Viche_1}",
+                "screen_0_Selecciona_material_ejecutado_0": "${data.screen_0_Selecciona_material_ejecutado_0}",
+                "screen_0_Por_ejemplo_copas_1": "${data.screen_0_Por_ejemplo_copas_1}",
+                "photoPicker": "${data.photoPicker}",
+                "executionSelected": "${data.executionSelected}",
+                "openBottles": "${data.openBottles}",
+                "quantityOpenBottles": "${data.quantityOpenBottles}",
+                "comments": "${data.comments}",
+                "bottlesCount": "${data.bottlesCount}",
+                "aceptedLever": "${data.aceptedLever}",
+                "salesLeverSelected": "${data.salesLeverSelected}",
+                "leverPresented": "${data.leverPresented}",
+                "managerName": "${data.managerName}",
+                "contactPhone": "${data.contactPhone}",
+                "contactEmail": "${data.contactEmail}",
+                "creationDate": "${data.creationDate}",
+                "nit": "${data.nit}",
+                "depto": "${data.depto}",
+                "town": "${data.town}",
+                "address": "${data.address}",
+                "zone": "${data.zone}",
+                "segment": "${data.segment}",
+                "u3m": "${data.u3m}",
+                "lastMonth": "${data.lastMonth}",
+                "salesLevers": "${data.salesLevers}",
+                "portafolio": "${data.portafolio}",
+                "portafolioStatus": "${data.portafolioStatus}",
+                "commercialPlan": "${data.commercialPlan}",
+                "store": "${data.store}",
+                "noFound": "${data.noFound}",
+                "clientName": "${data.clientName}",
+                "clientNit": "${data.clientNit}",
+                "sid": "${data.sid}",
+                "client": "${data.client}",
+                "visitDate": "${data.visitDate}",
+                "captureType": "${data.captureType}",
+                "phone": "${data.phone}",
+                "userLocation": "${data.userLocation}",
+                "nearbyStores": "${data.nearbyStores}",
+                "conversationId": "${data.conversationId}"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

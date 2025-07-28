@@ -169,7 +169,8 @@ export const formatImageUploadSummary = (images: any) => {
 export const extractIdTitleArray = (
   data: any[],
   idField: string,
-  titleField: string
+  titleField: string,
+  unique: boolean = true
 ) => {
   if (!Array.isArray(data) || data.length < 2) {
     return [];
@@ -191,10 +192,14 @@ export const extractIdTitleArray = (
 
     if (!idRaw || !title) return result;
 
-    const id = idRaw.toString().replace(/\s+/g, '_').toUpperCase();
+    // const id = idRaw.toString().replace(/\s+/g, '_').toUpperCase();
+    const id =
+      idRaw.toString().trim() === '' ? '_' : idRaw.toString().toUpperCase();
 
-    if (!seen.has(id)) {
+    if (unique && !seen.has(id)) {
       seen.add(id);
+      result.push({ id, title: title.toUpperCase() });
+    } else {
       result.push({ id, title: title.toUpperCase() });
     }
 
@@ -280,12 +285,29 @@ export const getUniqueById = (data: any[]) => {
 
   return data
     .filter((item) => {
-      const trimmedId = item.id.trim();
-      if (seen.has(trimmedId)) {
+      if (seen.has(item.id.trim())) {
         return false;
       }
-      seen.add(trimmedId);
+      seen.add(item.id.trim());
       return true;
     })
-    .sort((a, b) => a.id.localeCompare(b.id));
+    .sort((a: { title: number }, b: { title: number }) => a.title - b.title);
+};
+
+export const getUniqueByKey = (array: any[], key: string) => {
+  const seen = new Set<any>();
+  const uniques: any = [];
+  const duplicates: any = [];
+
+  for (const item of array) {
+    const value = item[key];
+    if (seen.has(value)) {
+      duplicates.push(item);
+    } else {
+      seen.add(value);
+      uniques.push(item);
+    }
+  }
+
+  return uniques;
 };
