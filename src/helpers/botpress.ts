@@ -6,16 +6,16 @@ export const sendDataCaptureFlow = async (
   url: string
 ) => {
   try {
-    delete data.photoPicker
-    delete data.nearbyStores
-    delete data.salesLevers
-    delete data.store
-    console.log('Sending to botpress', conversationId, data);
+    delete data.photoPicker;
+    delete data.nearbyStores;
+    delete data.salesLevers;
+    delete data.store;
     let body = JSON.stringify({
       conversationId: conversationId,
       type: 'data_capture_flow',
       data: data,
     });
+    console.log('Sending to botpress', conversationId, body);
 
     const config = {
       method: 'post',

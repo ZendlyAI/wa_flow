@@ -1977,8 +1977,14 @@
                 "name": "update_data",
                 "payload": {
                   "stores": [
-                    { "id": "9003754548", "title": "EL VIAJERO CARTAGENA" },
-                    { "id": "9003754545", "title": "EL VIAJERO GUATAPE" }
+                    {
+                      "id": "9003754548",
+                      "title": "EL VIAJERO CARTAGENA"
+                    },
+                    {
+                      "id": "9003754545",
+                      "title": "EL VIAJERO GUATAPE"
+                    }
                   ]
                 }
               }
@@ -1990,9 +1996,18 @@
                 "name": "update_data",
                 "payload": {
                   "stores": [
-                    { "id": "901538239", "title": "CACHITO GROUP SAS" },
-                    { "id": "10305536690", "title": "IMAGINARIUM " },
-                    { "id": "9013191851", "title": "LOCAL COLOMBIA S.A.S" },
+                    {
+                      "id": "901538239",
+                      "title": "CACHITO GROUP SAS"
+                    },
+                    {
+                      "id": "10305536690",
+                      "title": "IMAGINARIUM "
+                    },
+                    {
+                      "id": "9013191851",
+                      "title": "LOCAL COLOMBIA S.A.S"
+                    },
                     {
                       "id": "900115560Crear",
                       "title": "SOCIEDAD OPERADORA 72 GRAN HOTEL SAS"
@@ -2008,21 +2023,42 @@
                 "name": "update_data",
                 "payload": {
                   "stores": [
-                    { "id": "9011358011", "title": "CASCAJAL" },
-                    { "id": "860006866", "title": "CLUB DEL COMERCIO" },
-                    { "id": "9015986771", "title": "Cocodrilo SAS" },
+                    {
+                      "id": "9011358011",
+                      "title": "CASCAJAL"
+                    },
+                    {
+                      "id": "860006866",
+                      "title": "CLUB DEL COMERCIO"
+                    },
+                    {
+                      "id": "9015986771",
+                      "title": "Cocodrilo SAS"
+                    },
                     {
                       "id": "9005390520",
                       "title": "EMILIA GRACE/EMILIA GRACE"
                     },
-                    { "id": "9016474821", "title": "HAB HOTEL" },
-                    { "id": "10190172951", "title": "HARAKURU" },
-                    { "id": "901035244", "title": "INSURGENTES CLL 56" },
+                    {
+                      "id": "9016474821",
+                      "title": "HAB HOTEL"
+                    },
+                    {
+                      "id": "10190172951",
+                      "title": "HARAKURU"
+                    },
+                    {
+                      "id": "901035244",
+                      "title": "INSURGENTES CLL 56"
+                    },
                     {
                       "id": "901581276",
                       "title": "INVERSIONES MAAVI SAS/RESTAURANTE FIERO"
                     },
-                    { "id": "9016445801", "title": "JARDIN TRAGOS Y PASTEL" }
+                    {
+                      "id": "9016445801",
+                      "title": "JARDIN TRAGOS Y PASTEL"
+                    }
                   ]
                 }
               }
@@ -2034,8 +2070,14 @@
                 "name": "update_data",
                 "payload": {
                   "stores": [
-                    { "id": "901572006", "title": "OVEJO 116" },
-                    { "id": "8000370111", "title": "SHAMUA" }
+                    {
+                      "id": "901572006",
+                      "title": "OVEJO 116"
+                    },
+                    {
+                      "id": "8000370111",
+                      "title": "SHAMUA"
+                    }
                   ]
                 }
               }
@@ -2062,7 +2104,10 @@
                 "name": "update_data",
                 "payload": {
                   "stores": [
-                    { "id": "9015460791", "title": "RESTAURANTE SIGA" },
+                    {
+                      "id": "9015460791",
+                      "title": "RESTAURANTE SIGA"
+                    },
                     {
                       "id": "9014701650",
                       "title": "SANTA JUANA FOOD BAR S.A.S."
@@ -2078,13 +2123,34 @@
                 "name": "update_data",
                 "payload": {
                   "stores": [
-                    { "id": "900906554", "title": "CANTINA LA 15" },
-                    { "id": "800210409", "title": "HOTEL SOFITEL" },
-                    { "id": "9003879931", "title": "LALICO DE LA 85" },
-                    { "id": "9009174360", "title": "OSAKA COCINA NIKKEI SAS" },
-                    { "id": "901354801", "title": "SUMAK SAS" },
-                    { "id": "9013475461", "title": "TERCER PISO " },
-                    { "id": "900817497", "title": "VAPIANO" }
+                    {
+                      "id": "900906554",
+                      "title": "CANTINA LA 15"
+                    },
+                    {
+                      "id": "800210409",
+                      "title": "HOTEL SOFITEL"
+                    },
+                    {
+                      "id": "9003879931",
+                      "title": "LALICO DE LA 85"
+                    },
+                    {
+                      "id": "9009174360",
+                      "title": "OSAKA COCINA NIKKEI SAS"
+                    },
+                    {
+                      "id": "901354801",
+                      "title": "SUMAK SAS"
+                    },
+                    {
+                      "id": "9013475461",
+                      "title": "TERCER PISO "
+                    },
+                    {
+                      "id": "900817497",
+                      "title": "VAPIANO"
+                    }
                   ]
                 }
               }
@@ -2095,7 +2161,12 @@
               "on-select-action": {
                 "name": "update_data",
                 "payload": {
-                  "stores": [{ "id": "90137361010", "title": "aquelarre" }]
+                  "stores": [
+                    {
+                      "id": "90137361010",
+                      "title": "aquelarre"
+                    }
+                  ]
                 }
               }
             },
@@ -2106,10 +2177,22 @@
                 "name": "update_data",
                 "payload": {
                   "stores": [
-                    { "id": "8300883741", "title": "IRISH PUB CALLE 93" },
-                    { "id": "9017891821", "title": "POCIMA" },
-                    { "id": "9018204201", "title": "Seikuchi " },
-                    { "id": "8300947519", "title": "Vista corona" }
+                    {
+                      "id": "8300883741",
+                      "title": "IRISH PUB CALLE 93"
+                    },
+                    {
+                      "id": "9017891821",
+                      "title": "POCIMA"
+                    },
+                    {
+                      "id": "9018204201",
+                      "title": "Seikuchi "
+                    },
+                    {
+                      "id": "8300947519",
+                      "title": "Vista corona"
+                    }
                   ]
                 }
               }
@@ -2120,7 +2203,12 @@
               "on-select-action": {
                 "name": "update_data",
                 "payload": {
-                  "stores": [{ "id": "9011499161", "title": "MONFERRINA SAS" }]
+                  "stores": [
+                    {
+                      "id": "9011499161",
+                      "title": "MONFERRINA SAS"
+                    }
+                  ]
                 }
               }
             },
@@ -2145,7 +2233,12 @@
               "on-select-action": {
                 "name": "update_data",
                 "payload": {
-                  "stores": [{ "id": "9017097621", "title": "Putt SAS" }]
+                  "stores": [
+                    {
+                      "id": "9017097621",
+                      "title": "Putt SAS"
+                    }
+                  ]
                 }
               }
             },
@@ -2156,10 +2249,22 @@
                 "name": "update_data",
                 "payload": {
                   "stores": [
-                    { "id": "9008182403", "title": "CHAPINERO" },
-                    { "id": "9010847431", "title": "CHICHERIA DEMENTE" },
-                    { "id": "9006089841", "title": "EL CEBOLLERO" },
-                    { "id": "9014176161", "title": "VIDEO CLUB" }
+                    {
+                      "id": "9008182403",
+                      "title": "CHAPINERO"
+                    },
+                    {
+                      "id": "9010847431",
+                      "title": "CHICHERIA DEMENTE"
+                    },
+                    {
+                      "id": "9006089841",
+                      "title": "EL CEBOLLERO"
+                    },
+                    {
+                      "id": "9014176161",
+                      "title": "VIDEO CLUB"
+                    }
                   ]
                 }
               }
@@ -2171,8 +2276,14 @@
                 "name": "update_data",
                 "payload": {
                   "stores": [
-                    { "id": "9016831461", "title": "Distribuidora RH SAS" },
-                    { "id": "9014730881", "title": "MANUEL RESTAURANTE" }
+                    {
+                      "id": "9016831461",
+                      "title": "Distribuidora RH SAS"
+                    },
+                    {
+                      "id": "9014730881",
+                      "title": "MANUEL RESTAURANTE"
+                    }
                   ]
                 }
               }
@@ -2184,8 +2295,14 @@
                 "name": "update_data",
                 "payload": {
                   "stores": [
-                    { "id": "9004153580", "title": "OLIVIA 81" },
-                    { "id": "9017996081", "title": "OSSO" },
+                    {
+                      "id": "9004153580",
+                      "title": "OLIVIA 81"
+                    },
+                    {
+                      "id": "9017996081",
+                      "title": "OSSO"
+                    },
                     {
                       "id": "901559949",
                       "title": "P&P LIQUORS & DELICATESSEN SAS"
@@ -2201,8 +2318,14 @@
                 "name": "update_data",
                 "payload": {
                   "stores": [
-                    { "id": "9015627281", "title": "2 GATOS Y SIMONE" },
-                    { "id": "8300845881", "title": "ARACATACA + MARCHA" }
+                    {
+                      "id": "9015627281",
+                      "title": "2 GATOS Y SIMONE"
+                    },
+                    {
+                      "id": "8300845881",
+                      "title": "ARACATACA + MARCHA"
+                    }
                   ]
                 }
               }
@@ -2213,7 +2336,12 @@
               "on-select-action": {
                 "name": "update_data",
                 "payload": {
-                  "stores": [{ "id": "8600063020", "title": "JOCKEY CLUB" }]
+                  "stores": [
+                    {
+                      "id": "8600063020",
+                      "title": "JOCKEY CLUB"
+                    }
+                  ]
                 }
               }
             },
@@ -2224,7 +2352,10 @@
                 "name": "update_data",
                 "payload": {
                   "stores": [
-                    { "id": "10100051261", "title": "CANTON DE TIJUANA" }
+                    {
+                      "id": "10100051261",
+                      "title": "CANTON DE TIJUANA"
+                    }
                   ]
                 }
               }
@@ -2236,8 +2367,14 @@
                 "name": "update_data",
                 "payload": {
                   "stores": [
-                    { "id": "83008142712", "title": "OSAKI 85" },
-                    { "id": "8300814279", "title": "VECCINA 85" }
+                    {
+                      "id": "83008142712",
+                      "title": "OSAKI 85"
+                    },
+                    {
+                      "id": "8300814279",
+                      "title": "VECCINA 85"
+                    }
                   ]
                 }
               }
@@ -2249,7 +2386,10 @@
                 "name": "update_data",
                 "payload": {
                   "stores": [
-                    { "id": "9018533071", "title": "Casona Mercado Artesanal" }
+                    {
+                      "id": "9018533071",
+                      "title": "Casona Mercado Artesanal"
+                    }
                   ]
                 }
               }
@@ -2261,8 +2401,14 @@
                 "name": "update_data",
                 "payload": {
                   "stores": [
-                    { "id": "9016950111", "title": "CAFE DE LA MADELEINE" },
-                    { "id": "103069110980", "title": "EL GARNACHAN" }
+                    {
+                      "id": "9016950111",
+                      "title": "CAFE DE LA MADELEINE"
+                    },
+                    {
+                      "id": "103069110980",
+                      "title": "EL GARNACHAN"
+                    }
                   ]
                 }
               }
@@ -2453,6 +2599,7 @@
                   "name": "data_exchange",
                   "payload": {
                     "portafolioDetails": "${data.portafolioDetails}",
+                    "situationExpressed": "${data.situationExpressed}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -2498,6 +2645,10 @@
         "portafolioDetails": {
           "type": "string",
           "__example__": "Total de facturas pendientes: 2\n\nNúmero de factura: 1234\nFecha de vencimiento: 12/07/2025\nRango mora: 8-30 días \nValor: $40,000\n\nNúmero de factura: 5678\nFecha de vencimiento: 12/07/2025\nRango mora: 31-60 días \nValor: $12,000"
+        },
+        "specificAction": {
+          "type": "string",
+          "__example__": "Activación Proceso Castigo Cartera Proceso de Castigo de Cartera Fugitivos"
         }
       },
       "layout": {
@@ -2545,6 +2696,22 @@
                   {
                     "text": "${data.portafolioDetails}",
                     "type": "TextBody"
+                  },
+                  {
+                    "text": "Acción a comunicar:",
+                    "type": "TextSubheading"
+                  },
+                  {
+                    "text": "${data.specificAction}",
+                    "type": "TextBody"
+                  },
+                  {
+                    "input-type": "text",
+                    "label": "Situación expresada",
+                    "name": "situationExpressed",
+                    "required": true,
+                    "type": "TextInput",
+                    "helper-text": "razón de no pago, acuerdos de pago, pasos a seguir, etc"
                   }
                 ]
               },
@@ -2553,6 +2720,7 @@
                 "on-click-action": {
                   "name": "data_exchange",
                   "payload": {
+                    "situationExpressed": "${form.situationExpressed}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -2630,6 +2798,7 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "situationExpressed": "${data.situationExpressed}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -2750,24 +2919,24 @@
                     "name": "salesLeverSelected",
                     "required": true,
                     "type": "Dropdown"
-                  },
-                  {
-                    "data-source": [
-                      {
-                        "id": "si",
-                        "title": "Si"
-                      },
-                      {
-                        "id": "no",
-                        "title": "No"
-                      }
-                    ],
-                    "label": "¿Palanca aceptada?",
-                    "name": "aceptedLever",
-                    "required": true,
-                    "type": "RadioButtonsGroup"
                   }
                 ]
+              },
+              {
+                "data-source": [
+                  {
+                    "id": "si",
+                    "title": "Si"
+                  },
+                  {
+                    "id": "no",
+                    "title": "No"
+                  }
+                ],
+                "label": "¿Palanca aceptada?",
+                "name": "aceptedLever",
+                "required": true,
+                "type": "RadioButtonsGroup"
               },
               {
                 "label": "Continuar",
@@ -2787,6 +2956,7 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "situationExpressed": "${data.situationExpressed}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -2858,7 +3028,7 @@
                     "title": "No"
                   }
                 ],
-                "label": "¿Tiene botellas abiertas??",
+                "label": "¿Tiene botellas abiertas?",
                 "name": "openBottles",
                 "required": true,
                 "type": "RadioButtonsGroup"
@@ -2898,6 +3068,7 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "situationExpressed": "${data.situationExpressed}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -3004,6 +3175,7 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "situationExpressed": "${data.situationExpressed}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -3035,8 +3207,38 @@
       }
     },
     {
-      "data": {},
       "id": "TRADE_MARKETING",
+      "title": "TradeMarketing",
+      "data": {
+        "tradeMarketingPlan": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "CRISTALERIA",
+              "title": "CRISTALERIA"
+            },
+            {
+              "id": "CASH X COCTEL",
+              "title": "CASH X COCTEL"
+            },
+            {
+              "id": "GLORIFICADOR",
+              "title": "GLORIFICADOR"
+            }
+          ]
+        }
+      },
       "layout": {
         "children": [
           {
@@ -3046,23 +3248,22 @@
                 "text": "Material de Trade Marketing:"
               },
               {
-                "data-source": [
-                  { "id": "0_Glorificador", "title": "Glorificador" },
-                  { "id": "1_Vasos", "title": "Vasos" },
-                  { "id": "2_Portavasos", "title": "Portavasos" }
-                ],
-                "label": "Selecciona material ejecutado:",
-                "name": "Selecciona_material_ejecutado_a4185c",
+                "data-source": "${data.tradeMarketingPlan}",
+                "label": "Seleciona material:",
+                "name": "tradeMarketingSelected",
                 "required": true,
-                "type": "CheckboxGroup"
+                "type": "Dropdown"
               },
               {
-                "text": "¿Requiere algún tipo de material?",
-                "type": "TextSubheading"
+                "type": "TextInput",
+                "required": true,
+                "label": "Cantidad de material",
+                "input-type": "number",
+                "name": "quantitytradeMarketing"
               },
               {
-                "label": "Por ejemplo: copas",
-                "name": "Por_ejemplo_copas_36c6bd",
+                "label": "Por ejemplo: vasos",
+                "name": "tradeMarketingMaterial",
                 "required": true,
                 "type": "TextArea",
                 "helper-text": "Escribe aquí tu petición de material"
@@ -3072,8 +3273,9 @@
                 "on-click-action": {
                   "name": "data_exchange",
                   "payload": {
-                    "screen_0_Selecciona_material_ejecutado_0": "${form.Selecciona_material_ejecutado_a4185c}",
-                    "screen_0_Por_ejemplo_copas_1": "${form.Por_ejemplo_copas_36c6bd}",
+                    "quantitytradeMarketing": "${form.quantitytradeMarketing}",
+                    "tradeMarketingSelected": "${form.tradeMarketingSelected}",
+                    "tradeMarketingMaterial": "${form.tradeMarketingMaterial}",
                     "photoPicker": "${data.photoPicker}",
                     "executionSelected": "${data.executionSelected}",
                     "openBottles": "${data.openBottles}",
@@ -3093,6 +3295,7 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "situationExpressed": "${data.situationExpressed}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -3121,22 +3324,12 @@
           }
         ],
         "type": "SingleColumnLayout"
-      },
-      "title": "TradeMarketing"
+      }
     },
     {
-      "data": {
-        "screen_0_Selecciona_material_ejecutado_0": {
-          "__example__": [],
-          "items": { "type": "string" },
-          "type": "array"
-        },
-        "screen_0_Por_ejemplo_copas_1": {
-          "__example__": "Example",
-          "type": "string"
-        }
-      },
       "id": "COMPETITION",
+      "title": "Competencia",
+      "data": {},
       "layout": {
         "children": [
           {
@@ -3147,19 +3340,30 @@
               },
               {
                 "data-source": [
-                  { "id": "0_Mano_de_Buey", "title": "Mano de Buey" },
-                  { "id": "1_Viche_Dioses", "title": "Viche Dioses" },
-                  { "id": "2_Viche_Canao", "title": "Viche Canao" },
                   {
-                    "id": "3_Viche_La_Esperanza",
-                    "title": "Viche La Esperanza"
+                    "id": "Mano_de_Buey",
+                    "title": "Mano de Buey"
                   },
-                  { "id": "4_Otro", "title": "Otro" }
+                  {
+                    "id": "Viche_Dioses",
+                    "title": "Viche Dioses"
+                  },
+                  {
+                    "id": "Viche_Canao",
+                    "title": "Viche Canao"
+                  },
+                  {
+                    "id": "Viche_La_Esperanza",
+                    "title": "Viche La Esperanza"
+                  }
                 ],
                 "label": "Selecciona las que veas:",
-                "name": "Selecciona_las_que_veas_c082d9",
-                "required": true,
+                "name": "priceValidationSelected",
                 "type": "CheckboxGroup"
+              },
+              {
+                "type": "TextBody",
+                "text": "Para otros"
               },
               {
                 "text": "Añade el nombre del Viche:",
@@ -3168,8 +3372,7 @@
               {
                 "input-type": "text",
                 "label": "Viche...",
-                "name": "Viche_eb4f3a",
-                "required": true,
+                "name": "otherViche",
                 "type": "TextInput"
               },
               {
@@ -3177,10 +3380,11 @@
                 "on-click-action": {
                   "name": "data_exchange",
                   "payload": {
-                    "screen_1_Selecciona_las_que_veas_0": "${form.Selecciona_las_que_veas_c082d9}",
-                    "screen_1_Viche_1": "${form.Viche_eb4f3a}",
-                    "screen_0_Selecciona_material_ejecutado_0": "${data.screen_0_Selecciona_material_ejecutado_0}",
-                    "screen_0_Por_ejemplo_copas_1": "${data.screen_0_Por_ejemplo_copas_1}",
+                    "priceValidationSelected": "${form.priceValidationSelected}",
+                    "otherViche": "${form.otherViche}",
+                    "quantitytradeMarketing": "${data.quantitytradeMarketing}",
+                    "tradeMarketingSelected": "${data.tradeMarketingSelected}",
+                    "tradeMarketingMaterial": "${data.tradeMarketingMaterial}",
                     "photoPicker": "${data.photoPicker}",
                     "executionSelected": "${data.executionSelected}",
                     "openBottles": "${data.openBottles}",
@@ -3200,6 +3404,7 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "situationExpressed": "${data.situationExpressed}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -3228,28 +3433,33 @@
           }
         ],
         "type": "SingleColumnLayout"
-      },
-      "title": "Competencia"
+      }
     },
     {
+      "id": "PRICE_VALIDATION",
+      "title": "Validación de precios",
       "data": {
-        "screen_1_Selecciona_las_que_veas_0": {
-          "__example__": [],
-          "items": { "type": "string" },
-          "type": "array"
+        "hasManoDeBuey": {
+          "type": "boolean",
+          "__example__": true
         },
-        "screen_1_Viche_1": { "__example__": "Example", "type": "string" },
-        "screen_0_Selecciona_material_ejecutado_0": {
-          "__example__": [],
-          "items": { "type": "string" },
-          "type": "array"
+        "hasVicheDioses": {
+          "type": "boolean",
+          "__example__": true
         },
-        "screen_0_Por_ejemplo_copas_1": {
-          "__example__": "Example",
-          "type": "string"
+        "hasVicheCanao": {
+          "type": "boolean",
+          "__example__": true
+        },
+        "hasVicheLaEsperanza": {
+          "type": "boolean",
+          "__example__": true
+        },
+        "otherViche": {
+          "type": "string",
+          "__example__": "Vivhe"
         }
       },
-      "id": "PRICE_VALIDATION",
       "layout": {
         "children": [
           {
@@ -3259,39 +3469,69 @@
                 "type": "TextSubheading"
               },
               {
-                "input-type": "text",
-                "label": "Precio Mano de Buey",
-                "name": "Precio_Mano_de_Buey_78a80f",
-                "required": true,
-                "type": "TextInput"
+                "type": "If",
+                "condition": "${data.hasManoDeBuey} == true",
+                "then": [
+                  {
+                    "input-type": "text",
+                    "label": "Precio Mano de Buey",
+                    "name": "Precio_Mano_de_Buey_78a80f",
+                    "required": true,
+                    "type": "TextInput"
+                  }
+                ]
               },
               {
-                "input-type": "text",
-                "label": "Precio Viche Dioses",
-                "name": "Precio_Viche_Dioses_66101b",
-                "required": true,
-                "type": "TextInput"
+                "type": "If",
+                "condition": "${data.hasVicheDioses} == true",
+                "then": [
+                  {
+                    "input-type": "text",
+                    "label": "Precio Viche Dioses",
+                    "name": "Precio_Viche_Dioses_66101b",
+                    "required": true,
+                    "type": "TextInput"
+                  }
+                ]
               },
               {
-                "input-type": "text",
-                "label": "Precio Viche Canao",
-                "name": "Precio_Viche_Canao_e9b942",
-                "required": true,
-                "type": "TextInput"
+                "type": "If",
+                "condition": "${data.hasVicheCanao} == true",
+                "then": [
+                  {
+                    "input-type": "text",
+                    "label": "Precio Viche Canao",
+                    "name": "Precio_Viche_Canao_e9b942",
+                    "required": true,
+                    "type": "TextInput"
+                  }
+                ]
               },
               {
-                "input-type": "text",
-                "label": "Precio La Esperanza",
-                "name": "Precio_La_Esperanza_fe808f",
-                "required": true,
-                "type": "TextInput"
+                "type": "If",
+                "condition": "${data.hasVicheLaEsperanza} == true",
+                "then": [
+                  {
+                    "input-type": "text",
+                    "label": "Precio La Esperanza",
+                    "name": "Precio_La_Esperanza_fe808f",
+                    "required": true,
+                    "type": "TextInput"
+                  }
+                ]
               },
               {
-                "input-type": "text",
-                "label": "Precio Otro Viche",
-                "name": "Precio_Otro_Viche_c1488c",
-                "required": true,
-                "type": "TextInput"
+                "type": "If",
+                "condition": "${data.otherViche} != ''",
+                "then": [
+                  {
+                    "input-type": "text",
+                    "label": "Precio Otro Viche",
+                    "name": "Precio_Otro_Viche_c1488c",
+                    "required": true,
+                    "type": "TextInput"
+                  }
+                ]
               },
               {
                 "label": "Continuar",
@@ -3303,10 +3543,15 @@
                     "screen_2_Precio_Viche_Canao_2": "${form.Precio_Viche_Canao_e9b942}",
                     "screen_2_Precio_La_Esperanza_3": "${form.Precio_La_Esperanza_fe808f}",
                     "screen_2_Precio_Otro_Viche_4": "${form.Precio_Otro_Viche_c1488c}",
-                    "screen_1_Selecciona_las_que_veas_0": "${data.screen_1_Selecciona_las_que_veas_0}",
-                    "screen_1_Viche_1": "${data.screen_1_Viche_1}",
-                    "screen_0_Selecciona_material_ejecutado_0": "${data.screen_0_Selecciona_material_ejecutado_0}",
-                    "screen_0_Por_ejemplo_copas_1": "${data.screen_0_Por_ejemplo_copas_1}",
+                    "hasManoDeBuey": "${data.hasManoDeBuey}",
+                    "hasVicheDioses": "${data.hasVicheDioses}",
+                    "hasVicheCanao": "${data.hasVicheCanao}",
+                    "hasVicheLaEsperanza": "${data.hasVicheLaEsperanza}",
+                    "priceValidationSelected": "${data.priceValidationSelected}",
+                    "otherViche": "${data.otherViche}",
+                    "quantitytradeMarketing": "${data.quantitytradeMarketing}",
+                    "tradeMarketingSelected": "${data.tradeMarketingSelected}",
+                    "tradeMarketingMaterial": "${data.tradeMarketingMaterial}",
                     "photoPicker": "${data.photoPicker}",
                     "executionSelected": "${data.executionSelected}",
                     "openBottles": "${data.openBottles}",
@@ -3326,6 +3571,7 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "situationExpressed": "${data.situationExpressed}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -3354,94 +3600,110 @@
           }
         ],
         "type": "SingleColumnLayout"
-      },
-      "title": "Validación de precios"
+      }
     },
     {
+      "id": "COMPETITION_INVENTORIES",
+      "title": "Inventarios competencia",
       "data": {
-        "screen_2_Precio_Mano_de_Buey_0": {
-          "__example__": "Example",
-          "type": "string"
+        "hasManoDeBuey": {
+          "type": "boolean",
+          "__example__": true
         },
-        "screen_2_Precio_Viche_Dioses_1": {
-          "__example__": "Example",
-          "type": "string"
+        "hasVicheDioses": {
+          "type": "boolean",
+          "__example__": true
         },
-        "screen_2_Precio_Viche_Canao_2": {
-          "__example__": "Example",
-          "type": "string"
+        "hasVicheCanao": {
+          "type": "boolean",
+          "__example__": true
         },
-        "screen_2_Precio_La_Esperanza_3": {
-          "__example__": "Example",
-          "type": "string"
+        "hasVicheLaEsperanza": {
+          "type": "boolean",
+          "__example__": true
         },
-        "screen_2_Precio_Otro_Viche_4": {
-          "__example__": "Example",
-          "type": "string"
-        },
-        "screen_1_Selecciona_las_que_veas_0": {
-          "__example__": [],
-          "items": { "type": "string" },
-          "type": "array"
-        },
-        "screen_1_Viche_1": { "__example__": "Example", "type": "string" },
-        "screen_0_Selecciona_material_ejecutado_0": {
-          "__example__": [],
-          "items": { "type": "string" },
-          "type": "array"
-        },
-        "screen_0_Por_ejemplo_copas_1": {
-          "__example__": "Example",
-          "type": "string"
+        "otherViche": {
+          "type": "string",
+          "__example__": "Vivhe"
         }
       },
-      "id": "COMPETITION_INVENTORIES",
       "layout": {
         "children": [
           {
             "children": [
               {
-                "text": "¿Cual es el invenario de botellas de las siguientes marcas en punto de venta?",
+                "text": "¿Cual es el inventario de botellas de las siguientes marcas en punto de venta?",
                 "type": "TextSubheading"
               },
+
               {
-                "input-type": "text",
-                "label": "Mano de Buey",
-                "name": "Mano_de_Buey_9913e2",
-                "required": true,
-                "type": "TextInput",
-                "helper-text": "Cantidad de botellas visibles de esta marca"
+                "type": "If",
+                "condition": "${data.hasManoDeBuey} == true",
+                "then": [
+                  {
+                    "input-type": "text",
+                    "label": "Mano de Buey",
+                    "name": "Mano_de_Buey_9913e2",
+                    "required": true,
+                    "type": "TextInput",
+                    "helper-text": "Cantidad de botellas visibles de esta marca"
+                  }
+                ]
               },
               {
-                "input-type": "text",
-                "label": "Viche Dioses",
-                "name": "Viche_Dioses_29b3b1",
-                "required": true,
-                "type": "TextInput",
-                "helper-text": "Cantidad de botellas visibles de esta marca"
+                "type": "If",
+                "condition": "${data.hasVicheDioses} == true",
+                "then": [
+                  {
+                    "input-type": "text",
+                    "label": "Viche Dioses",
+                    "name": "Viche_Dioses_29b3b1",
+                    "required": true,
+                    "type": "TextInput",
+                    "helper-text": "Cantidad de botellas visibles de esta marca"
+                  }
+                ]
               },
               {
-                "input-type": "text",
-                "label": "Viche Canao",
-                "name": "Viche_Canao_3740c3",
-                "required": true,
-                "type": "TextInput",
-                "helper-text": "Cantidad de botellas visibles de esta marca"
+                "type": "If",
+                "condition": "${data.hasVicheCanao} == true",
+                "then": [
+                  {
+                    "input-type": "text",
+                    "label": "Viche Canao",
+                    "name": "Viche_Canao_3740c3",
+                    "required": true,
+                    "type": "TextInput",
+                    "helper-text": "Cantidad de botellas visibles de esta marca"
+                  }
+                ]
               },
               {
-                "input-type": "text",
-                "label": "La Esperanza",
-                "name": "La_Esperanza_042d87",
-                "required": true,
-                "type": "TextInput"
+                "type": "If",
+                "condition": "${data.hasVicheLaEsperanza} == true",
+                "then": [
+                  {
+                    "input-type": "text",
+                    "label": "La Esperanza",
+                    "name": "La_Esperanza_042d87",
+                    "required": true,
+                    "type": "TextInput"
+                  }
+                ]
               },
               {
-                "input-type": "text",
-                "label": "Otro Viche",
-                "name": "Otro_Viche_21fb92",
-                "required": true,
-                "type": "TextInput",
-                "helper-text": "Cantidad de botellas visibles de esta marca"
+                "type": "If",
+                "condition": "${data.otherViche} != ''",
+                "then": [
+                  {
+                    "input-type": "text",
+                    "label": "Otro Viche",
+                    "name": "Otro_Viche_21fb92",
+                    "required": true,
+                    "type": "TextInput",
+                    "helper-text": "Cantidad de botellas visibles de esta marca"
+                  }
+                ]
               },
               {
                 "label": "Continuar",
@@ -3458,10 +3720,15 @@
                     "screen_2_Precio_Viche_Canao_2": "${data.screen_2_Precio_Viche_Canao_2}",
                     "screen_2_Precio_La_Esperanza_3": "${data.screen_2_Precio_La_Esperanza_3}",
                     "screen_2_Precio_Otro_Viche_4": "${data.screen_2_Precio_Otro_Viche_4}",
-                    "screen_1_Selecciona_las_que_veas_0": "${data.screen_1_Selecciona_las_que_veas_0}",
-                    "screen_1_Viche_1": "${data.screen_1_Viche_1}",
-                    "screen_0_Selecciona_material_ejecutado_0": "${data.screen_0_Selecciona_material_ejecutado_0}",
-                    "screen_0_Por_ejemplo_copas_1": "${data.screen_0_Por_ejemplo_copas_1}",
+                    "hasManoDeBuey": "${data.hasManoDeBuey}",
+                    "hasVicheDioses": "${data.hasVicheDioses}",
+                    "hasVicheCanao": "${data.hasVicheCanao}",
+                    "hasVicheLaEsperanza": "${data.hasVicheLaEsperanza}",
+                    "priceValidationSelected": "${data.priceValidationSelected}",
+                    "otherViche": "${data.otherViche}",
+                    "quantitytradeMarketing": "${data.quantitytradeMarketing}",
+                    "tradeMarketingSelected": "${data.tradeMarketingSelected}",
+                    "tradeMarketingMaterial": "${data.tradeMarketingMaterial}",
                     "photoPicker": "${data.photoPicker}",
                     "executionSelected": "${data.executionSelected}",
                     "openBottles": "${data.openBottles}",
@@ -3481,6 +3748,7 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "situationExpressed": "${data.situationExpressed}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -3509,8 +3777,7 @@
           }
         ],
         "type": "SingleColumnLayout"
-      },
-      "title": "Inventarios competencia"
+      }
     },
     {
       "id": "RATE",
@@ -3522,7 +3789,7 @@
             "children": [
               {
                 "text": "Califica tu experiencia general de tu visita en punto de venta:",
-                "type": "TextHeading"
+                "type": "TextSubheading"
               },
               {
                 "type": "Dropdown",
@@ -3553,6 +3820,61 @@
                 ]
               },
               {
+                "data-source": [
+                  {
+                    "id": "si",
+                    "title": "Si"
+                  },
+                  {
+                    "id": "no",
+                    "title": "No"
+                  }
+                ],
+                "label": "¿Se pudo realizar la venta?",
+                "name": "saleCompleted",
+                "required": true,
+                "type": "RadioButtonsGroup"
+              },
+              {
+                "type": "If",
+                "condition": "${form.saleCompleted} == 'si'",
+                "then": [
+                  {
+                    "type": "TextInput",
+                    "required": true,
+                    "label": "# botellas acordadas",
+                    "input-type": "number",
+                    "name": "agreedBottlesCount"
+                  }
+                ]
+              },
+              {
+                "type": "If",
+                "condition": "${form.saleCompleted} == 'no'",
+                "then": [
+                  {
+                    "data-source": [
+                      {
+                        "id": "Aun tiene producto",
+                        "title": "Aun tiene producto"
+                      },
+                      {
+                        "id": "No está interesado en la marca",
+                        "title": "No está interesado en la marca"
+                      },
+                      {
+                        "id": "Otros",
+                        "title": "Otros"
+                      }
+                    ],
+                    "label": "Motivo de no venta:",
+                    "name": "closureReasonSelected",
+                    "required": true,
+                    "type": "Dropdown"
+                  }
+                ]
+              },
+              {
                 "text": "Deja tus comentarios acerca de cómo te recibieron en el punto de venta",
                 "type": "TextCaption"
               },
@@ -3567,6 +3889,9 @@
                 "on-click-action": {
                   "name": "data_exchange",
                   "payload": {
+                    "closureReason": "${form.closureReason}",
+                    "agreedBottlesCount": "${form.agreedBottlesCount}",
+                    "saleCompleted": "${form.saleCompleted}",
                     "generalComments": "${form.generalComments}",
                     "generalExperience": "${form.generalExperience}",
                     "screen_3_Mano_de_Buey_0": "${data.Mano_de_Buey_9913e2}",
@@ -3578,11 +3903,15 @@
                     "screen_2_Precio_Viche_Dioses_1": "${data.screen_2_Precio_Viche_Dioses_1}",
                     "screen_2_Precio_Viche_Canao_2": "${data.screen_2_Precio_Viche_Canao_2}",
                     "screen_2_Precio_La_Esperanza_3": "${data.screen_2_Precio_La_Esperanza_3}",
-                    "screen_2_Precio_Otro_Viche_4": "${data.screen_2_Precio_Otro_Viche_4}",
-                    "screen_1_Selecciona_las_que_veas_0": "${data.screen_1_Selecciona_las_que_veas_0}",
-                    "screen_1_Viche_1": "${data.screen_1_Viche_1}",
-                    "screen_0_Selecciona_material_ejecutado_0": "${data.screen_0_Selecciona_material_ejecutado_0}",
-                    "screen_0_Por_ejemplo_copas_1": "${data.screen_0_Por_ejemplo_copas_1}",
+                    "hasManoDeBuey": "${data.hasManoDeBuey}",
+                    "hasVicheDioses": "${data.hasVicheDioses}",
+                    "hasVicheCanao": "${data.hasVicheCanao}",
+                    "hasVicheLaEsperanza": "${data.hasVicheLaEsperanza}",
+                    "priceValidationSelected": "${data.priceValidationSelected}",
+                    "otherViche": "${data.otherViche}",
+                    "quantitytradeMarketing": "${data.quantitytradeMarketing}",
+                    "tradeMarketingSelected": "${data.tradeMarketingSelected}",
+                    "tradeMarketingMaterial": "${data.tradeMarketingMaterial}",
                     "photoPicker": "${data.photoPicker}",
                     "executionSelected": "${data.executionSelected}",
                     "openBottles": "${data.openBottles}",
@@ -3602,6 +3931,7 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "situationExpressed": "${data.situationExpressed}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -3849,6 +4179,9 @@
             "on-click-action": {
               "name": "complete",
               "payload": {
+                "closureReason": "${data.closureReason}",
+                "agreedBottlesCount": "${data.agreedBottlesCount}",
+                "saleCompleted": "${data.saleCompleted}",
                 "generalComments": "${data.generalComments}",
                 "generalExperience": "${data.generalExperience}",
                 "screen_3_Mano_de_Buey_0": "${data.Mano_de_Buey_9913e2}",
@@ -3861,10 +4194,15 @@
                 "screen_2_Precio_Viche_Canao_2": "${data.screen_2_Precio_Viche_Canao_2}",
                 "screen_2_Precio_La_Esperanza_3": "${data.screen_2_Precio_La_Esperanza_3}",
                 "screen_2_Precio_Otro_Viche_4": "${data.screen_2_Precio_Otro_Viche_4}",
-                "screen_1_Selecciona_las_que_veas_0": "${data.screen_1_Selecciona_las_que_veas_0}",
-                "screen_1_Viche_1": "${data.screen_1_Viche_1}",
-                "screen_0_Selecciona_material_ejecutado_0": "${data.screen_0_Selecciona_material_ejecutado_0}",
-                "screen_0_Por_ejemplo_copas_1": "${data.screen_0_Por_ejemplo_copas_1}",
+                "hasManoDeBuey": "${data.hasManoDeBuey}",
+                "hasVicheDioses": "${data.hasVicheDioses}",
+                "hasVicheCanao": "${data.hasVicheCanao}",
+                "hasVicheLaEsperanza": "${data.hasVicheLaEsperanza}",
+                "priceValidationSelected": "${data.priceValidationSelected}",
+                "otherViche": "${data.otherViche}",
+                "quantitytradeMarketing": "${data.quantitytradeMarketing}",
+                "tradeMarketingSelected": "${data.tradeMarketingSelected}",
+                "tradeMarketingMaterial": "${data.tradeMarketingMaterial}",
                 "photoPicker": "${data.photoPicker}",
                 "executionSelected": "${data.executionSelected}",
                 "openBottles": "${data.openBottles}",
@@ -3884,6 +4222,7 @@
                 "address": "${data.address}",
                 "zone": "${data.zone}",
                 "segment": "${data.segment}",
+                "situationExpressed": "${data.situationExpressed}",
                 "u3m": "${data.u3m}",
                 "lastMonth": "${data.lastMonth}",
                 "salesLevers": "${data.salesLevers}",
