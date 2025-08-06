@@ -191,6 +191,16 @@ export const getNextScreen = async (decryptedBody: {
     };
   }
   if (action === 'data_exchange' && screen === 'COMPETITION') {
+    if (
+      !data.priceValidationSelected ||
+      data.priceValidationSelected.length === 0
+    ) {
+      return {
+        version,
+        screen: 'RATE',
+        data: { ...data },
+      };
+    }
     const screenData = await competitionScreenData(data);
 
     try {

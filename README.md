@@ -122,3 +122,7 @@ searchStoreInMatrix(spreadsheetData, query)
   .then((result) => console.log(JSON.stringify(result, null, 2)))
   .catch(console.error);
 ```
+
+```
+{"flowName":"fugitivos","userLocation":{"latitude": 4.6473894119263, "longitude": -74.056335449219},"conversationId":"conv_01K0SGBXWKVJC5CY2A6FW463SM","phone":"50250192435"}
+```
