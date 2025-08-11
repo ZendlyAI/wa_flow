@@ -1,26 +1,18 @@
 export const getData = async (data: any) => {
-  const hasManoDeBuey =
-    data.priceValidationSelected.find(
-      (element: string) => element === 'Mano_de_Buey'
-    ) || false;
-  const hasVicheDioses =
-    data.priceValidationSelected.find(
-      (element: string) => element === 'Viche_Dioses'
-    ) || false;
-  const hasVicheCanao =
-    data.priceValidationSelected.find(
-      (element: string) => element === 'Viche_Canao'
-    ) || false;
-  const hasVicheLaEsperanza =
-    data.priceValidationSelected.find(
-      (element: string) => element === 'Viche_La_Esperanza'
-    ) || false;
+  const result: Record<string, boolean> = {};
+
+  // Detect all keys like 'competition_n'
+  if (Array.isArray(data.priceValidationSelected)) {
+    data.priceValidationSelected.forEach((element: string) => {
+      const match = element.match(/^competition_(\d+)$/);
+      if (match) {
+        result[`hasCompetition${match[1]}`] = true;
+      }
+    });
+  }
 
   return {
     ...data,
-    hasManoDeBuey: hasManoDeBuey ? true : false,
-    hasVicheDioses: hasVicheDioses ? true : false,
-    hasVicheCanao: hasVicheCanao ? true : false,
-    hasVicheLaEsperanza: hasVicheLaEsperanza ? true : false,
+    ...result,
   };
 };

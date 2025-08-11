@@ -52,10 +52,30 @@ const generatePorfafolioDetails = (data: any) => {
   return text;
 };
 
+const generateRichTextFromData = (data: any) => {
+  if (!data || typeof data !== 'object') return ['No hay datos disponibles.'];
+
+  const safe = (key: keyof typeof data, fallback: string = 'N/A') =>
+    data[key] !== undefined && data[key] !== null && data[key] !== ''
+      ? data[key]
+      : fallback;
+
+  return [
+    '# Plan comercial',
+    `**Plan:** ${safe('PLAN')}`,
+    `**Venta:** ${safe('VENTA')}`,
+    `**Gap:** ${safe('GAP')}`,
+    `**Promedio de compra últimos 3 meses:** ${safe(
+      'PROMEDIO 3 ULTIMOS MESES'
+    )}`,
+    `**Mes de última compra:** ${safe('MES ULTIMA COMPRA')}`,
+  ];
+};
+
 export const getData = async (data: any) => {
   delete data.nearbyStores;
 
-  const tabs = await getGSheetTabsByID(sheetId, 'SID', data.sid);
+  const tabs: any = await getGSheetTabsByID(sheetId, 'SID', data.sid);
 
   const store = tabs['bd_tiendas'];
   const commercialPlan = mapToObjectsByProps(tabs['rutero'], [
@@ -63,7 +83,11 @@ export const getData = async (data: any) => {
     'VENTA',
     'GAP',
     'PALANCA',
+    'PROMEDIO 3 ULTIMOS MESES',
+    'MES ULTIMA COMPRA',
   ]);
+
+  const summary = generateRichTextFromData(commercialPlan[0]);
 
   const portafolioStatus = mapToObjectsByProps(tabs['gestor_de_cartera'], [
     'Total cartera',
@@ -84,29 +108,15 @@ export const getData = async (data: any) => {
   const portafolioDetails = generatePorfafolioDetails(portafolioStatus);
   // console.log('portafolioDetails', portafolioDetails);
 
-  const U3M = 'Avg Compra U3M';
-  const lastMonth = 'Month Last Purchase';
-
-  // TODO: UNCOMMENT
-  // console.log(tabs['base general'])
-  // const generalInputs: any = mapToObjectsByProps(tabs['base general'], [
-  //   U3M,
-  //   lastMonth,
-  // ]);
-  const generalInputs = [
-    { 'Avg Compra U3M': '27.43', 'Month Last Purchase': 'Julio 2025' },
-  ];
-  console.log('generalInputs', generalInputs);
-  // TODO: UNCOMMENT
-
   return {
     ...data,
     store,
     commercialPlan: commercialPlan[0],
     portafolioStatus: sumTotal > 0 ? true : false,
     portafolio: `$${formatearPesosColombianosSinSimbolo(sumTotal)}`,
-    u3m: generalInputs[0][U3M] || [],
-    lastMonth: generalInputs[0][lastMonth] || [],
+    u3m: commercialPlan[0]['PROMEDIO 3 ULTIMOS MESES'] || 'N/A',
+    lastMonth: commercialPlan[0]['MES ULTIMA COMPRA'] || 'N/A',
     portafolioDetails,
+    comercialPlanSummary: summary,
   };
 };

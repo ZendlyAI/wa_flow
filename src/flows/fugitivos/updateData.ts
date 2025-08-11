@@ -6,12 +6,14 @@ const sheetId: string =
   '1fbcqSADitew_25zAlkHmJyhoLayDRhSFpXy25wgMjpk';
 
 export const getData = async (data: any, status: string) => {
+  console.log('Updating data with status:', data);
   const dataUpdate: any = {
     status: status,
     captureType: data.captureType || '-',
     clientName: data.clientName || '-',
     nit: data.nit || data.clientNit || '-',
     depto: data.depto || '-',
+    town: data.town || '-',
     address: data.address || '-',
     zone: data.zone || '-',
     segment: data.segment || '-',
@@ -27,6 +29,7 @@ export const getData = async (data: any, status: string) => {
     portafolio: data.portafolio || '-',
     u3m: data.u3m || '-',
     lastMonth: data.lastMonth || '-',
+    specificAction: data.specificAction || '-',
     situationExpressed: data.situationExpressed || '-',
     leverPresented: data.leverPresented === 'si' ? true : false,
     salesLeverSelected: data.salesLeverSelected || '-',
@@ -45,13 +48,6 @@ export const getData = async (data: any, status: string) => {
       data.executionSelected.find((element: string) => element === 'Menú')
         ? true
         : false,
-    CAP6M:
-      Array.isArray(data.executionSelected) &&
-      data.executionSelected.find(
-        (element: string) => element === 'Capacitación últimos 6 meses'
-      )
-        ? true
-        : false,
     BACKBAR:
       Array.isArray(data.executionSelected) &&
       data.executionSelected.find(
@@ -64,28 +60,42 @@ export const getData = async (data: any, status: string) => {
       data.executionSelected.find((element: string) => element === 'Shots')
         ? true
         : false,
-    tradeMarketingMaterial: data.tradeMarketingMaterial || '-',
+    CAP6M:
+      Array.isArray(data.training) &&
+      data.training.find(
+        (element: string) => element === 'Capacitación últimos 6 meses'
+      )
+        ? true
+        : false,
     tradeMarketingSelected: data.tradeMarketingSelected || '-',
     quantitytradeMarketing: data.quantitytradeMarketing || '-',
-    hasManoDeBuey: data.hasManoDeBuey ? true : false,
-    hasVicheDioses: data.hasVicheDioses ? true : false,
-    hasVicheCanao: data.hasVicheCanao ? true : false,
-    hasVicheLaEsperanza: data.hasVicheLaEsperanza ? true : false,
-    otherViche: data.otherViche || '-',
-    'Precio Mano de Buey': data.screen_2_Precio_Mano_de_Buey_0 || '-',
-    'Precio Viche Dioses': data.screen_2_Precio_Viche_Dioses_1 || '-',
-    'Precio Viche Canao': data.screen_2_Precio_Viche_Canao_2 || '-',
-    'Precio La Esperanza': data.screen_2_Precio_La_Esperanza_3 || '-',
-    'Precio Otro Viche': data.screen_2_Precio_Otro_Viche_4 || '-',
-    'Cantidad Mano de Buey': data.screen_3_Mano_de_Buey_0 || '-',
-    'Cantidad Viche Dioses': data.screen_3_Viche_Dioses_1 || '-',
-    'Cantidad Viche Canao': data.screen_3_Viche_Canao_2 || '-',
-    'Cantidad La Esperanza': data.screen_3_La_Esperanza_3 || '-',
-    'Cantidad Otro Viche': data.screen_3_Otro_Viche_4 || '-',
+    additionalMaterial: data.additionalMaterial ? true : false,
+    additionalMaterialSelected: data.additionalMaterialSelected || '-',
+    quantityAdditionalMaterial: data.quantityAdditionalMaterial || '-',
+    'Comentarios de la requisición': data.tradeMarketingMaterial || '-',
+    'Tiene Competencia 1': data.hasCompetition1 ? true : false,
+    'Tiene Competencia 2': data.hasCompetition2 ? true : false,
+    'Tiene Competencia 3': data.hasCompetition3 ? true : false,
+    'Tiene Competencia 4': data.hasCompetition4 ? true : false,
+    'Tiene Competencia 5': data.hasCompetition5 ? true : false,
+    'Tiene Otro Licor': data.otherSpiritDrink || '-',
+    'Precio Competencia 1': data.competitionPrice1 || '-',
+    'Precio Competencia 2': data.competitionPrice2 || '-',
+    'Precio Competencia 3': data.competitionPrice3 || '-',
+    'Precio Competencia 4': data.competitionPrice4 || '-',
+    'Precio Competencia 5': data.competitionPrice5 || '-',
+    'Precio Otro Licor': data.priceOtherSpiritDrink || '-',
+    'Cantidad Competencia 1': data.competitionQty1 || '-',
+    'Cantidad Competencia 2': data.competitionQty2 || '-',
+    'Cantidad Competencia 3': data.competitionQty3 || '-',
+    'Cantidad Competencia 4': data.competitionQty4 || '-',
+    'Cantidad Competencia 5': data.competitionQty5 || '-',
+    'Cantidad Otro Licor': data.qtyOtherSpiritDrink || '-',
     generalComments: data.generalComments || '-',
     generalExperience: data.generalExperience || '-',
     saleCompleted: data.saleCompleted === 'si' ? true : false,
     agreedBottlesCount: data.agreedBottlesCount || '-',
+    closureReason: data.closureReason || '-',
     userLocation: JSON.stringify(data.userLocation) || '-',
     userLocationStr:
       data.userLocation &&
@@ -99,13 +109,13 @@ export const getData = async (data: any, status: string) => {
   const info = {
     spreadsheetId: sheetId,
     sheetName: 'Data',
-    columnName: 'id',
-    valueToMatch: `${data.taskId}`,
+    columnName: 'uniqueId',
+    valueToMatch: `${data.uuid}`,
     updates: dataUpdate,
   };
 
   console.log(
-    `Updating data for taskId ${data.taskId} with captureType ${JSON.stringify(
+    `Updating data for uuid ${data.uuid} with captureType ${JSON.stringify(
       info
     )}`
   );

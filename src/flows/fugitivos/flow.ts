@@ -9,6 +9,7 @@ import { getData as executionScreenData } from './execution';
 import { getData as rateScreenData } from './rate';
 import { getData as competitionScreenData } from './competition';
 import { getData as updateData } from './updateData';
+import { getData as tradeMarketingScreenData } from './tradeMarketing';
 
 import { sendDataCaptureFlow } from '../../helpers/botpress';
 import { stat } from 'fs';
@@ -39,7 +40,7 @@ export const getNextScreen = async (decryptedBody: {
 
   if (action === 'data_exchange' && screen === 'CAPTURE_TYPE') {
     const screenData = await storeScreenData(data);
-
+    data = { ...data, ...screenData };
     try {
       await updateData(data, 'CAPTURE_TYPE');
     } catch (error) {
@@ -49,7 +50,7 @@ export const getNextScreen = async (decryptedBody: {
     return {
       version,
       screen: data.captureType === 'exist' ? 'REGISTER_VISIT' : 'NEW_CLIENT',
-      data: { ...data, ...screenData },
+      data: data,
     };
   }
   if (action === 'data_exchange' && screen === 'NEW_CLIENT') {
@@ -80,6 +81,7 @@ export const getNextScreen = async (decryptedBody: {
 
   if (action === 'data_exchange' && screen === 'REGISTER_VISIT') {
     const screenData = await registerVisitScreenData(data);
+    data = { ...data, ...screenData };
     try {
       await updateData(data, 'REGISTER_VISIT');
     } catch (error) {
@@ -89,13 +91,13 @@ export const getNextScreen = async (decryptedBody: {
     return {
       version,
       screen: data.noFound ? 'CAPTURE_DATA' : 'COMMERCIAL_PLAN',
-      data: { ...data, ...screenData },
+      data: data,
     };
   }
 
   if (action === 'data_exchange' && screen === 'COMMERCIAL_PLAN') {
     const screenData = await commercialPlanScreenData(data);
-
+    data = { ...data, ...screenData };
     try {
       await updateData(data, 'COMMERCIAL_PLAN');
     } catch (error) {
@@ -105,12 +107,12 @@ export const getNextScreen = async (decryptedBody: {
     return {
       version,
       screen: 'PORTAFOLIO_STATUS',
-      data: { ...data, ...screenData },
+      data: data,
     };
   }
   if (action === 'data_exchange' && screen === 'PORTAFOLIO_STATUS') {
     const screenData = await portafolioStatusScreenData(data);
-
+    data = { ...data, ...screenData };
     try {
       await updateData(data, 'PORTAFOLIO_STATUS');
     } catch (error) {
@@ -120,21 +122,21 @@ export const getNextScreen = async (decryptedBody: {
     return {
       version,
       screen: 'CAPTURE_DATA',
-      data: { ...data, ...screenData },
+      data: data,
     };
   }
   if (action === 'data_exchange' && screen === 'CAPTURE_DATA') {
     const screenData = await captureDataScreenData(data);
-
+    data = { ...data, ...screenData };
     return {
       version,
       screen: 'SALES_LEVERS',
-      data: { ...data, ...screenData },
+      data: data,
     };
   }
   if (action === 'data_exchange' && screen === 'SALES_LEVERS') {
     const screenData = await salesLeversScreenData(data);
-
+    data = { ...data, ...screenData };
     try {
       await updateData(data, 'SALES_LEVERS');
     } catch (error) {
@@ -144,12 +146,12 @@ export const getNextScreen = async (decryptedBody: {
     return {
       version,
       screen: 'INVENTORY',
-      data: { ...data, ...screenData },
+      data: data,
     };
   }
   if (action === 'data_exchange' && screen === 'INVENTORY') {
     const screenData = await inventoryScreenData(data);
-
+    data = { ...data, ...screenData };
     try {
       await updateData(data, 'INVENTORY');
     } catch (error) {
@@ -159,12 +161,12 @@ export const getNextScreen = async (decryptedBody: {
     return {
       version,
       screen: 'EXECUTION',
-      data: { ...data, ...screenData },
+      data: data,
     };
   }
   if (action === 'data_exchange' && screen === 'EXECUTION') {
     const screenData = await executionScreenData(data);
-
+    data = { ...data, ...screenData };
     try {
       await updateData(data, 'EXECUTION');
     } catch (error) {
@@ -174,10 +176,12 @@ export const getNextScreen = async (decryptedBody: {
     return {
       version,
       screen: 'TRADE_MARKETING',
-      data: { ...data, ...screenData },
+      data: data,
     };
   }
   if (action === 'data_exchange' && screen === 'TRADE_MARKETING') {
+    const screenData = await tradeMarketingScreenData(data);
+    data = { ...data, ...screenData };
     try {
       await updateData(data, 'TRADE_MARKETING');
     } catch (error) {
@@ -187,21 +191,24 @@ export const getNextScreen = async (decryptedBody: {
     return {
       version,
       screen: 'COMPETITION',
-      data: { ...data },
+      data: data,
     };
   }
   if (action === 'data_exchange' && screen === 'COMPETITION') {
+    const screenData = await competitionScreenData(data);
+    data = { ...data, ...screenData };
+
     if (
-      !data.priceValidationSelected ||
-      data.priceValidationSelected.length === 0
+      (!data.priceValidationSelected ||
+        data.priceValidationSelected.length === 0) &&
+      (!data.otherSpiritDrink || data.otherSpiritDrink !== '')
     ) {
       return {
         version,
         screen: 'RATE',
-        data: { ...data },
+        data: data,
       };
     }
-    const screenData = await competitionScreenData(data);
 
     try {
       await updateData(data, 'COMPETITION');
@@ -212,7 +219,7 @@ export const getNextScreen = async (decryptedBody: {
     return {
       version,
       screen: 'PRICE_VALIDATION',
-      data: { ...data, ...screenData },
+      data: data,
     };
   }
   if (action === 'data_exchange' && screen === 'PRICE_VALIDATION') {

@@ -91,6 +91,7 @@ export const getGSheetTabsByID = async (
   const result: SheetData = {};
 
   for (const tab of tabs) {
+    console.log(`🔍 Buscando en la pestaña: ${tab.properties?.title}`);
     const tabName = tab.properties?.title;
     if (!tabName || !tabsRead.includes(tabName)) continue;
 
@@ -106,7 +107,7 @@ export const getGSheetTabsByID = async (
 
     // Buscar por SID
     const sidIndex = rows[0].indexOf(ID);
-    // console.log(`🔍 Buscando "${sidIndex} en "${tabName}"`);
+    console.log(`🔍 Buscando "${sidIndex} en "${tabName}"`);
     let match = [];
     if (sidIndex >= 0) {
       rows = rows.slice(1); // omitir encabezado
@@ -134,7 +135,9 @@ export const getGSheetByTab = async (
   }
 
   const range =
-    tabName === 'base general' ? `${tabName}!A1:BF1000` : `${tabName}!A1:Z1000`;
+    tabName === 'base general'
+      ? `${tabName}!A1:BF2000`
+      : `${tabName}!A1:BF2000`;
   const res = await sheets.spreadsheets.values.get({ spreadsheetId, range });
   const rows = res.data.values || [];
 
@@ -158,7 +161,7 @@ export const updateRowInSheet = async ({
 }) => {
   const sheets = google.sheets({ version: 'v4', auth });
 
-  const range = `${sheetName}!A1:Z1000`;
+  const range = `${sheetName}!A1:Z2000`;
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId,
     range,
