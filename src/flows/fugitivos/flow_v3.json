@@ -1781,7 +1781,7 @@
               {
                 "input-type": "text",
                 "label": "Nombre del cliente",
-                "name": "clientName",
+                "name": "name",
                 "required": true,
                 "type": "TextInput",
                 "helper-text": "Escribe el nombre de la razón social"
@@ -3112,7 +3112,7 @@
                 "data-source": [
                   {
                     "id": "Capacitación últimos 6 meses",
-                    "title": "Últimos 6 meses"
+                    "title": "Recibió capacitación en los últimos 6 meses"
                   }
                 ],
                 "label": "Capacitación",
@@ -3220,6 +3220,33 @@
               "title": "GLORIFICADOR"
             }
           ]
+        },
+        "commercialPlan": {
+          "type": "object",
+          "properties": {
+            "PLAN": {
+              "type": "string"
+            },
+            "VENTA": {
+              "type": "string"
+            },
+            "GAP": {
+              "type": "string"
+            },
+            "PALANCA": {
+              "type": "string"
+            },
+            "MATERIAL": {
+              "type": "string"
+            }
+          },
+          "__example__": {
+            "PLAN": "1",
+            "VENTA": "2",
+            "GAP": "1",
+            "PALANCA": "2x1",
+            "MATERIAL": "GLORIFICADOR SIN ESPEJO"
+          }
         }
       },
       "layout": {
@@ -3227,12 +3254,16 @@
           {
             "children": [
               {
-                "type": "TextSubheading",
+                "type": "TextHeading",
                 "text": "Material de Trade Marketing:"
               },
               {
-                "text": "Selecciona el material que vas a ejecutar en tu visita:",
+                "text": "`'Selecciona el material que vas a ejecutar en tu visita:: '${data.commercialPlan.MATERIAL}`",
                 "type": "TextBody"
+              },
+              {
+                "text": "Requisición de materiales",
+                "type": "TextSubheading"
               },
               {
                 "data-source": "${data.tradeMarketingPlan}",
@@ -3477,23 +3508,23 @@
       "data": {
         "hasCompetition1": {
           "type": "boolean",
-          "__example__": true
+          "__example__": false
         },
         "hasCompetition2": {
           "type": "boolean",
-          "__example__": true
+          "__example__": false
         },
         "hasCompetition3": {
           "type": "boolean",
-          "__example__": true
+          "__example__": false
         },
         "hasCompetition4": {
           "type": "boolean",
-          "__example__": true
+          "__example__": false
         },
         "hasCompetition5": {
           "type": "boolean",
-          "__example__": true
+          "__example__": false
         },
         "otherSpiritDrink": {
           "type": "string",
@@ -3650,6 +3681,7 @@
                     "hasCompetition5": "${data.hasCompetition5}",
                     "priceValidationSelected": "${data.priceValidationSelected}",
                     "otherSpiritDrink": "${data.otherSpiritDrink}",
+                    "competitionOptions": "${data.competitionOptions}",
                     "additionalMaterial": "${data.additionalMaterial}",
                     "additionalMaterialSelected": "${data.additionalMaterialSelected}",
                     "quantityAdditionalMaterial": "${data.quantityAdditionalMaterial}",
@@ -3714,23 +3746,23 @@
       "data": {
         "hasCompetition1": {
           "type": "boolean",
-          "__example__": true
+          "__example__": false
         },
         "hasCompetition2": {
           "type": "boolean",
-          "__example__": true
+          "__example__": false
         },
         "hasCompetition3": {
           "type": "boolean",
-          "__example__": true
+          "__example__": false
         },
         "hasCompetition4": {
           "type": "boolean",
-          "__example__": true
+          "__example__": false
         },
         "hasCompetition5": {
           "type": "boolean",
-          "__example__": true
+          "__example__": false
         },
         "otherSpiritDrink": {
           "type": "string",
@@ -3790,7 +3822,7 @@
                 "condition": "${data.hasCompetition1} == true",
                 "then": [
                   {
-                    "input-type": "text",
+                    "input-type": "number",
                     "label": "${data.competitionOptions[0].title}",
                     "label-variant": "large",
                     "name": "competitionQty1",
@@ -3805,7 +3837,7 @@
                 "condition": "${data.hasCompetition2} == true",
                 "then": [
                   {
-                    "input-type": "text",
+                    "input-type": "number",
                     "label": "${data.competitionOptions[1].title}",
                     "label-variant": "large",
                     "name": "competitionQty2",
@@ -3820,7 +3852,7 @@
                 "condition": "${data.hasCompetition3} == true",
                 "then": [
                   {
-                    "input-type": "text",
+                    "input-type": "number",
                     "label": "${data.competitionOptions[2].title}",
                     "label-variant": "large",
                     "name": "competitionQty3",
@@ -3835,7 +3867,7 @@
                 "condition": "${data.hasCompetition4} == true",
                 "then": [
                   {
-                    "input-type": "text",
+                    "input-type": "number",
                     "label": "${data.competitionOptions[3].title}",
                     "label-variant": "large",
                     "name": "competitionQty4",
@@ -3849,7 +3881,7 @@
                 "condition": "${data.hasCompetition5} == true",
                 "then": [
                   {
-                    "input-type": "text",
+                    "input-type": "number",
                     "label": "${data.competitionOptions[4].title}",
                     "label-variant": "large",
                     "name": "competitionQty5",
@@ -3863,7 +3895,7 @@
                 "condition": "${data.otherSpiritDrink} != ''",
                 "then": [
                   {
-                    "input-type": "text",
+                    "input-type": "number",
                     "label": "Otro Licor",
                     "label-variant": "large",
                     "name": "qtyOtherSpiritDrink",
@@ -3897,6 +3929,7 @@
                     "hasCompetition5": "${data.hasCompetition5}",
                     "priceValidationSelected": "${data.priceValidationSelected}",
                     "otherSpiritDrink": "${data.otherSpiritDrink}",
+                    "competitionOptions": "${data.competitionOptions}",
                     "additionalMaterial": "${data.additionalMaterial}",
                     "additionalMaterialSelected": "${data.additionalMaterialSelected}",
                     "quantityAdditionalMaterial": "${data.quantityAdditionalMaterial}",
@@ -4089,6 +4122,7 @@
                     "hasCompetition5": "${data.hasCompetition5}",
                     "priceValidationSelected": "${data.priceValidationSelected}",
                     "otherSpiritDrink": "${data.otherSpiritDrink}",
+                    "competitionOptions": "${data.competitionOptions}",
                     "additionalMaterial": "${data.additionalMaterial}",
                     "additionalMaterialSelected": "${data.additionalMaterialSelected}",
                     "quantityAdditionalMaterial": "${data.quantityAdditionalMaterial}",
@@ -4259,6 +4293,7 @@
                 "hasCompetition5": "${data.hasCompetition5}",
                 "priceValidationSelected": "${data.priceValidationSelected}",
                 "otherSpiritDrink": "${data.otherSpiritDrink}",
+                "competitionOptions": "${data.competitionOptions}",
                 "additionalMaterial": "${data.additionalMaterial}",
                 "additionalMaterialSelected": "${data.additionalMaterialSelected}",
                 "quantityAdditionalMaterial": "${data.quantityAdditionalMaterial}",

@@ -9,6 +9,28 @@ const sheetId: string =
   process.env.GSHEET_ID_FUGITIVOS ||
   '1fbcqSADitew_25zAlkHmJyhoLayDRhSFpXy25wgMjpk';
 
+interface CommercialPlan {
+  PLAN: string;
+  VENTA: string;
+  GAP: string;
+  PALANCA: string;
+  'PROMEDIO 3 ULTIMOS MESES': string;
+  'MES ULTIMA COMPRA': string;
+  'MATERIAL SUGERIDO POR TIPOLOGIA': string;
+  MATERIAL: string;
+}
+
+interface PortafolioItem {
+  Documento: string;
+  'Fecha vencimiento': string;
+  '0 - 8 Días': string;
+  '8 - 30 Días de Mora': string;
+  '31 - 60 Días de Mora': string;
+  '61 - 90 Días de Mora': string;
+  'Más de 90 Días de Mora': string;
+  'Más de 365 Días de Mora': string;
+}
+
 const formatearPesosColombianosSinSimbolo = (numero: number) => {
   return numero.toLocaleString('es-CO', {
     minimumFractionDigits: 2,
@@ -16,7 +38,7 @@ const formatearPesosColombianosSinSimbolo = (numero: number) => {
   });
 };
 
-const generatePorfafolioDetails = (data: any) => {
+const generatePortafolioDetails = (data: any) => {
   let text = `Total de facturas pendientes: ${data.length}\n\n`;
 
   data.forEach((item: any) => {
@@ -37,11 +59,16 @@ const generatePorfafolioDetails = (data: any) => {
     let valor = '';
 
     for (const rango of rangos) {
-      const monto = (item[rango] || '0').replace(/[\$, ]/g, ''); // quitar $ y espacios
+      const rawValue = item[rango];
+      const monto =
+        typeof rawValue === 'string'
+          ? rawValue.replace(/[\$, ]/g, '')
+          : String(rawValue || 0);
+
       if (parseFloat(monto) > 0) {
         rangoMora = rango;
         valor = item[rango];
-        break; // Solo tomar el primer rango con monto > 0
+        break;
       }
     }
 
@@ -52,7 +79,7 @@ const generatePorfafolioDetails = (data: any) => {
   return text;
 };
 
-const generateRichTextFromData = (data: any) => {
+const commercialPlanSummary = (data: any) => {
   if (!data || typeof data !== 'object') return ['No hay datos disponibles.'];
 
   const safe = (key: keyof typeof data, fallback: string = 'N/A') =>
@@ -77,17 +104,46 @@ export const getData = async (data: any) => {
 
   const tabs: any = await getGSheetTabsByID(sheetId, 'SID', data.sid);
 
+  if (
+    !tabs ||
+    !tabs['bd_tiendas'] ||
+    !tabs['rutero'] ||
+    !tabs['gestor_de_cartera']
+  ) {
+    throw new Error('Datos incompletos desde Google Sheets');
+  }
+
   const store = tabs['bd_tiendas'];
-  const commercialPlan = mapToObjectsByProps(tabs['rutero'], [
+  let commercialPlan: CommercialPlan[] = mapToObjectsByProps(tabs['rutero'], [
     'PLAN',
     'VENTA',
     'GAP',
     'PALANCA',
     'PROMEDIO 3 ULTIMOS MESES',
     'MES ULTIMA COMPRA',
+    'MATERIAL SUGERIDO POR TIPOLOGIA',
   ]);
+  // console.log('commercialPlan', commercialPlan);
+  if (!commercialPlan || commercialPlan.length === 0) {
+    console.log('No se encontró el plan comercial para la tienda');
+    commercialPlan = [
+      {
+        PLAN: '-',
+        VENTA: '-',
+        GAP: '-',
+        PALANCA: '-',
+        'PROMEDIO 3 ULTIMOS MESES': '-',
+        'MES ULTIMA COMPRA': '-',
+        'MATERIAL SUGERIDO POR TIPOLOGIA': '-',
+        MATERIAL: '-',
+      },
+    ];
+  }
+  const summary = commercialPlanSummary(commercialPlan[0]);
+  commercialPlan[0].MATERIAL =
+    commercialPlan[0]['MATERIAL SUGERIDO POR TIPOLOGIA'] || '-';
 
-  const summary = generateRichTextFromData(commercialPlan[0]);
+  // console.log('summary', summary);
 
   const portafolioStatus = mapToObjectsByProps(tabs['gestor_de_cartera'], [
     'Total cartera',
@@ -105,10 +161,10 @@ export const getData = async (data: any) => {
   const sumTotal = sumTotalCartera(portafolioStatus);
   // console.log('sumTotal', `$${formatearPesosColombianosSinSimbolo(sumTotal)}`);
 
-  const portafolioDetails = generatePorfafolioDetails(portafolioStatus);
+  const portafolioDetails = generatePortafolioDetails(portafolioStatus);
   // console.log('portafolioDetails', portafolioDetails);
 
-  return {
+  data = {
     ...data,
     store,
     commercialPlan: commercialPlan[0],
@@ -119,4 +175,8 @@ export const getData = async (data: any) => {
     portafolioDetails,
     comercialPlanSummary: summary,
   };
+
+  console.log('Final data for registerVisit screen:', data);
+
+  return data;
 };

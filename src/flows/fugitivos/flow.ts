@@ -201,7 +201,7 @@ export const getNextScreen = async (decryptedBody: {
     if (
       (!data.priceValidationSelected ||
         data.priceValidationSelected.length === 0) &&
-      (!data.otherSpiritDrink || data.otherSpiritDrink !== '')
+      (!data.otherSpiritDrink || data.otherSpiritDrink === '')
     ) {
       return {
         version,

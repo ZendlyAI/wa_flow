@@ -5,6 +5,11 @@ const sheetId: string =
   process.env.GSHEET_ID_FUGITIVOS ||
   '1fbcqSADitew_25zAlkHmJyhoLayDRhSFpXy25wgMjpk';
 
+const getTitleById = (id: string, competitions: any) => {
+  const competition = competitions.find((item: any) => item.id === id);
+  return competition ? competition.title : '-';
+};
+
 export const getData = async (data: any, status: string) => {
   console.log('Updating data with status:', data);
   const dataUpdate: any = {
@@ -22,7 +27,7 @@ export const getData = async (data: any, status: string) => {
     contactEmail: data.contactEmail || '-',
     creationDate: data.creationDate || '-',
     sid: data.sid || '',
-    visitDate: data.visitDate || '-',
+    visitDate: `${data.visitDate}` || '-',
     noFound: data.noFound || '-',
     client: data.client || '-',
     portafolioStatus: data.portafolioStatus ? true : false,
@@ -73,11 +78,21 @@ export const getData = async (data: any, status: string) => {
     additionalMaterialSelected: data.additionalMaterialSelected || '-',
     quantityAdditionalMaterial: data.quantityAdditionalMaterial || '-',
     'Comentarios de la requisición': data.tradeMarketingMaterial || '-',
-    'Tiene Competencia 1': data.hasCompetition1 ? true : false,
-    'Tiene Competencia 2': data.hasCompetition2 ? true : false,
-    'Tiene Competencia 3': data.hasCompetition3 ? true : false,
-    'Tiene Competencia 4': data.hasCompetition4 ? true : false,
-    'Tiene Competencia 5': data.hasCompetition5 ? true : false,
+    'Tiene Competencia 1': data.hasCompetition1
+      ? getTitleById('competition_1', data.competitionOptions)
+      : false,
+    'Tiene Competencia 2': data.hasCompetition2
+      ? getTitleById('competition_2', data.competitionOptions)
+      : false,
+    'Tiene Competencia 3': data.hasCompetition3
+      ? getTitleById('competition_3', data.competitionOptions)
+      : false,
+    'Tiene Competencia 4': data.hasCompetition4
+      ? getTitleById('competition_4', data.competitionOptions)
+      : false,
+    'Tiene Competencia 5': data.hasCompetition5
+      ? getTitleById('competition_5', data.competitionOptions)
+      : false,
     'Tiene Otro Licor': data.otherSpiritDrink || '-',
     'Precio Competencia 1': data.competitionPrice1 || '-',
     'Precio Competencia 2': data.competitionPrice2 || '-',

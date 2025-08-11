@@ -80,20 +80,20 @@ export const getGSheetTabsByID = async (
   value: string
 ) => {
   const sheets = google.sheets({ version: 'v4', auth });
-  const res = await sheets.spreadsheets.get({ spreadsheetId });
+  const sheetMeta = await sheets.spreadsheets.get({ spreadsheetId });
 
-  if (!res.data.sheets || res.data.sheets.length === 0) {
+  if (!sheetMeta.data.sheets || sheetMeta.data.sheets.length === 0) {
     throw new Error('No se encontraron hojas en el documento');
   }
 
-  const tabs = res.data.sheets || [];
-
+  const tabs = sheetMeta.data.sheets || [];
   const result: SheetData = {};
 
   for (const tab of tabs) {
-    console.log(`🔍 Buscando en la pestaña: ${tab.properties?.title}`);
     const tabName = tab.properties?.title;
     if (!tabName || !tabsRead.includes(tabName)) continue;
+
+    // console.log(`🔍 Buscando en la pestaña: ${tabName}`);
 
     const range =
       tabName === 'base general' ||
@@ -101,18 +101,25 @@ export const getGSheetTabsByID = async (
         ? `${tabName}!A1:BF1000`
         : `${tabName}!A1:Z1000`;
 
-    const res = await sheets.spreadsheets.values.get({ spreadsheetId, range });
-    let rows = res.data.values || [];
+    const valuesRes = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range,
+    });
+    const rows = valuesRes.data.values || [];
     const header = rows[0];
 
-    // Buscar por SID
-    const sidIndex = rows[0].indexOf(ID);
-    console.log(`🔍 Buscando "${sidIndex} en "${tabName}"`);
-    let match = [];
-    if (sidIndex >= 0) {
-      rows = rows.slice(1); // omitir encabezado
+    if (!header) {
+      result[tabName] = [];
+      continue;
+    }
 
-      match = rows.filter((row) => row[sidIndex] === value) || [];
+    const sidIndex = header.indexOf(ID);
+    // console.log(
+    //   `🔍 Buscando "${value}" en columna "${ID}" (index: ${sidIndex}) de "${tabName}"`
+    // );
+
+    if (sidIndex >= 0) {
+      const match = rows.slice(1).filter((row) => row[sidIndex] === value);
       result[tabName] = [header, ...match];
     } else {
       result[tabName] = rows;
@@ -120,6 +127,8 @@ export const getGSheetTabsByID = async (
 
     console.log(`✅ Leídas ${result[tabName].length} filas de "${tabName}"`);
   }
+  
+  console.log('spreadsheet leido');
   return result;
 };
 
