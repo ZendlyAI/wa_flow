@@ -7,12 +7,12 @@ const sheetId: string =
   '1fbcqSADitew_25zAlkHmJyhoLayDRhSFpXy25wgMjpk';
 
 export const getData = async (data: any) => {
-  const tab: any = await getGSheetByTab(sheetId, 'Palanca comercial');
+  const tab: any = await getGSheetByTab(sheetId, 'Inputs');
   const salesLevers: any = extractChannelsAndItems(tab);
-  console.log('salesLevers', salesLevers);
+  console.log('salesLevers', salesLevers['PALANCAS PREDETERMINADAS']);
 
   return {
     ...data,
-    salesLevers: salesLevers['Palanca'] || [],
+    salesLevers: salesLevers['PALANCAS PREDETERMINADAS'] || [],
   };
 };

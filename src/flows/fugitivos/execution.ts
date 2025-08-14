@@ -7,12 +7,15 @@ const sheetId: string =
   '1fbcqSADitew_25zAlkHmJyhoLayDRhSFpXy25wgMjpk';
 
 export const getData = async (data: any) => {
-  const tab: any = await getGSheetByTab(sheetId, 'Palanca comercial');
-  const tradeMarketingPlan: any = extractChannelsAndItems(tab);
-  console.log('tradeMarketingPlan', tradeMarketingPlan);
+  const tab: any = await getGSheetByTab(sheetId, 'Inputs');
+  const inputs: any = extractChannelsAndItems(tab);
+  console.log('tradeMarketingPlan', inputs['MATERIAL TRADE MARKETING']);
+
+  console.log('closureReasonOptions', inputs['MOTIVOS DE NO VENTA']);
 
   return {
     ...data,
-    tradeMarketingPlan: tradeMarketingPlan['TradeMarketing'] || [],
+    tradeMarketingPlan: inputs['MATERIAL TRADE MARKETING'] || [],
+    closureReasonOptions: inputs['MOTIVOS DE NO VENTA'] || [],
   };
 };

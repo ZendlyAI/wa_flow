@@ -4,12 +4,10 @@
   "description": "Endpoint for WhatsApp Flows https://developers.facebook.com/docs/whatsapp/flows",
   "main": "build/index.js",
   "scripts": {
-    "start": "functions-framework --source=build/ --target=preLoad",
+    "start": "npm run build:local && functions-framework --source=build/ --target=preLoad",
     "start:local": "npm run build:local && node build/index.js",
     "build:local": "rimraf ./build && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "copy:assets": "cp -r assets build/assets",
-    "deploy:assets": "npm run build:local && npm run copy:assets && gcloud functions deploy whatsapp-flow-zendly --gen2 --runtime=nodejs20 --region=us-central1 --source=. --entry-point=preLoad --trigger-http --env-vars-file=.env.yaml",
     "deploy": "gcloud functions deploy whatsapp-flow-zendly --gen2 --runtime=nodejs20 --region=us-central1 --source=. --entry-point=preLoad --trigger-http --env-vars-file=.env.yaml"
   },
   "author": "Gabriela Recinos <recinos.alejandra@gmail.com>",

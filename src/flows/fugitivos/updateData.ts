@@ -10,8 +10,13 @@ const getTitleById = (id: string, competitions: any) => {
   return competition ? competition.title : '-';
 };
 
+const transformDate = (date: string) => {
+  const [year, month, day] = date.split('-');
+  return `${day}/${month}/${year}`;
+};
+
 export const getData = async (data: any, status: string) => {
-  console.log('Updating data with status:', data);
+  // console.log('Updating data with status:', data);
   const dataUpdate: any = {
     status: status,
     captureType: data.captureType || '-',
@@ -25,16 +30,16 @@ export const getData = async (data: any, status: string) => {
     managerName: data.managerName || '-',
     contactPhone: data.contactPhone || '-',
     contactEmail: data.contactEmail || '-',
-    creationDate: data.creationDate || '-',
+    creationDate: `${data.creationDate}` || '-',
     sid: data.sid || '',
-    visitDate: `${data.visitDate}` || '-',
+    visitDate: `${transformDate(data.visitDate)}` || '-',
     noFound: data.noFound || '-',
     client: data.client || '-',
     portafolioStatus: data.portafolioStatus ? true : false,
     portafolio: data.portafolio || '-',
     u3m: data.u3m || '-',
     lastMonth: data.lastMonth || '-',
-    specificAction: data.specificAction || '-',
+    portafolioDetails: data.portafolioDetails || '-',
     situationExpressed: data.situationExpressed || '-',
     leverPresented: data.leverPresented === 'si' ? true : false,
     salesLeverSelected: data.salesLeverSelected || '-',

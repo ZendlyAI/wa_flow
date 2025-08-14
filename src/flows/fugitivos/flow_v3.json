@@ -1781,7 +1781,7 @@
               {
                 "input-type": "text",
                 "label": "Nombre del cliente",
-                "name": "name",
+                "name": "clientName",
                 "required": true,
                 "type": "TextInput",
                 "helper-text": "Escribe el nombre de la razón social"
@@ -2572,7 +2572,6 @@
               "payload": {
                 "portafolioDetails": "${data.portafolioDetails}",
                 "situationExpressed": "${data.situationExpressed}",
-                "specificAction": "${data.specificAction}",
                 "u3m": "${data.u3m}",
                 "lastMonth": "${data.lastMonth}",
                 "salesLevers": "${data.salesLevers}",
@@ -2613,11 +2612,7 @@
         },
         "portafolioDetails": {
           "type": "string",
-          "__example__": "Total de facturas pendientes: 2\n\nNúmero de factura: 1234\nFecha de vencimiento: 12/07/2025\nRango mora: 8-30 días \nValor: $40,000\n\nNúmero de factura: 5678\nFecha de vencimiento: 12/07/2025\nRango mora: 31-60 días \nValor: $12,000"
-        },
-        "specificAction": {
-          "type": "string",
-          "__example__": "Activación Proceso Castigo Cartera Proceso de Castigo de Cartera Fugitivos"
+          "__example__": "Total de facturas pendientes: 2\n\nNúmero de factura: 1234\nFecha de vencimiento: 12/07/2025\nRango mora: 8-30 días \nValor: $40,000\nAcción a comunicar: Proceso de Castigo de Cartera Fugitivos\n\nNúmero de factura: 5678\nFecha de vencimiento: 12/07/2025\nRango mora: 31-60 días \nValor: $12,000\nAcción a comunicar: Activación Proceso Castigo Cartera"
         }
       },
       "layout": {
@@ -2667,14 +2662,6 @@
                     "type": "TextBody"
                   },
                   {
-                    "text": "Acción a comunicar:",
-                    "type": "TextSubheading"
-                  },
-                  {
-                    "text": "${data.specificAction}",
-                    "type": "TextBody"
-                  },
-                  {
                     "input-type": "text",
                     "label": "Situación expresada",
                     "name": "situationExpressed",
@@ -2690,7 +2677,7 @@
                   "name": "data_exchange",
                   "payload": {
                     "situationExpressed": "${form.situationExpressed}",
-                    "specificAction": "${data.specificAction}",
+                    "portafolioDetails": "${data.portafolioDetails}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -2768,8 +2755,8 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "portafolioDetails": "${data.portafolioDetails}",
                     "situationExpressed": "${data.situationExpressed}",
-                    "specificAction": "${data.specificAction}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -2927,8 +2914,8 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "portafolioDetails": "${data.portafolioDetails}",
                     "situationExpressed": "${data.situationExpressed}",
-                    "specificAction": "${data.specificAction}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -3040,8 +3027,8 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "portafolioDetails": "${data.portafolioDetails}",
                     "situationExpressed": "${data.situationExpressed}",
-                    "specificAction": "${data.specificAction}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -3105,7 +3092,7 @@
                 ],
                 "label": "Selecciona el material que ves en el punto de venta en el momento de tu visita:",
                 "name": "executionSelected",
-                "required": true,
+                "required": false,
                 "type": "CheckboxGroup"
               },
               {
@@ -3140,6 +3127,7 @@
                     "photoPicker": "${form.photoPicker}",
                     "executionSelected": "${form.executionSelected}",
                     "training": "${form.training}",
+                    "closureReasonOptions": "${data.closureReasonOptions}",
                     "openBottles": "${data.openBottles}",
                     "quantityOpenBottles": "${data.quantityOpenBottles}",
                     "comments": "${data.comments}",
@@ -3157,8 +3145,8 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "portafolioDetails": "${data.portafolioDetails}",
                     "situationExpressed": "${data.situationExpressed}",
-                    "specificAction": "${data.specificAction}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -3258,7 +3246,7 @@
                 "text": "Material de Trade Marketing:"
               },
               {
-                "text": "`'Selecciona el material que vas a ejecutar en tu visita:: '${data.commercialPlan.MATERIAL}`",
+                "text": "`'Material sugerido para este cliente: '${data.commercialPlan.MATERIAL}`",
                 "type": "TextBody"
               },
               {
@@ -3326,6 +3314,7 @@
                     "photoPicker": "${data.photoPicker}",
                     "executionSelected": "${data.executionSelected}",
                     "training": "${data.training}",
+                    "closureReasonOptions": "${data.closureReasonOptions}",
                     "openBottles": "${data.openBottles}",
                     "quantityOpenBottles": "${data.quantityOpenBottles}",
                     "comments": "${data.comments}",
@@ -3343,8 +3332,8 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "portafolioDetails": "${data.portafolioDetails}",
                     "situationExpressed": "${data.situationExpressed}",
-                    "specificAction": "${data.specificAction}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -3453,6 +3442,7 @@
                     "photoPicker": "${data.photoPicker}",
                     "executionSelected": "${data.executionSelected}",
                     "training": "${data.training}",
+                    "closureReasonOptions": "${data.closureReasonOptions}",
                     "openBottles": "${data.openBottles}",
                     "quantityOpenBottles": "${data.quantityOpenBottles}",
                     "comments": "${data.comments}",
@@ -3470,8 +3460,8 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "portafolioDetails": "${data.portafolioDetails}",
                     "situationExpressed": "${data.situationExpressed}",
-                    "specificAction": "${data.specificAction}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -3691,6 +3681,7 @@
                     "photoPicker": "${data.photoPicker}",
                     "executionSelected": "${data.executionSelected}",
                     "training": "${data.training}",
+                    "closureReasonOptions": "${data.closureReasonOptions}",
                     "openBottles": "${data.openBottles}",
                     "quantityOpenBottles": "${data.quantityOpenBottles}",
                     "comments": "${data.comments}",
@@ -3708,8 +3699,8 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "portafolioDetails": "${data.portafolioDetails}",
                     "situationExpressed": "${data.situationExpressed}",
-                    "specificAction": "${data.specificAction}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -3939,6 +3930,7 @@
                     "photoPicker": "${data.photoPicker}",
                     "executionSelected": "${data.executionSelected}",
                     "training": "${data.training}",
+                    "closureReasonOptions": "${data.closureReasonOptions}",
                     "openBottles": "${data.openBottles}",
                     "quantityOpenBottles": "${data.quantityOpenBottles}",
                     "comments": "${data.comments}",
@@ -3956,8 +3948,8 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "portafolioDetails": "${data.portafolioDetails}",
                     "situationExpressed": "${data.situationExpressed}",
-                    "specificAction": "${data.specificAction}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -3991,7 +3983,36 @@
     {
       "id": "RATE",
       "title": "Calificar visita",
-      "data": {},
+      "data": {
+        "closureReasonOptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "Aun tiene producto",
+              "title": "Aun tiene producto"
+            },
+            {
+              "id": "No está interesado en la marca",
+              "title": "No está interesado en la marca"
+            },
+            {
+              "id": "Otros",
+              "title": "Otros"
+            }
+          ]
+        }
+      },
       "layout": {
         "children": [
           {
@@ -4062,20 +4083,7 @@
                 "condition": "${form.saleCompleted} == 'no'",
                 "then": [
                   {
-                    "data-source": [
-                      {
-                        "id": "Aun tiene producto",
-                        "title": "Aun tiene producto"
-                      },
-                      {
-                        "id": "No está interesado en la marca",
-                        "title": "No está interesado en la marca"
-                      },
-                      {
-                        "id": "Otros",
-                        "title": "Otros"
-                      }
-                    ],
+                    "data-source": "${data.closureReasonOptions}",
                     "label": "Motivo de no venta:",
                     "name": "closureReason",
                     "required": true,
@@ -4132,6 +4140,7 @@
                     "photoPicker": "${data.photoPicker}",
                     "executionSelected": "${data.executionSelected}",
                     "training": "${data.training}",
+                    "closureReasonOptions": "${data.closureReasonOptions}",
                     "openBottles": "${data.openBottles}",
                     "quantityOpenBottles": "${data.quantityOpenBottles}",
                     "comments": "${data.comments}",
@@ -4149,8 +4158,8 @@
                     "address": "${data.address}",
                     "zone": "${data.zone}",
                     "segment": "${data.segment}",
+                    "portafolioDetails": "${data.portafolioDetails}",
                     "situationExpressed": "${data.situationExpressed}",
-                    "specificAction": "${data.specificAction}",
                     "u3m": "${data.u3m}",
                     "lastMonth": "${data.lastMonth}",
                     "salesLevers": "${data.salesLevers}",
@@ -4303,6 +4312,7 @@
                 "photoPicker": "${data.photoPicker}",
                 "executionSelected": "${data.executionSelected}",
                 "training": "${data.training}",
+                "closureReasonOptions": "${data.closureReasonOptions}",
                 "openBottles": "${data.openBottles}",
                 "quantityOpenBottles": "${data.quantityOpenBottles}",
                 "comments": "${data.comments}",
@@ -4320,8 +4330,8 @@
                 "address": "${data.address}",
                 "zone": "${data.zone}",
                 "segment": "${data.segment}",
+                "portafolioDetails": "${data.portafolioDetails}",
                 "situationExpressed": "${data.situationExpressed}",
-                "specificAction": "${data.specificAction}",
                 "u3m": "${data.u3m}",
                 "lastMonth": "${data.lastMonth}",
                 "salesLevers": "${data.salesLevers}",

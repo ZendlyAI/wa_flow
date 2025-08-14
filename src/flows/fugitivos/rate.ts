@@ -1,6 +1,5 @@
 import { handleMedia } from '../../helpers/media';
 import { uploadBuffer } from '../../helpers/gstorage';
-
 const saveImages = async (photoPicker: any) => {
   const mediaPayload = photoPicker;
   console.log(JSON.stringify(mediaPayload));
@@ -23,7 +22,9 @@ const generateRichTextFromData = (data: any) => {
   if (!data || typeof data !== 'object') return ['No hay datos disponibles.'];
 
   const safe = (key: keyof typeof data, fallback: string = 'N/A') =>
-    data[key] !== undefined && data[key] !== null && data[key] !== '' ? data[key] : fallback;
+    data[key] !== undefined && data[key] !== null && data[key] !== ''
+      ? data[key]
+      : fallback;
 
   return [
     '# Resumen de Visita',
@@ -60,7 +61,6 @@ const generateRichTextFromData = (data: any) => {
     `- **Comentarios de inventario:** ${safe('comments')}`,
     `- **Comentarios generales:** ${safe('generalComments')}`,
     `- **Experiencia general:** ${safe('generalExperience')}`,
-    `- **Acción a comunicar al cliente:** ${safe('specificAction')}`,
     `- **Situación expresada por el cliente:** ${safe('situationExpressed')}`,
     '## Competencia',
     '- **¿Presencia de competidores?:**',
@@ -70,9 +70,17 @@ const generateRichTextFromData = (data: any) => {
     `  - Competidor 4: ${safe('hasCompetition4')}`,
     `  - Competidor 5: ${safe('hasCompetition5')}`,
     '- **Cantidad por competidor:**',
-    `  - 1: ${safe('competitionQty1')}, 2: ${safe('competitionQty2')}, 3: ${safe('competitionQty3')}, 4: ${safe('competitionQty4')}, 5: ${safe('competitionQty5')}`,
+    `  - 1: ${safe('competitionQty1')}, 2: ${safe(
+      'competitionQty2'
+    )}, 3: ${safe('competitionQty3')}, 4: ${safe('competitionQty4')}, 5: ${safe(
+      'competitionQty5'
+    )}`,
     '- **Precios por competidor:**',
-    `  - 1: ${safe('competitionPrice1')}, 2: ${safe('competitionPrice2')}, 3: ${safe('competitionPrice3')}, 4: ${safe('competitionPrice4')}, 5: ${safe('competitionPrice5')}`,
+    `  - 1: ${safe('competitionPrice1')}, 2: ${safe(
+      'competitionPrice2'
+    )}, 3: ${safe('competitionPrice3')}, 4: ${safe(
+      'competitionPrice4'
+    )}, 5: ${safe('competitionPrice5')}`,
     '## Otro Licor',
     `- **Licor:** ${safe('otherSpiritDrink')}`,
     `- **Cantidad:** ${safe('qtyOtherSpiritDrink')}`,
@@ -90,12 +98,12 @@ const generateRichTextFromData = (data: any) => {
     '## Otros datos',
     `- **Último mes (ventas):** ${safe('lastMonth')}`,
     `- **U3M (últimos 3 meses):** ${safe('u3m')}`,
-  
   ];
 };
 
 export const getData = async (data: any) => {
   const images = await saveImages(data.photoPicker);
+
   return {
     ...data,
     images,

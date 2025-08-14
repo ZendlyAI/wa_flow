@@ -73,7 +73,8 @@ const generatePortafolioDetails = (data: any) => {
     }
 
     text += `Rango mora: ${rangoMora}\n`;
-    text += `Valor: ${valor}\n\n`;
+    text += `Valor: ${valor}\n`;
+    text += `Acción a comunicar: ${item['Acción Especifica']}\n\n`;
   });
 
   return text;
@@ -155,6 +156,7 @@ export const getData = async (data: any) => {
     '61 - 90 Días de Mora',
     'Más de 90 Días de Mora',
     'Más de 365 Días de Mora',
+    'Acción Especifica',
   ]);
   // console.log('portafolioStatus', portafolioStatus);
 

@@ -11,7 +11,6 @@ const tabsRead = [
   'rutero',
   'gestor_de_cartera',
   'vendedores',
-  'Palanca comercial',
   'departamentos_municipios_input',
   'Cartera_por_cluster_importrange',
 ];
