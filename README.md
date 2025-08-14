@@ -1,65 +1,12 @@
-# Endpoint for WhatsApp Flows
+# Endpoint for Chatwoot integration
 
-This project is a cloud function to implement a endpoint to manage flow, following the Whatsapp Guide [Whastapp Implementing Endpoint for Flows Doc](https://developers.facebook.com/docs/whatsapp/flows/guides/implementingyourflowendpoint)
-and [Reference](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/whatsapp-business-encryption#set-business-public-key)
-
-Example: [nodejs](https://github.com/WhatsApp/WhatsApp-Flows-Tools/tree/main/examples/endpoint/nodejs/basic)
-
-### Prerequisites
-
-1. The phone number must be successfully registered (DONE)
-2. The business must have generated a 2048-bit RSA Key as described in the Doc [Generating a 2048-bit RSA Key Pair](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/whatsapp-business-encryption#gen)
-
-   - Generate a public and private RSA key pair by typing in the following command:
-     ```shell
-     openssl genrsa -des3 -out private.pem 2048
-     ```
-
-   This generates 2048-bit RSA key pair encrypted with a password you provided and is written to a file.
-
-   - Next, you need to export the RSA Public Key to a file:
-     ```shell
-     openssl rsa -in private.pem -outform PEM -pubout -out public.pem
-     ```
-
-3. Generate PRIVATE_KEY env
-
-- Export private key
-
-```shell
-    export PRIVATE_PEM=`cat ./private.pem`
-```
-
-- Run this code in a JS file on your Dev Machine.
-
-```shell
-    node
-    const privateKey=process.env.PRIVATE_PEM
-    const buff = Buffer.from(privateKey).toString('base64');
-    console.log(buff); // "RESULTADO DE BUFF"
-    (To exit, press Ctrl+C again or Ctrl+D or type .exit)
-```
-
-- Copy the buff result in .env file
-
-```shell
-export PRIVATE_KEY="RESULTADO DE BUFF"
-```
+This project is a cloud function to implement a endpoint to manage the chatwoot integration
 
 - Export .env to start envs
 
 ```
 source .env
 ```
-
-## Implementing Endpoint for Flows
-This NodeJS code sample aims to give an approximate example of how encrypted_aes_key field is calculated and how it can be decrypted.
-
-[NodeJS Script Demonstrating AES Key Encryption and Decryption](https://developers.facebook.com/docs/whatsapp/flows/guides/implementingyourflowendpoint#nodejs-script-demonstrating-aes-key-encryption-and-decryption)
-
-You can reference the below examples of how to decrypt and encrypt.
-
-The endpoint source code is available in the [WhatsApp-Flows-Tools Github repo](https://github.com/WhatsApp/WhatsApp-Flows-Tools/tree/main/examples/endpoint/nodejs/book-appointment?fbclid=IwZXh0bgNhZW0CMTEAAR1LixUss6fd79BuG9cAcUiud1L0MKIQjYMKBh0-3_gClCIeZDH4NOLUoVE_aem_y-qF36TRh7IBp0w9QxNgQA) 
 
 ## How to Run
 
@@ -82,3 +29,132 @@ npm run start
 ```
 
 Open [http://localhost:8080/](http://localhost:8080/)
+
+## How the Agent Mode Should Works in Botpress?
+
+If started a humanTakeover?
+send a summary of the conversation between bot and user
+identify the intent
+assign the accurate team or human agent
+
+if It's an open conversation with the humanAgent
+open all the incoming, outgoing messages and keep the state in the flow
+transcript every interaction bot, user, humanAgent or AIAgent
+
+if the conversation change to resolved
+change state to humanTakeover=false and return to botHandover
+
+### How to control the traffic between chatwoot and botpress
+
+should trigger a humanTakeover=false and botHandover in botpress when
+"status": "resolved" and "event": "conversation_updated"
+
+    "event": "conversation_updated" and
+      "status": "pending", is a conversation that is not been taken by the agent
+      status: "open", when the agent open a conversation
+
+      "message_type": "outgoing" send it from chatwoot humanAgent to wbehook
+      "message_type": "incomming" Send it from the user-botpress to chatwoot
+
+\*\*USING custom_attributes to send the botpress_conversation_id
+
+humanTakeover: true
+payload.content_type === 'text' &&
+payload.message_type === 'outgoing' &&
+payload.event === 'message_created'
+
+humanTakeover: false
+payload.status === 'resolved' &&
+payload.event === 'conversation_updated'
+
+## How to generate the ChatwootPayload in botpress
+
+// Example assumes `payload` is your JSON object
+
+```javascript
+const humanTakeoverTrue = {
+  conversationId:
+    payload.conversation.custom_attributes.botpress_conversation_id,
+  name: 'Agente de Chatwoot',
+  type: 'chatwoot_agent_incoming',
+  message: payload.content,
+  conversation: payload.conversation.id,
+  agent: payload.sender,
+  contact: payload.conversation.meta.sender,
+  account: payload.account,
+  inbox: payload.inbox,
+  timestamp: payload.created_at,
+  humanTakeover: true,
+};
+
+const humanTakeoverFalse = {
+  conversationId: payload.custom_attributes.botpress_conversation_id,
+  name: 'Agente de Chatwoot',
+  type: 'chatwoot_agent_incoming',
+  timestamp: payload.created_at,
+  humanTakeover: false,
+};
+```
+
+## How a transcript should looks like
+
+```json
+"transcript": [
+      {
+        "sender": "bot",
+        "preview": "Genial Tatis, iniciemos la captura de datos",
+        "senderDetails": {
+          "id": "botpress",
+          "name": "Bot de Botpress",
+          "type": "bot"
+        },
+        "timestamp": "2023-10-01T12:00:00Z"
+      },
+      {
+        "sender": "bot",
+        "preview": "Tu Ubicacion es  \nTASK: 14",
+        "senderDetails": {
+          "id": "botpress",
+          "name": "Bot de Botpress",
+          "type": "bot"
+        },
+        "timestamp": "2023-10-01T12:00:00Z"
+      },
+      {
+        "sender": "user",
+        "preview": "Hola",
+        "senderDetails": {
+          "id": "+50250192435",
+          "name": "Tatis",
+          "type": "whatsapp"
+        },
+        "timestamp": "2023-10-01T12:00:00Z"
+      },
+      {
+        "sender": "user",
+        "preview": "Hola, como estas?",
+        "senderDetails": {
+          "id": "+50250192435",
+          "name": "Tatis",
+          "type": "whatsapp"
+        },
+        "timestamp": "2023-10-01T12:00:00Z"
+      },
+      {
+        "sender": "chatwootAgent",
+        "preview": "Hola, como puedo ayudarte",
+        "senderDetails": {
+          "id": "chatwoot",
+          "name": "Agente de Chatwoot",
+          "type": "human",
+          "message": "180125760",
+          "conversation": "8",
+          "agent": 128228,
+          "contact": 358324356,
+          "account_id": "124274",
+          "inbox_id": "67317"
+        },
+        "timestamp": "2023-10-01T12:00:00Z"
+      }
+    ]
+```

@@ -1,0 +1,190 @@
+Example of payload using michaelbarney chatwoot Integration in Botpress To Chatwoot
+{
+  "id": "evt_01JXP4ZE4FGZVGXP7V4DK78FB2",
+  "type": "text",
+  "channel": "chatwoot",
+  "userId": "user_01JXP4ZE0YN4CE82QFN9FJ49BF",
+  "direction": "incoming",
+  "payload": { "text": "Por donde va mi pedido" },
+  "botId": "1843be45-14e4-4832-a962-a8722b47202b",
+  "createdOn": "2025-06-14T02:40:53.510Z",
+  "conversationId": "conv_01JXP4ZDZ7MH8CMRABNYZJW40Q",
+  "preview": "Por donde va mi pedido",
+  "state": {
+    "__stacktrace": [
+      { "flow": "flow:Main", "node": "node:Start" },
+      {
+        "flow": "flow:Main",
+        "node": "node:conversation_intent",
+        "card": "card:transition"
+      }
+    ],
+    "context": {
+      "currentFlow": "flow:Main",
+      "currentNode": "node:conversation_intent",
+      "currentCard": "card:Log Workflow and User Variables for Debugging Purposes",
+      "queue": [
+        {
+          "id": "card:workflow.pendingTask && Object.keys(workflow.pendingTask).length > 0",
+          "type": "transition",
+          "condition": {
+            "type": "expression",
+            "payload": "workflow.pendingTasks && workflow.pendingTasks.length > 0"
+          },
+          "label": "workflow.pendingTask && Object.keys(workflow.pendingTask).length > 0",
+          "generative": {
+            "label": "workflow.pendingTask && Object.keys(workflow.pendingTask).length > 0",
+            "suggestion": {
+              "condition": "workflow.pendingTasks && workflow.pendingTasks.length > 0"
+            },
+            "properties": { "condition": true }
+          },
+          "category": "Flow Logic",
+          "nodeId": "node:conversation_intent",
+          "description": "",
+          "destination": { "node": "node:close_task_loop" },
+          "transitions": []
+        },
+        {
+          "id": "card:if any other not match",
+          "type": "transition",
+          "condition": { "type": "expression", "payload": "true" },
+          "label": "if any other not match",
+          "generative": {
+            "label": "if any other not match",
+            "suggestion": { "condition": "true" },
+            "properties": { "condition": true }
+          },
+          "category": "Flow Logic",
+          "nodeId": "node:conversation_intent",
+          "description": "",
+          "transitions": [],
+          "destination": { "node": "node:start_task" }
+        }
+      ],
+      "previousNode": "node:Start",
+      "previousCard": "-"
+    },
+    "session": {
+      "history": [
+        {
+          "id": "5f55982b-d580-40dc-aa8a-15ed3cbc9dcd",
+          "sender": "user",
+          "date": "2025-06-14T02:40:53.741Z",
+          "preview": "Por donde va mi pedido",
+          "type": "text"
+        }
+      ],
+      "workflows_executions": [
+        {
+          "execution_id": "88759b50-888c-45c1-a8c3-84a9f43836ab",
+          "caller": { "type": "entry" },
+          "started_at": "2025-06-14T02:40:53.739Z",
+          "variable_values": {
+            "pendingTasks": [],
+            "taskRecord": {},
+            "userLocation": {},
+            "data_capture_flow": {},
+            "chatwootConversation": {},
+            "chatwootConversationId": 2
+          },
+          "workflow_id": "flow:Main"
+        }
+      ],
+      "id": null,
+      "kb_priority": { "enabled": false, "searchScope": "specific", "kbs": [] },
+      "current_execution_id": "88759b50-888c-45c1-a8c3-84a9f43836ab",
+      "current_workflow": {
+        "execution_id": "88759b50-888c-45c1-a8c3-84a9f43836ab",
+        "caller": { "type": "entry" },
+        "started_at": "2025-06-14T02:40:53.739Z",
+        "variable_values": {
+          "pendingTasks": [],
+          "taskRecord": {},
+          "userLocation": {},
+          "data_capture_flow": {},
+          "chatwootConversation": {},
+          "chatwootConversationId": 2
+        },
+        "workflow_id": "flow:Main"
+      }
+    },
+    "user": {
+      "name": "",
+      "phone": "",
+      "conversationId": "conv_01JXP4ZDZ7MH8CMRABNYZJW40Q"
+    },
+    "bot": {
+      "__cognitiveModelPrefs": {
+        "best": [
+          "openai:gpt-4o-2024-11-20",
+          "google-ai:models/gemini-2.0-flash"
+        ],
+        "fast": [
+          "openai:gpt-4o-mini-2024-07-18",
+          "google-ai:models/gemini-2.0-flash"
+        ],
+        "downtimes": [
+          {
+            "ref": "openai:gpt-4o-mini-2024-07-18",
+            "startedAt": "2025-06-11T21:09:43.654Z",
+            "reason": "Model is down"
+          }
+        ]
+      }
+    },
+    "conversation": {
+      "humanTakeover": false,
+      "botHandover": false,
+      "SummaryAgent": {
+        "summary": null,
+        "transcript": "user: Por donde va mi pedido\n"
+      }
+    },
+    "configVariables": {},
+    "agentVariables": {
+      "SummaryAgent": {
+        "bot": {},
+        "conversation": {
+          "summary": null,
+          "transcript": "user: Por donde va mi pedido\n"
+        },
+        "executions": {},
+        "user": {},
+        "turn": {
+          "lines": [
+            "{\"sender\":\"user\",\"message\":\"Por donde va mi pedido. Por donde va mi pedido\"}"
+          ]
+        }
+      },
+      "KnowledgeAgent": {
+        "bot": {},
+        "conversation": {},
+        "executions": {},
+        "user": {},
+        "turn": { "responded": false, "answer": null, "citations": [] }
+      },
+      "VisionAgent": {
+        "bot": {},
+        "conversation": {},
+        "executions": {},
+        "user": {},
+        "turn": { "content": null }
+      }
+    }
+  },
+  "messageId": "5f55982b-d580-40dc-aa8a-15ed3cbc9dcd",
+  "flags": {},
+  "nlu": {
+    "errored": false,
+    "openbook_model_id": "eadfe510c28df888.d208c1c3dae45987",
+    "entities": [],
+    "ms": 0
+  },
+  "integration": "michaelbarney/chatwoot",
+  "tags": {
+    "message": { "michaelbarney/chatwoot:chatwootId": "180113872" },
+    "conversation": { "michaelbarney/chatwoot:chatwootId": "8" },
+    "user": { "michaelbarney/chatwoot:chatwootId": "358324356" }
+  }
+}

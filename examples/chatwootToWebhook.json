@@ -1,0 +1,482 @@
+[
+  {
+    "updated_at": 1749874170.573204,
+    "agent_last_seen_at": 1749874148,
+    "meta": {
+      "assignee": {
+        "availability_status": null,
+        "thumbnail": "",
+        "name": "Ale",
+        "id": 128228,
+        "type": "user",
+        "available_name": "Ale",
+        "avatar_url": ""
+      },
+      "sender": {
+        "identifier": null,
+        "name": "Erick",
+        "blocked": false,
+        "custom_attributes": {},
+        "email": "erick@example.com",
+        "id": 358324356,
+        "phone_number": "+6611111111",
+        "type": "contact",
+        "additional_attributes": {},
+        "thumbnail": ""
+      },
+      "hmac_verified": false,
+      "team": null
+    },
+    "messages": [
+      {
+        "status": "sent",
+        "id": 180125760,
+        "message_type": 1,
+        "additional_attributes": {},
+        "account_id": 124274,
+        "conversation": {
+          "contact_inbox": {
+            "source_id": "7f705ef8-c0f5-41c0-8717-f8e5885e8735"
+          },
+          "last_activity_at": 1749871738,
+          "assignee_id": 128228,
+          "unread_count": 0
+        },
+        "sentiment": {},
+        "source_id": null,
+        "external_source_ids": {},
+        "content_type": "text",
+        "conversation_id": 8,
+        "sender_type": "User",
+        "sender": {
+          "availability_status": null,
+          "name": "Ale",
+          "type": "user",
+          "available_name": "Ale",
+          "thumbnail": "",
+          "avatar_url": "",
+          "id": 128228
+        },
+        "processed_message_content": "como puedo ayudarlo??",
+        "content_attributes": {},
+        "content": "como puedo ayudarlo??",
+        "private": false,
+        "inbox_id": 67317,
+        "sender_id": 128228,
+        "created_at": 1749871738,
+        "updated_at": "2025-06-14T03:28:58.602Z"
+      }
+    ],
+    "unread_count": 0,
+    "created_at": 1749868852,
+    "id": 8,
+    "last_activity_at": 1749871738,
+    "event": "conversation_updated",
+    "inbox_id": 67317,
+    "contact_inbox": {
+      "hmac_verified": false,
+      "inbox_id": 67317,
+      "pubsub_token": "j679mJs2E8pQYZRAZP4js5wp",
+      "contact_id": 358324356,
+      "created_at": "2025-06-14T02:40:52.849Z",
+      "updated_at": "2025-06-14T02:40:52.849Z",
+      "source_id": "7f705ef8-c0f5-41c0-8717-f8e5885e8735",
+      "id": 358110884
+    },
+    "first_reply_created_at": "2025-06-14T03:28:58.602Z",
+    "priority": null,
+    "can_reply": true,
+    "timestamp": 1749871738,
+    "changed_attributes": [
+      {
+        "status": {
+          "previous_value": "pending",
+          "current_value": "open"
+        }
+      },
+      {
+        "updated_at": {
+          "current_value": "2025-06-14T04:09:30.573Z",
+          "previous_value": "2025-06-14T03:28:58.691Z"
+        }
+      }
+    ],
+    "labels": ["soporte", "cliente-nuevo"],
+    "waiting_since": 0,
+    "channel": "Channel::Api",
+    "contact_last_seen_at": 0,
+    "custom_attributes": {},
+    "snoozed_until": null,
+    "additional_attributes": {},
+    "status": "open"
+  },
+
+  {
+    "message_type": "outgoing",
+    "private": false,
+    "content_attributes": {},
+    "additional_attributes": {},
+    "id": 180137632,
+    "source_id": null,
+    "created_at": "2025-06-14T04:12:14.712Z",
+    "account": {
+      "id": 124274,
+      "name": "Zendly"
+    },
+    "conversation": {
+      "id": 8,
+      "timestamp": 1749874334,
+      "additional_attributes": {},
+      "status": "open",
+      "created_at": 1749868852,
+      "contact_last_seen_at": 0,
+      "last_activity_at": 1749874334,
+      "priority": null,
+      "first_reply_created_at": "2025-06-14T03:28:58.602Z",
+      "snoozed_until": null,
+      "agent_last_seen_at": 1749874334,
+      "can_reply": true,
+      "updated_at": 1749874334.71489,
+      "unread_count": 0,
+      "meta": {
+        "hmac_verified": false,
+        "assignee": {
+          "id": 128228,
+          "thumbnail": "",
+          "name": "Ale",
+          "availability_status": null,
+          "type": "user",
+          "avatar_url": "",
+          "available_name": "Ale"
+        },
+        "sender": {
+          "identifier": null,
+          "custom_attributes": {},
+          "type": "contact",
+          "phone_number": "+6611111111",
+          "thumbnail": "",
+          "additional_attributes": {},
+          "id": 358324356,
+          "name": "Erick",
+          "blocked": false,
+          "email": "erick@example.com"
+        },
+        "team": null
+      },
+      "waiting_since": 0,
+      "messages": [
+        {
+          "message_type": 1,
+          "conversation_id": 8,
+          "external_source_ids": {},
+          "processed_message_content": "como puedo ayudarlo??",
+          "content_type": "text",
+          "content": "como puedo ayudarlo??",
+          "conversation": {
+            "unread_count": 0,
+            "assignee_id": 128228,
+            "contact_inbox": {
+              "source_id": "7f705ef8-c0f5-41c0-8717-f8e5885e8735"
+            },
+            "last_activity_at": 1749874334
+          },
+          "id": 180137632,
+          "additional_attributes": {},
+          "sentiment": {},
+          "sender_type": "User",
+          "inbox_id": 67317,
+          "private": false,
+          "updated_at": "2025-06-14T04:12:14.712Z",
+          "sender_id": 128228,
+          "status": "sent",
+          "content_attributes": {},
+          "created_at": 1749874334,
+          "account_id": 124274,
+          "source_id": null,
+          "sender": {
+            "type": "user",
+            "name": "Ale",
+            "id": 128228,
+            "avatar_url": "",
+            "thumbnail": "",
+            "availability_status": null,
+            "available_name": "Ale"
+          }
+        }
+      ],
+      "contact_inbox": {
+        "hmac_verified": false,
+        "pubsub_token": "j679mJs2E8pQYZRAZP4js5wp",
+        "id": 358110884,
+        "contact_id": 358324356,
+        "updated_at": "2025-06-14T02:40:52.849Z",
+        "source_id": "7f705ef8-c0f5-41c0-8717-f8e5885e8735",
+        "created_at": "2025-06-14T02:40:52.849Z",
+        "inbox_id": 67317
+      },
+      "inbox_id": 67317,
+      "custom_attributes": {},
+      "channel": "Channel::Api",
+      "labels": ["soporte", "cliente-nuevo"]
+    },
+    "content": "como puedo ayudarlo??",
+    "event": "message_created",
+    "inbox": {
+      "name": "Kapta-Demo",
+      "id": 67317
+    },
+    "content_type": "text",
+    "sender": {
+      "email": "recinos.alejandra@gmail.com",
+      "type": "user",
+      "id": 128228,
+      "name": "Ale"
+    }
+  },
+  {
+    "additional_attributes": {},
+    "account": {
+      "id": 124274,
+      "name": "Zendly"
+    },
+    "content_attributes": {},
+    "id": 183458320,
+    "private": false,
+    "conversation": {
+      "contact_last_seen_at": 0,
+      "messages": [
+        {
+          "sender_id": 365809884,
+          "source_id": null,
+          "created_at": 1750286587,
+          "private": false,
+          "additional_attributes": {},
+          "status": "sent",
+          "conversation": {
+            "unread_count": 10,
+            "contact_inbox": {
+              "source_id": "c6fc1114-50e4-4e84-8b2d-2ed792fafe1f"
+            },
+            "last_activity_at": 1750286587,
+            "assignee_id": 128228
+          },
+          "content_type": "text",
+          "sender_type": "Contact",
+          "conversation_id": 12,
+          "processed_message_content": "(audio_transcription)  The brand is well located, and it shows that it has good visibility. There are no brands of the competition, so it is better positioned than the others. \n (audio_transcription)",
+          "content_attributes": {},
+          "sentiment": {},
+          "id": 183458320,
+          "inbox_id": 67317,
+          "message_type": 0,
+          "updated_at": "2025-06-18T22:43:07.913Z",
+          "sender": {
+            "name": "David Salinas",
+            "email": null,
+            "additional_attributes": {},
+            "blocked": false,
+            "type": "contact",
+            "phone_number": "+573208341803",
+            "identifier": null,
+            "custom_attributes": {},
+            "thumbnail": "",
+            "id": 365809884
+          },
+          "account_id": 124274,
+          "external_source_ids": {},
+          "content": "(audio_transcription)  The brand is well located, and it shows that it has good visibility. There are no brands of the competition, so it is better positioned than the others. \n (audio_transcription)"
+        }
+      ],
+      "channel": "Channel::Api",
+      "id": 12,
+      "created_at": 1750218096,
+      "updated_at": 1750286587.915585,
+      "unread_count": 10,
+      "inbox_id": 67317,
+      "additional_attributes": {},
+      "snoozed_until": null,
+      "status": "open",
+      "custom_attributes": {},
+      "priority": null,
+      "contact_inbox": {
+        "pubsub_token": "Vfze2mbUgekLcFjKrqkNW7BE",
+        "id": 364210459,
+        "source_id": "c6fc1114-50e4-4e84-8b2d-2ed792fafe1f",
+        "updated_at": "2025-06-18T03:41:36.060Z",
+        "contact_id": 365809884,
+        "created_at": "2025-06-18T03:41:36.060Z",
+        "inbox_id": 67317,
+        "hmac_verified": false
+      },
+      "waiting_since": 1750266518,
+      "timestamp": 1750286587,
+      "agent_last_seen_at": 1750269921,
+      "can_reply": true,
+      "meta": {
+        "hmac_verified": false,
+        "sender": {
+          "custom_attributes": {},
+          "type": "contact",
+          "name": "David Salinas",
+          "additional_attributes": {},
+          "thumbnail": "",
+          "phone_number": "+573208341803",
+          "id": 365809884,
+          "email": null,
+          "blocked": false,
+          "identifier": null
+        },
+        "team": null,
+        "assignee": {
+          "available_name": "Ale",
+          "id": 128228,
+          "type": "user",
+          "name": "Ale",
+          "availability_status": null,
+          "thumbnail": "",
+          "avatar_url": ""
+        }
+      },
+      "last_activity_at": 1750286587,
+      "labels": ["soporte", "cliente-nuevo"],
+      "first_reply_created_at": "2025-06-18T04:00:56.006Z"
+    },
+    "content_type": "text",
+    "source_id": null,
+    "event": "message_created",
+    "content": "(audio_transcription)  The brand is well located, and it shows that it has good visibility. There are no brands of the competition, so it is better positioned than the others. \n (audio_transcription)",
+    "created_at": "2025-06-18T22:43:07.913Z",
+    "sender": {
+      "account": {
+        "name": "Zendly",
+        "id": 124274
+      },
+      "identifier": null,
+      "email": null,
+      "thumbnail": "",
+      "blocked": false,
+      "phone_number": "+573208341803",
+      "additional_attributes": {},
+      "id": 365809884,
+      "custom_attributes": {},
+      "name": "David Salinas",
+      "avatar": ""
+    },
+    "message_type": "incoming",
+    "inbox": {
+      "name": "Kapta-Demo",
+      "id": 67317
+    }
+  },
+  {
+    "meta": {
+      "sender": {
+        "name": "Tatis",
+        "phone_number": "+50250192435",
+        "additional_attributes": {},
+        "id": 359465186,
+        "email": null,
+        "custom_attributes": {},
+        "blocked": false,
+        "identifier": null,
+        "type": "contact",
+        "thumbnail": ""
+      },
+      "team": null,
+      "hmac_verified": false,
+      "assignee": {
+        "id": 128228,
+        "available_name": "Ale",
+        "type": "user",
+        "avatar_url": "",
+        "name": "Ale",
+        "availability_status": null,
+        "thumbnail": ""
+      }
+    },
+    "first_reply_created_at": "2025-06-18T23:02:20.725Z",
+    "custom_attributes": {},
+    "snoozed_until": null,
+    "messages": [
+      {
+        "sender_id": 128228,
+        "conversation": {
+          "contact_inbox": {
+            "source_id": "391fd5f2-36d2-4731-9480-a614ee45105a"
+          },
+          "last_activity_at": 1750294338,
+          "assignee_id": 128228,
+          "unread_count": 0
+        },
+        "account_id": 124274,
+        "created_at": 1750287740,
+        "inbox_id": 67317,
+        "processed_message_content": "Hola, en que te puedo apoyar?\n",
+        "sentiment": {},
+        "status": "sent",
+        "content": "Hola, en que te puedo apoyar?\n",
+        "content_attributes": {},
+        "id": 183464019,
+        "message_type": 1,
+        "source_id": null,
+        "private": false,
+        "conversation_id": 14,
+        "sender": {
+          "name": "Ale",
+          "type": "user",
+          "avatar_url": "",
+          "availability_status": null,
+          "available_name": "Ale",
+          "id": 128228,
+          "thumbnail": ""
+        },
+        "external_source_ids": {},
+        "additional_attributes": {},
+        "content_type": "text",
+        "sender_type": "User",
+        "updated_at": "2025-06-18T23:02:20.725Z"
+      }
+    ],
+    "can_reply": true,
+    "created_at": 1750269972,
+    "channel": "Channel::Api",
+    "updated_at": 1750294338.094242,
+    "additional_attributes": {},
+    "contact_last_seen_at": 0,
+    "labels": ["soporte", "cliente-nuevo"],
+    "changed_attributes": [
+      {
+        "status": {
+          "previous_value": "open",
+          "current_value": "resolved"
+        }
+      },
+      {
+        "updated_at": {
+          "previous_value": "2025-06-18T23:02:20.816Z",
+          "current_value": "2025-06-19T00:52:18.023Z"
+        }
+      }
+    ],
+    "last_activity_at": 1750294338,
+    "priority": null,
+    "timestamp": 1750294338,
+    "status": "resolved",
+    "waiting_since": 0,
+    "inbox_id": 67317,
+    "id": 14,
+    "contact_inbox": {
+      "inbox_id": 67317,
+      "contact_id": 359465186,
+      "source_id": "391fd5f2-36d2-4731-9480-a614ee45105a",
+      "hmac_verified": false,
+      "created_at": "2025-06-18T18:06:12.966Z",
+      "pubsub_token": "1dCk6fm8geTijhHQfiYHZQue",
+      "id": 365202082,
+      "updated_at": "2025-06-18T18:06:12.966Z"
+    },
+    "event": "conversation_updated",
+    "agent_last_seen_at": 1750294336,
+    "unread_count": 0
+  }
+]

@@ -1,0 +1,126 @@
+Example payload from chatwoot to zendly webhook of humanTakeover
+
+{
+  "content_attributes": {},
+  "account": {
+    "name": "Zendly",
+    "id": 124274
+  },
+  "content_type": "text",
+  "inbox": {
+    "name": "Kapta-Demo",
+    "id": 67317
+  },
+  "id": 183464019,
+  "private": false,
+  "additional_attributes": {},
+  "content": "Hola, en que te puedo apoyar?\n",
+  "event": "message_created",
+  "sender": {
+    "name": "Ale",
+    "type": "user",
+    "id": 128228,
+    "email": "recinos.alejandra@gmail.com"
+  },
+  "created_at": "2025-06-18T23:02:20.725Z",
+  "conversation": {
+    "first_reply_created_at": null,
+    "id": 14,
+    "updated_at": 1750287740.727995,
+    "inbox_id": 67317,
+    "agent_last_seen_at": 1750287740,
+    "priority": null,
+    "meta": {
+      "assignee": {
+        "type": "user",
+        "name": "Ale",
+        "id": 128228,
+        "thumbnail": "",
+        "availability_status": null,
+        "avatar_url": "",
+        "available_name": "Ale"
+      },
+      "hmac_verified": false,
+      "sender": {
+        "name": "Tatis",
+        "additional_attributes": {},
+        "id": 359465186,
+        "email": null,
+        "custom_attributes": {},
+        "blocked": false,
+        "phone_number": "+50250192435",
+        "identifier": null,
+        "thumbnail": "",
+        "type": "contact"
+      },
+      "team": null
+    },
+    "additional_attributes": {},
+    "timestamp": 1750287740,
+    "contact_inbox": {
+      "pubsub_token": "1dCk6fm8geTijhHQfiYHZQue",
+      "source_id": "391fd5f2-36d2-4731-9480-a614ee45105a",
+      "id": 365202082,
+      "created_at": "2025-06-18T18:06:12.966Z",
+      "hmac_verified": false,
+      "contact_id": 359465186,
+      "inbox_id": 67317,
+      "updated_at": "2025-06-18T18:06:12.966Z"
+    },
+    "custom_attributes": {
+      "botpress_conversation_id": "conv_01JXGMQ38TEC4DX4CYJD0J6E2K"
+    },
+    "status": "open",
+    "channel": "Channel::Api",
+    "can_reply": true,
+    "unread_count": 0,
+    "last_activity_at": 1750287740,
+    "snoozed_until": null,
+    "created_at": 1750269972,
+    "contact_last_seen_at": 0,
+    "labels": ["soporte", "cliente-nuevo"],
+    "messages": [
+      {
+        "conversation_id": 14,
+        "content_attributes": {},
+        "sender_type": "User",
+        "source_id": null,
+        "private": false,
+        "status": "sent",
+        "account_id": 124274,
+        "id": 183464019,
+        "inbox_id": 67317,
+        "content_type": "text",
+        "additional_attributes": {},
+        "external_source_ids": {},
+        "sender": {
+          "available_name": "Ale",
+          "name": "Ale",
+          "avatar_url": "",
+          "thumbnail": "",
+          "availability_status": null,
+          "id": 128228,
+          "type": "user"
+        },
+        "conversation": {
+          "last_activity_at": 1750287740,
+          "assignee_id": 128228,
+          "contact_inbox": {
+            "source_id": "391fd5f2-36d2-4731-9480-a614ee45105a"
+          },
+          "unread_count": 0
+        },
+        "processed_message_content": "Hola, en que te puedo apoyar?\n",
+        "created_at": 1750287740,
+        "message_type": 1,
+        "sentiment": {},
+        "content": "Hola, en que te puedo apoyar?\n",
+        "sender_id": 128228,
+        "updated_at": "2025-06-18T23:02:20.725Z"
+      }
+    ],
+    "waiting_since": 1750269972
+  },
+  "message_type": "outgoing",
+  "source_id": null
+}

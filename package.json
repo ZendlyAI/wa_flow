@@ -4,24 +4,38 @@
   "description": "Endpoint for WhatsApp Flows https://developers.facebook.com/docs/whatsapp/flows",
   "main": "build/index.js",
   "scripts": {
-    "start": "functions-framework --source=build/ --target=preLoad",
-    "start:local": "npm run build && node build/index.js",
+    "start:incoming": "functions-framework --source=build/ --target=incoming",
+    "start:outgoing": "functions-framework --source=build/ --target=outgoing",
+    "start:media": "functions-framework --source=build/ --target=media",
+    "start:local": "npm run build:local && node build/index.js",
     "build:local": "rimraf ./build && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy-reservation-flow": "gcloud functions deploy wa_flow_template-reservation-flow --gen2 --runtime=nodejs20 --region=us-central1 --source=. --entry-point=preLoad --trigger-http --env-vars-file=.env.yaml"
+    "deploy:chatwoot-zendly": "gcloud functions deploy chatwoot-zendly --gen2 --runtime=nodejs20 --region=us-central1 --source=. --entry-point=incoming --trigger-http --env-vars-file=.env.yaml",
+    "deploy:botpress-zendly": "gcloud functions deploy botpress-zendly --gen2 --runtime=nodejs20 --region=us-central1 --source=. --entry-point=outgoing --trigger-http --env-vars-file=.env.yaml",
+    "deploy:botpress-zendly-ai": "gcloud functions deploy botpress-zendly-ai --gen2 --runtime=nodejs20 --region=us-central1 --source=. --entry-point=outgoing --trigger-http --env-vars-file=.env.yaml",
+    "deploy:botpress-fugitivos": "gcloud functions deploy botpress-fugitivos --gen2 --runtime=nodejs20 --region=us-central1 --source=. --entry-point=outgoing --trigger-http --env-vars-file=.env.yaml",
+    "deploy:botpress-ontop": "gcloud functions deploy botpress-ontop --gen2 --runtime=nodejs20 --region=us-central1 --source=. --entry-point=outgoing --trigger-http --env-vars-file=.env.yaml"
   },
   "author": "Gabriela Recinos <recinos.alejandra@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.17.21",
+    "@types/fluent-ffmpeg": "2.1.27",
     "@types/node": "^20.10.6",
-    "rimraf": "^5.0.5",
+    "@types/node-fetch": "2.6.12",
+    "rimraf": "4.1.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {
     "@google-cloud/functions-framework": "^3.3.0",
-    "axios": "^1.6.5",
-    "crypto": "^1.0.1"
+    "axios": "1.9.0",
+    "fluent-ffmpeg": "2.1.3",
+    "fs": "0.0.1-security",
+    "install": "0.13.0",
+    "node-fetch": "2.7.0",
+    "npm": "11.4.2",
+    "openai": "5.3.0",
+    "uuid": "11.1.0"
   }
 }

@@ -1,0 +1,161 @@
+{
+  "id": "evt_01JXP2H0YV211WEWVB37RK36FD",
+  "type": "webhook:event",
+  "direction": "incoming",
+  "payload": {
+    "body": { "conversationId": "conv_01JXNKMRXKQCXZ9HG2225DF34M" },
+    "query": {},
+    "method": "POST",
+    "headers": {
+      "host": "webhook.botpress.cloud",
+      "user-agent": "PostmanRuntime/7.44.0",
+      "content-length": "59",
+      "accept": "*/*",
+      "accept-encoding": "gzip, deflate, br",
+      "cache-control": "no-cache",
+      "content-type": "application/json",
+      "postman-token": "8e8275e1-f4cc-42ed-a2f0-bd6350241058",
+      "x-amzn-trace-id": "Root=1-684cd72a-0e34ff1549e373e40715992a",
+      "x-forwarded-for": "216.19.189.9, 10.4.74.163",
+      "x-forwarded-host": "webhook.botpress.cloud",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https",
+      "x-forwarded-server": "ip-10-4-168-211.ec2.internal",
+      "x-real-ip": "10.4.74.163"
+    },
+    "path": ""
+  },
+  "botId": "1843be45-14e4-4832-a962-a8722b47202b",
+  "createdOn": "2025-06-14T01:58:07.507Z",
+  "preview": "Unknown message of type \"webhook:event\" on channel \"unknown\": {\"body\":{\"conversationId\":\"conv_01JXNKMRXKQCXZ9HG2225DF34M\"},\"query\":{},\"method\":\"POST\",\"headers\":{\"host\":\"webhook.botpress.cloud\",\"user-agent\":\"PostmanRuntime/7.44.0\",\"content-length\":\"59\",\"accept\":\"*/*\",\"accept-encoding\":\"gzip, deflate, br\",\"cache-control\":\"no-cache\",\"content-type\":\"application/json\",\"postman-token\":\"8e8275e1-f4cc-42ed-a2f0-bd6350241058\",\"x-amzn-trace-id\":\"Root=1-684cd72a-0e34ff1549e373e40715992a\",\"x-forwarded-for\":\"216.19.189.9, 10.4.74.163\",\"x-forwarded-host\":\"webhook.botpress.cloud\",\"x-forwarded-port\":\"443\",\"x-forwarded-proto\":\"https\",\"x-forwarded-server\":\"ip-10-4-168-211.ec2.internal\",\"x-real-ip\":\"10.4.74.163\"},\"path\":\"\"}",
+  "state": {
+    "__stacktrace": [
+      { "flow": "flow:Main", "node": "node:Trigger1" },
+      { "flow": "flow:Main", "node": "node:Standard2", "card": "card:" }
+    ],
+    "context": {
+      "currentFlow": "flow:Main",
+      "currentNode": "node:Standard2",
+      "currentCard": "Log Workflow and User Variables for Debugging Purposes",
+      "previousNode": "node:Trigger1",
+      "previousCard": "-"
+    },
+    "session": {
+      "history": [
+        {
+          "sender": "user",
+          "date": "2025-06-14T01:58:07.868Z",
+          "preview": "Unknown message of type \"webhook:event\" on channel \"unknown\": {\"body\":{\"conversationId\":\"conv_01JXNKMRXKQCXZ9HG2225DF34M\"},\"query\":{},\"method\":\"POST\",\"headers\":{\"host\":\"webhook.botpress.cloud\",\"user-agent\":\"PostmanRuntime/7.44.0\",\"content-length\":\"59\",\"accept\":\"*/*\",\"accept-encoding\":\"gzip, deflate, br\",\"cache-control\":\"no-cache\",\"content-type\":\"application/json\",\"postman-token\":\"8e8275e1-f4cc-42ed-a2f0-bd6350241058\",\"x-amzn-trace-id\":\"Root=1-684cd72a-0e34ff1549e373e40715992a\",\"x-forwarded-for\":\"216.19.189.9, 10.4.74.163\",\"x-forwarded-host\":\"webhook.botpress.cloud\",\"x-forwarded-port\":\"443\",\"x-forwarded-proto\":\"https\",\"x-forwarded-server\":\"ip-10-4-168-211.ec2.internal\",\"x-real-ip\":\"10.4.74.163\"},\"path\":\"\"}",
+          "type": "text"
+        }
+      ],
+      "workflows_executions": [
+        {
+          "execution_id": "135f3106-05ea-4a2b-9829-e5a7418369b9",
+          "caller": { "type": "entry" },
+          "started_at": "2025-06-14T01:58:07.863Z",
+          "variable_values": {
+            "pendingTasks": [],
+            "taskRecord": {},
+            "userLocation": {},
+            "data_capture_flow": {},
+            "chatwootConversation": {},
+            "chatwootConversationId": ""
+          },
+          "workflow_id": "flow:Main"
+        }
+      ],
+      "id": null,
+      "kb_priority": { "enabled": false, "searchScope": "specific", "kbs": [] },
+      "current_execution_id": "135f3106-05ea-4a2b-9829-e5a7418369b9",
+      "current_workflow": {
+        "execution_id": "135f3106-05ea-4a2b-9829-e5a7418369b9",
+        "caller": { "type": "entry" },
+        "started_at": "2025-06-14T01:58:07.863Z",
+        "variable_values": {
+          "pendingTasks": [],
+          "taskRecord": {},
+          "userLocation": {},
+          "data_capture_flow": {},
+          "chatwootConversation": {},
+          "chatwootConversationId": ""
+        },
+        "workflow_id": "flow:Main"
+      }
+    },
+    "user": { "name": "", "phone": "", "conversationId": "" },
+    "bot": {
+      "__cognitiveModelPrefs": {
+        "best": [
+          "openai:gpt-4o-2024-11-20",
+          "google-ai:models/gemini-2.0-flash"
+        ],
+        "fast": [
+          "openai:gpt-4o-mini-2024-07-18",
+          "google-ai:models/gemini-2.0-flash"
+        ],
+        "downtimes": [
+          {
+            "ref": "openai:gpt-4o-mini-2024-07-18",
+            "startedAt": "2025-06-11T21:09:43.654Z",
+            "reason": "Model is down"
+          }
+        ]
+      }
+    },
+    "conversation": {
+      "humanTakeover": false,
+      "botHandover": false,
+      "SummaryAgent": {
+        "summary": null,
+        "transcript": "user: Unknown message of type \"webhook:event\" on channel \"unknown\": {\"body\":{\"conversationId\":\"conv_01JXNKMRXKQCXZ9HG2225DF34M\"},\"query\":{},\"method\":\"POST\",\"headers\":{\"host\":\"webhook.botpress.cloud\",\"user-agent\":\"PostmanRuntime/7.44.0\",\"content-length\":\"59\",\"accept\":\"*/*\",\"accept-encoding\":\"gzip, deflate, br\",\"cache-control\":\"no-cache\",\"content-type\":\"application/json\",\"postman-token\":\"8e8275e1-f4cc-42ed-a2f0-bd6350241058\",\"x-amzn-trace-id\":\"Root=1-684cd72a-0e34ff1549e373e40715992a\",\"x-forwarded-for\":\"216.19.189.9, 10.4.74.163\",\"x-forwarded-host\":\"webhook.botpress.cloud\",\"x-forwarded-port\":\"443\",\"x-forwarded-proto\":\"https\",\"x-forwarded-server\":\"ip-10-4-168-211.ec2.internal\",\"x-real-ip\":\"10.4.74.163\"},\"path\":\"\"}\n"
+      }
+    },
+    "configVariables": {},
+    "agentVariables": {
+      "SummaryAgent": {
+        "bot": {},
+        "conversation": {
+          "summary": null,
+          "transcript": "user: Unknown message of type \"webhook:event\" on channel \"unknown\": {\"body\":{\"conversationId\":\"conv_01JXNKMRXKQCXZ9HG2225DF34M\"},\"query\":{},\"method\":\"POST\",\"headers\":{\"host\":\"webhook.botpress.cloud\",\"user-agent\":\"PostmanRuntime/7.44.0\",\"content-length\":\"59\",\"accept\":\"*/*\",\"accept-encoding\":\"gzip, deflate, br\",\"cache-control\":\"no-cache\",\"content-type\":\"application/json\",\"postman-token\":\"8e8275e1-f4cc-42ed-a2f0-bd6350241058\",\"x-amzn-trace-id\":\"Root=1-684cd72a-0e34ff1549e373e40715992a\",\"x-forwarded-for\":\"216.19.189.9, 10.4.74.163\",\"x-forwarded-host\":\"webhook.botpress.cloud\",\"x-forwarded-port\":\"443\",\"x-forwarded-proto\":\"https\",\"x-forwarded-server\":\"ip-10-4-168-211.ec2.internal\",\"x-real-ip\":\"10.4.74.163\"},\"path\":\"\"}\n"
+        },
+        "executions": {},
+        "user": {},
+        "turn": {
+          "lines": [
+            "{\"sender\":\"user\",\"message\":\"conv_01JXNKMRXKQCXZ9HG2225DF34M. POST. webhook.botpress.cloud. PostmanRuntime/7.44.0. 59. */*. gzip, deflate, br. no-cache. application/json. 8e8275e1-f4cc-42ed-a2f0-bd6350241058. Root=1-684cd72a-0e34ff1549e373e40715992a. 216.19.189.9, 10.4.74.163. webhook.botpress.cloud. 443. https. ip-10-4-168-211.ec2.internal. 10.4.74.163. \"}"
+          ]
+        }
+      },
+      "KnowledgeAgent": {
+        "bot": {},
+        "conversation": {},
+        "executions": {},
+        "user": {},
+        "turn": { "responded": false, "answer": null, "citations": [] }
+      },
+      "VisionAgent": {
+        "bot": {},
+        "conversation": {},
+        "executions": {},
+        "user": {},
+        "turn": { "content": null }
+      }
+    }
+  },
+  "flags": {},
+  "nlu": {
+    "errored": false,
+    "openbook_model_id": "eadfe510c28df888.d208c1c3dae45987",
+    "entities": [],
+    "ms": 0
+  },
+  "integration": "webhook",
+  "tags": {},
+  "trigger": {
+    "integration": "webhook",
+    "eventName": "event",
+    "flowId": "flow:Main",
+    "nodeId": "node:Trigger1"
+  }
+}
