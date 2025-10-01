@@ -1,15 +1,18 @@
 import { handleMedia } from '../../helpers/media';
 import { uploadBuffer } from '../../helpers/gstorage';
-const saveImages = async (photoPicker: any) => {
+import { v4 as uuidv4 } from 'uuid';
+
+export const saveImages = async (photoPicker: any) => {
   const mediaPayload = photoPicker;
   console.log(JSON.stringify(mediaPayload));
   const imagesUrls: string[] = [];
   try {
     for (const item of mediaPayload as any[]) {
       const data = await handleMedia(item);
-      // console.log('📸 Saving image:', data);
-      // require('fs').writeFileSync(item.file_name, data);
-      imagesUrls.push(await uploadBuffer(data, item.file_name));
+      console.log('📸 Saving image:', data);
+      const imageName = `${uuidv4()}-${item.file_name}`;
+      // require('fs').writeFileSync(imageName, data);
+      imagesUrls.push(await uploadBuffer(data, imageName));
     }
   } catch (err) {
     console.error('❌ Error:', err);

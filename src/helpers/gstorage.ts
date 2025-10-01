@@ -10,6 +10,8 @@ const storage = new Storage({
 const bucketName = 'zendly';
 
 export const uploadBuffer = async (buffer: Buffer, imageName: string) => {
+  // return `https://storage.googleapis.com/${bucketName}/fugitivos/${imageName}}`;
+
   try {
     const bucket = storage.bucket(bucketName);
     const fileName = `fugitivos/${imageName}`;

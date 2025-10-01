@@ -11,8 +11,12 @@ const getTitleById = (id: string, competitions: any) => {
 };
 
 const transformDate = (date: string) => {
-  const [year, month, day] = date.split('-');
-  return `${day}/${month}/${year}`;
+  if (date) {
+    const [year, month, day] = date.split('-');
+    return `${day}/${month}/${year}`;
+  } else {
+    return '-';
+  }
 };
 
 export const getData = async (data: any, status: string) => {
