@@ -1,0 +1,14 @@
+---
+description: Repository-specific Zendly context and architecture synchronization.
+alwaysApply: true
+---
+
+# WA Flow context
+
+- This repository owns Endpoint cifrado para WhatsApp Flows.
+- Start from `src/index.ts`, `src/flows.ts` y `src/helpers/encryption.ts`, then trace the active vertical slice before changing code.
+- Treat the manifest, Dockerfile, CI, migrations, and existing tests as executable sources of truth; do not rely on stale prose over them.
+- Read the matching architecture page before changing contracts, dependencies, data, tenancy, authentication, deployment, or decisions: https://github.com/ZendlyAI/zendly-architecture/blob/main/architecture/services/wa-flow/README.md.
+- For architecture-impacting work, update that page or link its documentation PR in the change.
+- Keep validation focused and safe: `npm run build:local` sólo si las dependencias locales están disponibles; no uses claves reales ni despliegues.
+- Never use real environment files, secrets, production endpoints, cloud resources, or tenant data during agent work.

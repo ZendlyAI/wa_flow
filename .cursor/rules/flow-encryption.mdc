@@ -1,0 +1,14 @@
+---
+description: Domain constraints for WA Flow.
+globs:
+  - "src/**"
+alwaysApply: false
+---
+
+# WhatsApp Flow encryption
+
+- Conserva RSA-OAEP-SHA256, AES-GCM y la inversión de IV exigida por el protocolo.
+- Nunca registres cuerpo descifrado, `flow_token`, clave privada, passphrase ni claves de Google Sheets.
+- `flow_token` y la transición de pantalla son contratos; prueba ping, transición y respuesta de error cifrada.
+- Los datos externos pasan por adaptadores existentes; no incluyas credenciales en código ni fixtures.
+- El build no es una puerta fiable hasta resolver el módulo de flow faltante: reporta el bloqueo, no lo ocultes.
